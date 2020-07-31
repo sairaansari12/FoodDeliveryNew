@@ -1,458 +1,221 @@
-<!-- AUI Framework -->
 <!DOCTYPE html>
-    <html>
-   <%-include ('../partials/header')%>
-    <body style="overflow: hidden;">
-       
+<html lang="en">
+<%- include('../partials/header'); -%>
 
 
-        <div id="page-wrapper" class="demo-example">
+<body class="loading"
+    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <%- include('../partials/dashboardHeader'); -%>
+                   <div class="content-page">
+                <div class="content">
 
-           
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="<%- adminpath %>">Dashboard</a></li>
+                                            
+                                            <li class="breadcrumb-item active">Orders</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Orders</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
 
-            <!-- #page-header -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-lg-12">
+                                                <form class="form-inline">
+                                                    <div class="form-group mb-2">
+                                                        <label for="inputPassword2" class="sr-only">Search</label>
+                                                        <input type="search" class="form-control" id ="search" name="search" placeholder="Search...">
+                                                    </div>
+                                                    <div class="form-group mx-sm-2 mb-2">
+                                                        <label for="status-select" class="mr-2">Status</label>
+                                                        <select class="custom-select" id="status-select">
+                                                            <option value="" />All 
+                                                            <option value="0" />Pending 
+                                                            <option value="1" />Confirmed
+                                                            <option value="2" />Cancelled-User
+                                                            <option value="3" />Processing 
+                                                            <option value="3" />Cancelled-Company 
+                                                            <option value="5" />Completed 
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group mx-sm-1 mb-2">
+                                                        <input type="text" id="basic-datepicker"  name="from" class="fromDate form-control" placeholder="From Date">
+                                                    </div>
+                                                    <div class="form-group mx-sm-1 mb-2">
+                                                        
+                                                            <input type="text" id="toDate" placeholder="To Date"  class="toDate form-control" name="to" />
+                                                    </div>
 
-            <%-include ('../partials/side_bar')%>
-            <!-- #page-sidebar -->
-            <div id="page-content-wrapper" >
-                <div class="card">
-                <div>
-
-
-  
-                    <div  style="background-color:aliceblue"  class="col-md-12 form-bordered  text-transform-upr font-size-18 font-bold font-black pad10A  ">Total ORDERS : <span id="totalOrders">0</span>  &nbsp;&nbsp;&nbsp;Total Payment : <%-CURRENCY%>&nbsp;<span id="totalPayment">  </span> </div>
-                    <div style="background-color:aliceblue"  class="col-md-6   bg-gray form-bordered    text-transform-upr font-size-12  font-bold  font-black pad10A">PENDING  ORDERS :<span id="totalPendingCount">0</span> &nbsp;&nbsp;&nbsp;Total Payment : <%-CURRENCY%> &nbsp;<span id="totalPendingSum"> 0</span>  </div>
-                    <div style="background-color:aliceblue"  class="col-md-6  bg-gray  form-bordered   text-transform-upr font-size-12 font-bold  font-red pad10A">Cancelled  ORDERS :<span id="totalCancelledCount">0</span> &nbsp;&nbsp;&nbsp;Total Payment : <%-CURRENCY%> &nbsp;<span id="totalCancelledSum"> 0 </span>  </div>
-                    <div style="background-color:aliceblue"  class="col-md-6   bg-gray   form-bordered text-transform-upr font-size-12 font-bold  primary-font pad10A mrg25B">Processing  ORDERS :<span id="totalProcessingCount">0</span> &nbsp;&nbsp;&nbsp;Total Payment : <%-CURRENCY%> &nbsp;<span id="totalProcessingSum"> 0 </span>  </div>
-                    <div style="background-color:aliceblue"  class="col-md-6   bg-gray form-bordered  text-transform-upr font-size-12  font-bold font-green pad10A mrg25B">Completed  ORDERS :<span id="totalCompletedCount">0</span> &nbsp;&nbsp;&nbsp;Total Payment : <%-CURRENCY%> &nbsp;<span id="totalCompletedSum"> 0 </span> </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="text-lg-left">
+                                                            <a onclick="getFilter(1)" href="javascript:;"><button type="button" class="btn btn-light waves-effect mb-2">Filter</button></a>
+                                                        </div>
+                                                    </div><!-- end col-->
+                                                </form>                            
+                                            </div>
+                                            
+                                        </div>
                 
+                                        <div class="table-responsive">
+                                            <table id="exe" class="table table-centered">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>Order ID</th>
+                                                        <th>Customer</th>
+                                                        <th>Date</th>
+                                                        <th>Contact</th>
+                                                        <th>Price (<%-CURRENCY%>)</th>
+                                                        <th>Payment</th>
+                                                        <th>Address</th>
+                                                        <th>Order Date </th>
+                                                        <th>Order Status</th>
+                                                        <th style="width: 125px;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="orderData">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-4" style="float:right" id="append_pagination">
+                                        </div>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
 
-                   
-</div><!-- #page-title -->
-<div id="page-content" >
-
-
-<%-include ('../partials/flashMessage')%>
-<% 
-if(data==undefined || data==null || data=='{}' || data.length==0) {%>
-
-    <%-include ('../partials/norecord')%>
-
-
-<%}else {%>
-
-    <div class="example-box">
-    
-
-            <div class="form-row col-lg-2 float-left form-vertical">
-                <div class="form-label">
-                    <label for="from">
-                        From Date:
-                    </label>
-                </div>
-                <div class="form-input">
-                    <input type="text" size="10" class="fromDate" id="fromDate" name="from" />
-                </div>
+                </div> <!-- content -->
             </div>
-    
-            <div class="form-row col-lg-2 float-left form-vertical">
-                <div class="form-label">
-                    <label for="to">
-                        To Date: 
-                    </label>
-                </div>
-                <div class="form-input">
-                    <input type="text" size="10" class="toDate"  id ="toDate" name="to" />
-                </div>
-            </div>
-
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
           
-        
-        <div class="form-row col-lg-3 float-left form-vertical dropdown form-label mrg25T">
-            <select data-placeholder="Choose Status" class="chosen-select" id="status">
-                <option value="" /> 
-                <option value="" />All 
-                <option value="0" />Pending 
-                <option value="1" />Confirmed
-                <option value="2" />Cancelled-User
-                <option value="3" />Processing 
-                <option value="3" />Cancelled-Company 
-                <option value="5" />Completed 
+            
 
-       </select>
-    
-         </div>
-
-    
-       
-         <div class="form-row col-lg-2 float-left form-vertical form-label mrg25T">
-            <a onclick="getFilter(1)" href="javascript:;" class="btn medium primary-bg" title="" >
-                <span class="button-content text-center float-none font-size-11 text-transform-upr">
-                    Filter
-                </span>
-            </a>
-    
-         </div>
-       
-         <div class="form-row col-lg-2 float-left form-vertical">
-            <div class="form-label">
-                <label for="to">
-                    Search: 
-                </label>
-            </div>
-            <div class="form-input">
-                <input type="text" size="10" class="search"  id ="search" name="search" />
-            </div>
-        </div>
-         
-        </div>
-
-
-
-<table class="table font-size-13" id="example" style="width:100%">
-
-	<thead>
-		<tr>
-            <th>Order No.</th>
-			<th>Customer</th>
-			<th>Service Date</th>
-            <th>Contact</th>
-            <th>Price (<%-CURRENCY%>)</th>
-            <th>Payment</th>
-            <th>address </th>
-            <th>Order Date </th>
-			<th>Action</th>
-		</tr>
-    </thead>
-    
-    
-
-  
-    
-    
-	<tbody id="orderData">
-
-	
-
-
-
-
-
-           
-	</tbody>
-	
-</table>
-
-<div class="col-md-4" style="float:right" id="append_pagination">
-     
+                    <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Order Status</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <div class="row">
+                                         <input type="hidden" id="assignOrderId" value=""/>
+                                        <select class="custom-select" id="status-selectt" >
+                                            <option value="" disabled />Choose Status
+                                            <option value="1"/>Order Confirmed
+                                            <option value="3"/>Order Prepare by restaurent
+                                            <option value="6"/>Order Picked up
+                                            <option value="5"/>Order Delivered
+                                            <option value="2"/>Order Cancelled By user
+                                            <option value="4"/>Order Cancelled By restaurant
+                                        </select>
+                                    </div>
+                                </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                    <button type="button" onclick="changeStatus()" class="btn btn-info waves-effect waves-light">Save changes</button>
+                                </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div><!-- /.modal -->
+                
 </div>
-<%}%>
-
-<!-- 
-<div class="modal fade in"  id="myModal"  role="dialog">
-    <div class="modal-dialog">
-    
-      Modal content-->
-      <!-- <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-       <div class="infobox notice-bg">
-            <div class="bg-azure large btn info-icon">
-                <i class="glyph-icon icon-bullhorn"></i>
-            </div>
-            <h4 class="infobox-title">Order Status</h4>
-            <p>To change your order status, click the button showing below </p>
-        </div>        </div>
-        <div class="modal-body form-wizard" id="statusModal">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div> -->
-
- 
-
-
-  
-</div>
-<div class="hide resize" id="black-modal-60" role="dialog" title="Order Status">
-    <div class="pad20A">
-
-        <div class="infobox notice-bg">
-            <div class="bg-azure large btn info-icon">
-                <i class="glyph-icon icon-bullhorn"></i>
-            </div>
-            <h4 class="infobox-title">Order Status</h4>
-            <p>To change your order status, click the button showing below </p>
-        </div>
-
-        
-            <div class="divider"></div>
-     
-        <div  id="statusModal" class="form-wizard">
-           
-          
-  
-  
-      
-  </div>
-  
-    </div>
-</div>
-
-
-                	</div><!-- #page-content -->
-            </div><!-- #page-main -->
-        </div><!-- #page-wrapper -->
-    </div>
-
-        
-
-
-
-    </body>
-</html>
-
-
-
-
-<script type="text/javascript">
-   
-  
-
-
-    
-
-
- var table=$('#example').DataTable( {
-        "bPaginate":   false,
-        "bInfo":     false,
-        "bSorting":false,
-        "bFilter":false,
-        "bLengthChangeInfo":false,
-        "columnDefs": [
-       { "type": "html-string", "targets": 0 },
-       { "type": "html-string", "targets": 1 } 
-       //and so on
-    ]
-    } );
-    $('#example thead th').off('click')
-  
-  
-  
+                
+    <!-- END wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+    <%- include('../partials/script'); -%>
+    <%- include('../partials/commonJs'); -%>
+<script>
     $('#search').on( 'keyup', function () {
        setTimeout(function(){getSearch(1) },800);
-} );
-
-
-
-      $('#adduser').submit( function() {
-
-            var tempform = $('#adduser');
-            
-            tempform .parsley('validate' );
-
-            if(tempform.parsley('isValid' ))
-            {
-            var form_data = new FormData(tempform[0]);
-            $(".overlay").show();
-            $.ajax({
-                type: 'POST',
-                url: '<%-adminpath%>users/adduser',
-                dataType: 'json',
-                data: form_data,
-                contentType:false,
-                cache:false,
-                processData:false,
-                success: function (response) {
-                    $(".overlay").hide();
-                    if (response.code == 200) {
-                  
-                        showToastSuccess(response.message)
-
-                         window.location.href="<%-adminpath%>users";
-                       
-                    } else {
-                        showToastError(response.message)
-                    }
-                },
-
-                error: function(response)
-                {
-                   var errorResponse=JSON.parse(response.responseText)
-                   showToastError(errorResponse.message)
-
-
-                }
-            });
-        }
-      });
-    
-  
-    </script>
-<!-- 
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-
-<script>
-   $("#black-modal-60").dialog({
-         autoOpen: false,
-        resizable: false,
-        modal: true,
-        width:'60%'
- })
-
-    function changeStatus(id,status,stYpe)
+    });
+    $("#toDate").flatpickr();
+    function changeStatus()
     {
-
+        var id = $("#assignOrderId").val();
+        console.log(id);
+        var status = $("#status-selectt :selected").val();
+        console.log('sadas',status)
         if( confirm('Are you sure you want to change status for this order?'))
         {
-            $("#black-modal-60").dialog('close');
+            
+                $("#con-close-modal").modal('hide');
+                $.ajax({
+                    type: 'POST',
+                    url: '<%-adminpath%>orders/status',
+                    dataType: 'json',
+                    data: {'id':id,'status':status},
+                    success: function (response) {
+                        console.log(response)
+                        if (response.code == '200') {
+                           // $('#block_status_'+id).html('');
+                               showToastSuccess( response.message)
+                               //var btnBg=getOrderColor(status)
+                                //$("#black-modal-60").attr('class','hide ui-dialog-content ui-widget-content'); 
+                                // $('#block_statustext_'+id).html(stYpe)
+                                // $('#block_statusvalue_'+id).val(status)
+                                // $('#block_status_'+id).removeClass()
+                                // $('#block_status_'+id).addClass('btn font-size-11 '+btnBg)
+                                window.location.reload()
 
-        $.ajax({
-            type: 'POST',
-            url: '<%-adminpath%>orders/status',
-            dataType: 'json',
-            data: {'id':id,'status':status},
-            success: function (response) {
-                if (response.code == '200') {
-                   // $('#block_status_'+id).html('');
+                           
+                            
+                        }
+                        else{
+                           
+                            showToastError(response.message)
+                        }
+                    },
 
+                    error :function(response)
+                    {
 
-                       showToastSuccess( response.message)
-                       var btnBg=getOrderColor(status)
+                        showToastError(response.message)
 
-//$("#black-modal-60").attr('class','hide ui-dialog-content ui-widget-content'); 
-$('#block_statustext_'+id).html(stYpe)
-$('#block_statusvalue_'+id).val(status)
-$('#block_status_'+id).removeClass()
-$('#block_status_'+id).addClass('btn font-size-11 '+btnBg)
-//window.location.reload()
-
-                   
-                    
-                }
-                else{
-                   
-                    showToastError(response.message)
-                }
-            },
-
-            error :function(response)
-            {
-
-                showToastError(response.message)
-
+                    }
+                });
             }
-        });
-    }
-    }
-   
+            }
     function showModal(id,status)
    {
+        console.log(id);
+       
+        $('#assignOrderId').val(id);
+        $("#con-close-modal").modal('show');
 
-var status=$('#block_statusvalue_'+id).val()
- 
-   var class0="wizard-step "
-   var class1="wizard-step "
-   var class2="wizard-step "
-   var class3="wizard-step "
-   var class4="wizard-step "
-   var class5="wizard-step "
-
-if(status=="0")  class0="wizard-step"
-if(status=="1")  class1="wizard-step"
-if(status=="2")  class2="wizard-step"
-if(status=="3")  class3="wizard-step"
-if(status=="4")  class4="wizard-step"
-if(status=="5")  class5="wizard-step"
-    
-    var myvar = '<ul>'+
-'              <li >'+
-'                  <a onclick="changeStatus(\''+id+'\',\''+0+'\',\'Not Confirmed\')">'+
-'                    <label class="'+class0+'">1</label>'+
-'                    <span class="wizard-description">'+
-'                       Not Confirmed'+
-'                       <small>Order is not confirmed yet</small>'+
-'                    </span>'+
-'                  </a>'+
-'              </li>'+
-'                  <li <%if(data.progressStatus!="3") {%>  <%}%> >'+
-    '                  <a onclick="changeStatus(\''+id+'\',\''+2+'\',\'Cancelled\')">'+
-'                        <label  class="'+class2+'">2</label>'+
-'                        <span class="wizard-description ">'+
-'                           Cancelled'+
-'                           <small>Order is cancelled by user</small>'+
-'                        </span>                   '+
-'                      </a>'+
-'                  </li>'+
-'<li>'+
-    '                  <a onclick="changeStatus(\''+id+'\',\''+1+'\',\'Confirmed\')">'+
-'                    <label class="'+class1+'">3</label>'+
-'                    <span class="wizard-description">'+
-'                       Confirmed'+
-'                       <small>Order is confirmed</small>'+
-'                    </span>'+
-'                  </a>'+
-'              </li>'+
-'              <li>'+
-    '                  <a onclick="changeStatus(\''+id+'\',\''+3+'\',\'Processing\')">'+
-'                      <label    class="'+class3+'" >4</label>'+
-'                      <span class="wizard-description">'+
-'                       Precessing'+
-'                       <small>Order is in processing</small>'+
-'                    </span>                   '+
-'                  </a>'+
-'              </li>'+
-'              <li <%if(data.trackStatus!="3") {%>  <%}%>>'+
-    '                  <a onclick="changeStatus(\''+id+'\',\''+4+'\',\'Cancelled-Company\')">'+
-'                    <label  class="'+class4+'">5</label>'+
-'                    <span class="wizard-description">'+
-'                       Cancelled by Company'+
-'                       <small>Order is cancelled by company</small>'+
-'                    </span>                   '+
-'                  </a>'+
-'              </li>'+
-'              <li>'+
-    '                  <a onclick="changeStatus(\''+id+'\',\''+5+'\',\'Completed\')">'+
-'                      <label  class="'+class5+'">6</label>'+
-'                      <span class="wizard-description">'+
-'                       Completed'+
-'                       <small>Order has been completed</small>'+
-'                    </span>                   '+
-'                  </a>'+
-'              </li>'+
-'            </ul>';
-	
-
-
-//console.log(myvar)
-
-$('#statusModal').html(myvar);
-$("#black-modal-60").dialog('open');
-
-//$('#myModal').modal();
+        //$('#myModal').modal();
 
    }
-
-    
-
-   
-
-   
-    
-function getFilter(currentPage)
+    function getFilter(currentPage)
     {
         currentPage=currentPage
         var limit=40
         $('#loading1').show()
-        var status=$('#status').val();
-        var fromDate=$('#fromDate').val();
+        var status=$('#status-select').val();
+        var fromDate=$('.fromDate').val();
         var toDate=$('#toDate').val();
 
         //alert(fromDate)
@@ -464,95 +227,76 @@ function getFilter(currentPage)
             success: function (response) {
                 $('#loading1').hide()
 
-                if (response.code == '200') {
-
+                if (response.code == '200') 
+                {
                     var row="";
-                    console.log(response)
+
                     $('#orderData').html('')
                     var data1=response.body.data
                     var data=response.body.data.rows
-for(var t=0;t<data.length;t++)
-{
-    
+                    for(var t=0;t<data.length;t++)
+                    {
+                        var status="Pending"
+                        var Payment="Failed"
+                        var paymentBg="bg-red"
+                        var orderClass = "badge-info";
 
-                    var status="Pending"
-                    var Payment="Failed"
-                    var paymentBg="bg-red"
-                if(data[t].progressStatus=="1") status="Confirmed"
-                if(data[t].progressStatus=="2") status="Cancelled"
-                if(data[t].progressStatus=="3") status="Processing"
-                if(data[t].progressStatus=="4") status="Cancelled-Comapny"
-                if(data[t].progressStatus=="5") status="Completed"
+                        if(data[t].payment && data[t].payment.transactionStatus=="1") {
+                          var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button" data-placement="bottom" title="Open modal window"   >'+
+                            '<h5><span class="badge bg-soft-success text-success"><i class="mdi mdi-coin"></i>Paid</span></h5></a>';
+                        }else{
+                            var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button" data-placement="bottom" title="Open modal window"   >'+
+                            '<h5><span class="badge bg-soft-danger text-danger"><i class="mdi mdi-cancel"></i> Payment Failed</span></h5></a>';
+                        }
 
-                var btnBg=getOrderColor(data[t].progressStatus)
-                if(data[t].payment && data[t].payment.transactionStatus=="1") {
-                    Payment="Success"
-                    paymentBg="bg-green"
-                }
-
-
-row =row+ '<tr id="row_'+data[t].id+'">'+
-    '			<td>'+data[t].orderNo+' </td>'+
-'			<td>'+data[t].user.firstName+ " "+  data[t].user.lastName+' </td>'+
-'			<td>'+format(new Date(data[t].serviceDateTime))+' </td>'+
-'            <td>'+data[t].user.countryCode +" "+ data[t].user.phoneNumber+'</td>'+
-'            <td>'+data[t].totalOrderPrice  +'</td>'+
-'            <td>'+
-'             <a href="javascript:;"  class="btn '+paymentBg+' font-size-10 pad5A tooltip-button" data-placement="bottom" title="Open modal window"   >'+
-    '                <span class="button-content">'+
-'                    <i class="glyph-icon icon-money float-left"></i>'+
-                       '<span>'+Payment+' <span>'+  
-'                </span>'+
-'            </a></td>'+
-'            <td>'+(data[t].address!=null? data[t].address.houseNo+" "+ data[t].address.addressName +" ,"+data[t].address.city:"")+'</td>'+
-'            <td>'+format(new Date(data[t].createdAt)) +'</td>              '+
-'              '+
-'            <td>'+
-'             <a href="javascript:;"  class="btn '+btnBg+' font-size-10 pad5A tooltip-button  black-modal-60" data-placement="bottom" title="Open modal window"  id="block_status_'+data[t].id+'"  onclick="showModal(\''+data[t].id+'\',\''+data[t].progressStatus+'\')" >'+
-    '                <input type="hidden"  value="'+data[t].progressStatus+'" id="block_statusvalue_'+data[t].id+'">'+
-    '                <span class="button-content">'+
-'                    <i class="glyph-icon icon-cog float-left"></i>'+
-                       '<span id="block_statustext_'+data[t].id+'">'+status+' <span>'+  
-'                </span>'+
-'            </a>'+
-'             <div class="dropdown">'+
-'                <a href="javascript:;" title="" class="btn small bg-blue dropdown-toggle" data-toggle="dropdown">'+
-'                    <span class="button-content">'+
-'                        <i class="glyph-icon font-size-11 icon-cog"></i>'+
-'                        <i class="glyph-icon font-size-11 icon-chevron-down"></i>'+
-'                    </span>'+
-'                </a>'+
-'                <ul class="dropdown-menu float-right">'+
-'                    <li>'+
-'                        <a href="<%-adminpath%>orders/view/'+data[t].id+'" title="">'+
-'                            <i class="glyph-icon icon-edit mrg5R"></i>'+
-'                            View'+
-'                        </a>'+
-'                    </li>'+
-'                    <li class="divider"></li>'+
-'                    <li>'+
-'                        <a onclick="return confirm(\'Are you sure you want to delete this?\');"  href="<%-adminpath%>orders/delete/'+data[t].id +'" data-id="'+ data[t].id+'" class="font-red" title="">'+
-'                            <i class="glyph-icon icon-archive mrg5R"></i>'+
-'                            Delete'+
-'                        </a>'+
-'                    </li>'+
-'                </ul>'+
-'            </div>'+
-'            </td>		'+
-'        </tr>';
-
-}
-
-if(row=="") {$('#orderData').html('&nbsp;&nbsp;&nbsp;No matching records found')
-
-}
-else $('#orderData').html(row);
-appendPagination(currentPage,Math.ceil(data1.count/limit))
-appendStat(response.body.counts)
-
+                        if(data[t].progressStatus=="1")
+                        {
+                            status="Confirmed";
+                            var orderClass = "badge-info";
+                        } 
+                        if(data[t].progressStatus=="2"){
+                            status="Cancelled";
+                            var orderClass = "badge-danger";
+                        } 
+                        if(data[t].progressStatus=="3"){
+                            status="Order Prepare";
+                            var orderClass = "badge-warning";
+                        }
+                        if(data[t].progressStatus=="4"){
+                             status="Cancelled-Comapny";
+                            var orderClass = "badge-danger";
+                        }
+                        if(data[t].progressStatus=="5"){
+                            status="Delivered";
+                            var orderClass = "badge-success";
+                        }
+                        if(data[t].progressStatus=="6"){
+                            status="Picked up";
+                            var orderClass = "badge-success";
+                        }
+                        row =row+ '<tr id="row_'+data[t].id+'">'+
+                        '<td>'+data[t].orderNo+' </td>'+
+                        '<td>'+data[t].user.firstName+ " "+  data[t].user.lastName+' </td>'+
+                        '<td>'+format(new Date(data[t].serviceDateTime))+' </td>'+
+                        '<td>'+data[t].user.countryCode +" "+ data[t].user.phoneNumber+'</td>'+
+                        '<td>'+data[t].totalOrderPrice  +'</td>'+
+                        '<td>'+payemnt+'</td>'+
+                        '<td>'+(data[t].address!=null? data[t].address.houseNo+" "+ data[t].address.addressName +" ,"+data[t].address.city:"")+'</td>'+
+                        '<td>'+format(new Date(data[t].createdAt)) +'</td>'+
+                        '<td><h5><span class="badge '+orderClass+'">'+status+'</span></h5></td>'+
+                        '<td>'+
+                        '<a href="<%-adminpath%>orders/view/'+data[t].id +'" class="action-icon"> <i class="mdi mdi-eye"></i></a>'+
+                        '<a onclick="return confirm(\'Are you sure you want to delete this?\');"  href="<%-adminpath%>orders/delete/'+data[t].id +'" data-id="'+ data[t].id+'" title="" class="action-icon"> <i class="mdi mdi-delete"></i></a>'+ 
+                        '<a href="javascript:;" class="action-icon" id="block_status_'+data[t].id+'"  onclick="showModal(\''+data[t].id+'\',\''+data[t].progressStatus+'\')" ><i class="mdi mdi-square-edit-outline"></i></a>'+                              
+                        '</td>'+
+                        '</tr>';
+                    }
+                    
+                    $('#orderData').html(row);
+                    appendPagination(currentPage,Math.ceil(data1.count/limit))
+                    //$('#exe').DataTable();
                 }
                 else{
-                   
                     showToastError(response.message)
                 }
             },
@@ -566,119 +310,92 @@ appendStat(response.body.counts)
             }
         });
     } 
-
-
-
-
-
     function getSearch(currentPage)
     {
         currentPage=currentPage
         var search=$('#search').val()
         var limit=40
         $('#loading1').show()
-        var status=$('#status').val();
-        var fromDate=$('#fromDate').val();
-        var toDate=$('#toDate').val();
+        var status=$('#status-select').val();
+        var fromDate="";
+        var toDate="";
 
         //alert(fromDate)
         $.ajax({
             type: 'POST',
             url: '<%-adminpath%>orders/search',
             dataType: 'json',
-            data: {'search':search,'page':currentPage,'limit':limit},
+            data: {'search':search,'fromDate':fromDate,'progressStatus':status ,'toDate':toDate,'page':currentPage,'limit':limit},
             success: function (response) {
                 $('#loading1').hide()
 
-                if (response.code == '200') {
-
+                if (response.code == '200') 
+                {
                     var row="";
-                    console.log(response)
+
                     $('#orderData').html('')
                     var data1=response.body.data
                     var data=response.body.data.rows
-for(var t=0;t<data.length;t++)
-{
-    
+                    for(var t=0;t<data.length;t++)
+                    {
+                        var status="Pending"
+                        var Payment="Failed"
+                        var paymentBg="bg-red"
+                        var orderClass = "badge-info";
 
-                    var status="Pending"
-                    var Payment="Failed"
-                    var paymentBg="bg-red"
-                if(data[t].progressStatus=="1") status="Confirmed"
-                if(data[t].progressStatus=="2") status="Cancelled"
-                if(data[t].progressStatus=="3") status="Processing"
-                if(data[t].progressStatus=="4") status="Cancelled-Comapny"
-                if(data[t].progressStatus=="5") status="Completed"
+                        if(data[t].payment && data[t].payment.transactionStatus=="1") {
+                          var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button" data-placement="bottom" title="Open modal window"   >'+
+                            '<h5><span class="badge bg-soft-success text-success"><i class="mdi mdi-coin"></i>Paid</span></h5></a>';
+                        }else{
+                            var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button" data-placement="bottom" title="Open modal window"   >'+
+                            '<h5><span class="badge bg-soft-danger text-danger"><i class="mdi mdi-cancel"></i> Payment Failed</span></h5></a>';
+                        }
 
-                var btnBg=getOrderColor(data[t].progressStatus)
-                if(data[t].payment && data[t].payment.transactionStatus=="1") {
-                    Payment="Success"
-                    paymentBg="bg-green"
-                }
+                        if(data[t].progressStatus=="1")
+                        {
+                            status="Confirmed";
+                            var orderClass = "badge-info";
+                        } 
+                        if(data[t].progressStatus=="2"){
+                            status="Cancelled";
+                            var orderClass = "badge-danger";
+                        } 
+                        if(data[t].progressStatus=="3"){
+                            status="Processing";
+                            var orderClass = "badge-warning";
+                        }
+                        if(data[t].progressStatus=="4"){
+                             status="Cancelled-Comapny";
+                            var orderClass = "badge-danger";
+                        }
+                        if(data[t].progressStatus=="5"){
+                            status="Completed";
+                            var orderClass = "badge-success";
+                        }
 
-
-row =row+ '<tr id="row_'+data[t].id+'">'+
-    '			<td>'+data[t].orderNo+' </td>'+
-'			<td>'+data[t].user.firstName+ " "+  data[t].user.lastName+' </td>'+
-'			<td>'+format(new Date(data[t].serviceDateTime))+' </td>'+
-'            <td>'+data[t].user.countryCode +" "+ data[t].user.phoneNumber+'</td>'+
-'            <td>'+data[t].totalOrderPrice  +'</td>'+
-'            <td>'+
-'             <a href="javascript:;"  class="btn '+paymentBg+' font-size-10 pad5A tooltip-button" data-placement="bottom" title="Open modal window"   >'+
-    '                <span class="button-content">'+
-'                    <i class="glyph-icon icon-money float-left"></i>'+
-                       '<span>'+Payment+' <span>'+  
-'                </span>'+
-'            </a></td>'+
-'            <td>'+(data[t].address!=null? data[t].address.houseNo+" "+ data[t].address.addressName +" ,"+data[t].address.city:"")+'</td>'+
-'            <td>'+format(new Date(data[t].createdAt)) +'</td>              '+
-'              '+
-'            <td>'+
-'             <a href="javascript:;"  class="btn '+btnBg+' font-size-10 pad5A tooltip-button  black-modal-60" data-placement="bottom" title="Open modal window"  id="block_status_'+data[t].id+'"  onclick="showModal(\''+data[t].id+'\',\''+data[t].progressStatus+'\')" >'+
-    '                <input type="hidden"  value="'+data[t].progressStatus+'" id="block_statusvalue_'+data[t].id+'">'+
-    '                <span class="button-content">'+
-'                    <i class="glyph-icon icon-cog float-left"></i>'+
-                       '<span id="block_statustext_'+data[t].id+'">'+status+' <span>'+  
-'                </span>'+
-'            </a>'+
-'             <div class="dropdown">'+
-'                <a href="javascript:;" title="" class="btn small bg-blue dropdown-toggle" data-toggle="dropdown">'+
-'                    <span class="button-content">'+
-'                        <i class="glyph-icon font-size-11 icon-cog"></i>'+
-'                        <i class="glyph-icon font-size-11 icon-chevron-down"></i>'+
-'                    </span>'+
-'                </a>'+
-'                <ul class="dropdown-menu float-right">'+
-'                    <li>'+
-'                        <a href="<%-adminpath%>orders/view/'+data[t].id+'" title="">'+
-'                            <i class="glyph-icon icon-edit mrg5R"></i>'+
-'                            View'+
-'                        </a>'+
-'                    </li>'+
-'                    <li class="divider"></li>'+
-'                    <li>'+
-'                        <a onclick="return confirm(\'Are you sure you want to delete this?\');"  href="<%-adminpath%>orders/delete/'+data[t].id +'" data-id="'+ data[t].id+'" class="font-red" title="">'+
-'                            <i class="glyph-icon icon-archive mrg5R"></i>'+
-'                            Delete'+
-'                        </a>'+
-'                    </li>'+
-'                </ul>'+
-'            </div>'+
-'            </td>		'+
-'        </tr>';
-
-}
-
-if(row=="") {$('#orderData').html('&nbsp;&nbsp;&nbsp;No matching records found')
-
-}
-else $('#orderData').html(row);
-appendPagination(currentPage,Math.ceil(data1.count/limit))
-appendStat(response.body.counts)
-
+                        row =row+ '<tr id="row_'+data[t].id+'">'+
+                        '<td>'+data[t].orderNo+' </td>'+
+                        '<td>'+data[t].user.firstName+ " "+  data[t].user.lastName+' </td>'+
+                        '<td>'+format(new Date(data[t].serviceDateTime))+' </td>'+
+                        '<td>'+data[t].user.countryCode +" "+ data[t].user.phoneNumber+'</td>'+
+                        '<td>'+data[t].totalOrderPrice  +'</td>'+
+                        '<td>'+payemnt+'</td>'+
+                        '<td>'+(data[t].address!=null? data[t].address.houseNo+" "+ data[t].address.addressName +" ,"+data[t].address.city:"")+'</td>'+
+                        '<td>'+format(new Date(data[t].createdAt)) +'</td>'+
+                        '<td><h5><span class="badge '+orderClass+'">'+status+'</span></h5></td>'+
+                        '<td>'+
+                        '<a href="<%-adminpath%>orders/view/'+data[t].id +'" class="action-icon"> <i class="mdi mdi-eye"></i></a>'+
+                        '<a onclick="return confirm(\'Are you sure you want to delete this?\');"  href="<%-adminpath%>orders/delete/'+data[t].id +'" data-id="'+ data[t].id+'" title="" class="action-icon"> <i class="mdi mdi-delete"></i></a>'+       
+                        '<a href="javascript:;" class="action-icon" id="block_status_'+data[t].id+'"  onclick="showModal(\''+data[t].id+'\',\''+data[t].progressStatus+'\')" ><i class="mdi mdi-square-edit-outline"></i></a>'+                        
+                        '</td>'+
+                        '</tr>';
+                    }
+                    
+                    $('#orderData').html(row);
+                    appendPagination(currentPage,Math.ceil(data1.count/limit))
+                    //$('#exe').DataTable();
                 }
                 else{
-                   
                     showToastError(response.message)
                 }
             },
@@ -692,121 +409,57 @@ appendStat(response.body.counts)
             }
         });
     } 
+    function appendPagination(currentPage,count)
+    {
+        var fd="";
+        if (count >= 1) { 
+            fd=fd+' <ul class="pagination pagination-rounded justify-content-end my-2">'; 
 
+            if (currentPage > 1) {            
+              fd=fd+'<li class="page-item"><a class="page-link" onclick="getFilter(1)" href="javascript: void(0);" aria-label="Previous"> <span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>';
+            }
+            else{
+                fd=fd+'<li class="page-item"><a class="page-link disabled" href="javascript: void(0);" aria-label="Previous"> <span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>';
+            }
+          var i = 1;
+          if (currentPage > 5) {
+          i = +currentPage - 4;
+          } 
+         // if (i !== 1) { 
+         //      fd=fd+'<a  class="btn medium disabled ui-state-default" href="javascript:;">...</a>';
+         //  } 
+                         
+         // alert(fd);
+          
+         
+            for (i; i<=count; i++) {
+                if (currentPage == i) { 
+                  fd=fd+'<li class="page-item active"><a class="page-link" href="javascript: void(0);">'+currentPage+'</a></li>';
+                } else {
+                    fd=fd+'<li class="page-item"><a class="page-link" onclick="getFilter('+i+')" href="javascript: void(0);">'+i+'</a></li';
+                }
+                if (i == (+currentPage + 4)) {
+                    fd=fd+'<a  class="btn medium disabled ui-state-default" href="javascript:;">...</a>';
+                 break; } 
+              }
+         
+          
+            if (currentPage != count) {
+                fd=fd+'<li class="page-item"><a class="page-link" onclick="getFilter('+count+')" href="javascript: void(0);" aria-label="Previous"> <span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>';
+            } 
+            else{
+                fd=fd+'<li class="page-item"><a class="page-link disabled" href="javascript: void(0);" aria-label="Previous"> <span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>';
+            } 
+             
+            fd=fd+'</ul>';  
+        } 
 
-
-
-
-
-
-
-
-function appendPagination(currentPage,count)
-{
-    var fd="";
-//alert(data.pageCount);
- if (count > 1) { 
-fd=fd+'<ul class="button-group center-div">'; 
-
-  if (currentPage > 1) {
-      fd=fd+'<a  href="javascript:;" class="btn medium ui-state-default" onclick="getFilter(1)"><i class="glyph-icon icon-chevron-left"></i></a>';
-  }
-  else{
-    fd=fd+'<a  href="javascript:;" class="btn medium ui-state-default disabled"><i class="glyph-icon icon-chevron-left"></i></a>';
- 
-  }
-  var i = 1;
-  if (currentPage > 5) {
-  i = +currentPage - 4;
-  } 
- if (i !== 1) { 
-      fd=fd+'<a  class="btn medium disabled ui-state-default" href="javascript:;">...</a>';
-  } 
-                 
- // alert(fd);
-  
- 
- for (i; i<=count; i++) {
- if (currentPage == i) { 
-      fd=fd+'<li class="btn medium ui-state-default primary-bg"><span><span>'+currentPage+'</span></span></li>';
-    } else {
-        fd=fd+'<a  class="btn medium  ui-state-default" href="javascript:;" onclick="getFilter('+i+')">'+i+'</a>';
-     }
-    if (i == (+currentPage + 4)) {
-        fd=fd+'<a  class="btn medium disabled ui-state-default" href="javascript:;">...</a>';
-     break; } 
-  }
- 
-  
-  if (currentPage != count) {
-      fd=fd+'<a  class="btn medium ui-state-default"  href="javascript:void(0)" onclick="getFilter('+count+')"> <i class="glyph-icon icon-chevron-right"></i></a>';
- } 
- else{
-      fd=fd+'<a  class="btn medium ui-state-default disabled"  href="javascript:void(0)" > <i class="glyph-icon icon-chevron-right"></i></a>';
- } 
- 
-fd=fd+'</ul>';  
- } 
-
-       $("#append_pagination").html(fd)  
-}
-function appendStat(data)
-{
-    var total=0;
-    var count=0
-    $('#totalPendingCount').html("0")
-    $('#totalPendingSum').html("0")
-    $('#totalConfirmedCount').html("0")
-    $('#totalConfirmedSum').html("0")
-    $('#totalCancelledCount').html("0")
-    $('#totalCancelledSum').html("0")
-    $('#totalProcessingCount').html("0")
-    $('#totalProcessingSum').html("0")
-    $('#totalCompletedCount').html("0")
-    $('#totalCompletedSum').html("0")
-for(var k=0;k<data.length;k++)
-{
-
-    if(data[k].progressStatus=="0") {
-     $('#totalPendingCount').html(data[k].count)
-    $('#totalPendingSum').html(data[k].totalSum)
-}
-
-if(data[k].progressStatus=="1") {
-     $('#totalConfirmedCount').html(data[k].count)
-    $('#totalConfirmedSum').html(data[k].totalSum)
-}
-
-if(data[k].progressStatus=="2") {
-     $('#totalCancelledCount').html(data[k].count)
-    $('#totalCancelledSum').html(data[k].totalSum)
-}
-
-
-if(data[k].progressStatus=="3") {
-     $('#totalProcessingCount').html(data[k].count)
-    $('#totalProcessingSum').html(data[k].totalSum)
-}
-
-
-
-if(data[k].progressStatus=="5") {
-     $('#totalCompletedCount').html(data[k].count)
-    $('#totalCompletedSum').html(data[k].totalSum)
-}
-
-
-    total=total+data[k].totalSum
-    count=count+data[k].count
-}
-
-$('#totalPayment').html(total)
-$('#totalOrders').html(count)
-
-}
-
-
-
-var currentPage=1
+           $("#append_pagination").html(fd)  
+    }
+    var currentPage=1
     getFilter(currentPage)
 </script>
+
+</body>
+
+</html>

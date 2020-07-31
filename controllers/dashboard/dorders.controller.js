@@ -240,7 +240,7 @@ if(findData.rows.length==0)
   
       var userDtaa={}
       userDtaa.data=findData
-      userDtaa.counts=countDataq
+      //userDtaa.counts=countData
      
   
       return responseHelper.post(res, appstrings.success, userDtaa);
@@ -564,6 +564,7 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
       include: [
         {model: db.models.address , attributes: ['id','addressName','addressType','houseNo','latitude','longitude','town','landmark','city'] } ,
         {model: USERS , attributes: ['firstName','lastName','countryCode','phoneNumber','image'] } ,
+        {model: PAYMENT , attributes: ['transactionId','paymentMode','transactionStatus']},
         {model: ASSIGNMENT , attributes: ['id'],
         include: [{
           model: EMPLOYEE,
@@ -576,7 +577,7 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
         {model: SUBORDERS , attributes: ['id','serviceId','quantity'],
         include: [{
           model: SERVICES,
-          attributes: ['id','name','description','price','icon','thumbnail','type','price','duration'],
+          attributes: ['id','name','description','price','icon','thumbnail','type','price','duration','originalPrice'],
           required: false
         }]},
         
