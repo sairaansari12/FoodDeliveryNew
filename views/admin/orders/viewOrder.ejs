@@ -152,6 +152,10 @@
                                                         <td><div class="font-weight-bold"><%-CURRENCY +' '+data.orderPrice%></div></td>
                                                     </tr>
                                                     <tr>
+                                                        <th scope="row" colspan="4" class="text-right">Order Tip :</th>
+                                                        <td><%-CURRENCY +' '+data.tip%></td>
+                                                    </tr>
+                                                    <tr>
                                                         <th scope="row" colspan="4" class="text-right">Service Charges :</th>
                                                         <td><%-CURRENCY +' '+data.serviceCharges%></td>
                                                     </tr>
@@ -221,6 +225,13 @@
                                     <div class="card-body">
                                         <h4 class="header-title mb-3">Delivery Info</h4>
                                         <div class="text-center">
+                                        <p class="mb-1"><span class="font-weight-semibold">Type :</span> 
+                                        <% if(data.deliveryType == '1'){ %>
+                                        Pick Up
+                                        <% }else{ %>
+                                        Delivery
+                                        <% } %>
+                                        </p>
                                             <% 
                                                 var empDatat=data.assignedEmployees!=null?data.assignedEmployees :[] 
                                                 for(var t=0;t<empDatat.length ;t ++)
@@ -246,12 +257,20 @@
         <div class="col-xl-6">
                                 <div class="card-box">
 
-                                    <h4 class="header-title">Assignment</h4>
+                                    <h4 class="header-title">Cooking Instructions</h4>
 
                                     <p class="sub-header">
-                                        To Assign order to employee, choose employee from below and click on asssign button
+                                       <%- data.cookingInstructions %>
                                     </p>
-
+                                    <h4 class="header-title">Delivery Instructions</h4>
+                                    <% if(instructions){ %>
+                                        <% for(var t=0;t<instructions.deliveryInstructions.length;t++){ %>
+                                            <p class="sub-header">
+                                               <%- instructions.deliveryInstructions[t].heading %>
+                                            </p>
+                                        <%}%>
+                                    <% } %>
+                                    
                                     <!-- sample modal content -->
 
                                     <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

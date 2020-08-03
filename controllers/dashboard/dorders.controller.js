@@ -592,12 +592,13 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
         where :{companyId:req.companyId}
     
     });
+      var instructions = await INSTRUCTIONS.findOne({
+        where :{companyId:req.companyId}
+    
+    });
 
-   
 
-
-
-      return res.render('admin/orders/viewOrder.ejs',{data:findData,empData:empData});
+      return res.render('admin/orders/viewOrder.ejs',{data:findData,empData:empData,instructions});
 
 
 
