@@ -1,291 +1,221 @@
-<!-- AUI Framework -->
 <!DOCTYPE html>
-    <html>
-   <%-include ('../partials/header')%>
-    <body style="overflow: hidden;">
-        
-
-       
-
-        <div id="page-wrapper" class="demo-example">
-
-           
-
-            <!-- #page-header -->
-
-            <%-include ('../partials/side_bar')%>
-            <!-- #page-sidebar -->
-            <div id="page-content-wrapper">
-                <div class="card">
-
-                <div id="page-title">
+<html lang="en">
+<%- include('../partials/header'); -%>
 
 
-    <div class=" text-transform-upr font-size-15 font-bold primary-font pad10A" >Edit Coupan</div>
+<body class="loading"
+    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <%- include('../partials/dashboardHeader'); -%>
+            <div class="content-page">
+                <div class="content">
+                    <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Edit Coupon</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                    <form  role="form" onsubmit="return false"  class="col-md-12"  id="adduser" >
+                    <input type="hidden"  name="parentId" id="parentId"   />
+                     <input type="hidden"  name="coupanId" id="coupanId"  value="<%-data.id%>" />
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-box">
+                                    <div class="row">
+                                        <div class="form-group col-md-4 mb-3">
+                                            <label for="product-name">Coupon Name <span class="text-danger">*</span></label>
+                                            <input type="text" value="<%-data.name%>" id="name" autocomplete="off"  minlength="2" maxlength="100" name="name" class="form-control" placeholder="Coupon Name">
+                                        </div>
 
-    
+                                        <div class="form-group col-md-4 mb-3">
+                                            <label for="product-name">Coupon Code <span class="text-danger">*</span></label>
+                                            <input type="text" id="code" value="<%-data.code%>"  autocomplete="off" minlength="2" maxlength="30" name="code" class="form-control" placeholder="Coupon Code">
+                                        </div>
 
-                </div>
-                   <!-- #page-title -->
-<div id="page-content">
+                                        <div class="form-group col-md-4 mb-3">
+                                            <label for="product-name">Coupon Discount (%) <span class="text-danger">*</span></label>
+                                            <input type="number" id="discount" value="<%-data.discount%>" name="discount" class="form-control" placeholder="Coupon Discount (%)">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group  col-md-6 mb-3">
+                                            <label for="product-category">Categories <span class="text-danger">*</span></label>
+                                            <select class="form-control select2" name="categoryId" id="categoryId">
+                                                <option value="" <% if(data.categoryId == ""){ %> selected <% } %>> All Categories</option>
+                                                <%for(var t=0;t<catData.length;t++){%>
+                                                   <option <% if(catData[t].id == data.categoryId){ %> selected <% } %>  value="<%-catData[t].id%>" /><%-catData[t].name%> 
+                                                <%}%>
+                                            </select>
+                                        </div>
 
+                                        <div class="form-group  col-md-6 mb-3">
+                                            <label for="product-category">Type <span class="text-danger">*</span></label>
+                                            <select class="form-control select2" id="type" name="type">
+                                                <option value="0" />All 
+                                                <%for(var p=0;p<types.length;p++){%>
+                                                    <option <%if(data.type==types[p].id){%> selected <%}%>   value="<%-types[p].id%>" ><%-types[p].userType%></option>  
+                                                <%}%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="product-name">Coupon Usage Limit <span class="text-danger">*</span></label>
+                                            <input type="number" id="usageLimit" value="<%-data.usageLimit%>" name="usageLimit" class="form-control" placeholder="Coupon Usage Limit">
+                                        </div>
 
-<%-include ('../partials/flashMessage')%>
-<% 
-if(data==undefined || data==null || data=='{}' || data.length==0) {%>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="product-name">Minimum Order Amount <span class="text-danger">*</span></label>
+                                            <input type="number" id="minimumAmount" value="<%-data.minimumAmount%>" name="minimumAmount" class="form-control" placeholder="Minimum Order Amount">
+                                        </div>
+                                    </div>
 
-    <%-include ('../partials/norecord')%>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label>Icon</label> <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                     <input type="file" id="icon" name="icon" class="form-control-file">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <!-- Date View -->
+                                            <div class="form-group">
+                                                <label>Uploaded Icon </label>
+                                                <img id="myIcon" src="<%=data.icon%>" alt="Icon" style="width:50%;max-width:100px">
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
 
-
-<%}else {%>
-
-    <div class="large-box">
-        <div class="pad10A">
-            
-
-                <!-- <form id="demo-form" action=""  method="" /> -->
-
-
-
-
-                <form  role="form" onsubmit="return false"  class="col-md-12"  id="adduser" >
-                    <input type="hidden"  name="coupanId" id="coupanId"  value="<%-data.id%>" />
-
-                <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                 Name:
-                                <span class="required">*</span>
-                            </label>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <!-- Date View -->
+                                            <div class="form-group">
+                                                <label>Due Date <span class="text-danger">*</span></label>
+                                                <input type="text" value="<%-data.validupto%>" class="form-control" id="validupto" name="validupto" placeholder="Coupon Valid">
+                                            </div>
+                                        </div>
+                                        <div class="form-group  col-md-6 mb-3">
+                                            <label for="product-description">Coupon Description <span class="text-danger">*</span></label>
+                                            <textarea class="form-control" id="description" value="<%-data.description%>" name="description" rows="5" placeholder="Please enter description"><%-data.description%></textarea>
+                                        </div>
+                                    </div>
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
                         </div>
-                        <div class="form-input col-md-8">
-                            <input type="text" id="name"  value="<%-data.name%>"  data-rangelength="[2,100]" name="name"  data-trigger="change" data-required="true" class="parsley-validated" />
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-center mb-3">
+                                    <a href="<%- adminpath %>coupans"><button type="button" class="btn w-sm btn-light waves-effect">Cancel</button></a>
+                                    <button type="submit" class="btn w-sm btn-success waves-effect waves-light">Update</button>
+                                </div>
+                            </div> <!-- end col -->
                         </div>
-                    </div>
+                        <!-- end row -->
+                    </form>
+                    </div> <!-- container -->
 
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                 Code:
-                                <span class="required">*</span>
-                            </label>
-                        </div>
-                        <div class="form-input col-md-8">
-                            <input type="text" id="code"  value="<%-data.code%>"  data-rangelength="[2,100]" name="code"  data-trigger="change" data-required="true" class="parsley-validated" />
-                        </div>
-                    </div>
-
-
-                    
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                 Discount (%):
-                                <span class="required">*</span>
-                            </label>
-                        </div>
-                        <div class="form-input col-md-8">
-                            <input  id="code"  data-type="number"  value="<%-data.discount%>"  data-rangelength="[1,3]" name="discount"  data-trigger="change" data-required="true" class="parsley-validated" />
-                        </div>
-                    </div>
-
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                Choose Category :
-                                <span class="required">*</span>
-                            </label>
-                        </div>
-                        <div class="form-input col-md-8">
-                            <select   data-placeholder="Choose Category"  class="chosen-select" name="categoryId" id="categoryId">
-                                <option value="" > All Categories</option>
-                                <%for(var t=0;t<catData.length;t++){%>
-                                <option   <%if(catData[t].id==data.categoryId){%> selected <%}%>  value="<%-catData[t].id%>" /><%-catData[t].name%> 
-                               
-                        <%}%>
-                       </select>                        </div>
-                    </div>
-
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                Type:  <span class="required">*</span>
-                            
-                            </label>
-                        </div>
-                        <div class="form-input col-md-8">
-                            <select data-placeholder="Choose Type"  value="<%-data.type%>" class="chosen-select"  data-required="true" id="type" name="type">
-                                <option value="0" >All </option> 
-                               <%for(var p=0;p<types.length;p++){%>
-                                   
-                                    <option <%if(data.type==types[p].id){%> selected <%}%>   value="<%-types[p].id%>" ><%-types[p].userType%></option> 
-  
-                                   
-                                   <%}%>
+                </div> <!-- content -->
+            </div>
                 
-                       </select>                        </div>
-                    </div>
+</div>
+                
+    <!-- END wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+    <%- include('../partials/script'); -%>
+    <%- include('../partials/commonJs'); -%>
+    <script>
+    $(function() { 
+        $('#sidebar-menu ul li').find('a[href*="<%-adminpath%>coupans"]').parent().addClass('menuitem-active');
+        $('#sidebar-menu ul li a[href^="<%-adminpath%>coupans"]').addClass('active');
+    });
+    $("#validupto").flatpickr({minDate: "today"});
+    $('#name').on('keypress', function (event) {
+        var regex = new RegExp("^[a-zA-Z0-9_ ]*$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+           event.preventDefault();
+           return false;
+        }
+    });
+    $("#adduser").validate({
+        rules: {
+            name: {
+              required: true
+            },
+            code: {
+              required: true
+            },
+            discount: {
+                required: true
+            },
+            categoryId: {
+                required: true
+            },
+            type: {
+                required: true
+            },
+            usageLimit: {
+                required: true
+            },
+            minimumAmount: {
+                required: true
+            },
+            validupto: {
+                required: true
+            },
+            description: {
+                required: true
+            },
+            icon: { accept: "image/jpg,image/jpeg,image/png,image/gif"},
 
-
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                Usage Limit :
-                                <span class="required">*</span>
-                            </label>
-                        </div>
-                        <div class="form-input col-md-8">
-                            <input  id="usageLimit"  data-type="number"   value="<%-data.usageLimit%>" data-rangelength="[1,3]" name="usageLimit"  data-trigger="change" data-required="true" class="parsley-validated" />
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                Minimum Order Amount :
-                                <span class="required">*</span>
-                            </label>
-                        </div>
-                        <div class="form-input col-md-8">
-                            <input  id="minimumAmount"  data-type="number"  value="<%-data.minimumAmount%>"  data-rangelength="[1,6]" name="minimumAmount"  data-trigger="change" data-required="true" class="parsley-validated" />
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                Icon:
-                                <span class="required">*</span>
-                            </label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input type="file" id="icon"   name="icon"  />
-                        </div>         
-                        <div class="form-group col-md-4" <% if (data.icon==null || data.icon =="") {%> style="display :none"  <%}%>  > 
-                            <label>Uploaded Icon </label>
-                            <div class="fm-admin-file">
-                                    <img id="myIcon" src="<%=data.icon%>" alt="Icon" style="width:50%;max-width:100px">
-
-                            </div>
-                        </div>
-                                
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                Thumbnail:
-                            </label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input type="file"  id="thumbnail" name="thumbnail"  />
-                        </div>
-
-                        <div class="form-group col-md-4" <% if (data.thumbnail==null ||  data.thumbnail =="") {%> style="display :none"  <%}%>  > 
-                            <label>Uploaded Thumbnail </label>
-                            <div class="fm-admin-file">
-                                    <img id="myThumbnail" src="<%=data.thumbnail%>" alt="Icon" style="width:50%;max-width:100px">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="">
-                                Valid Upto:
-                                <span class="required">*</span>
-                            </label>
-                        </div>
-                        <div class="form-input col-md-8">
-                           
-                            <input type="text" class="datepicker" value="<%-data.validupto%>"  data-required="true"  id="validupto" name="validupto" />
-                        </div>
-                    </div>
-
-
-                    <div class="form-row">
-                        <div class="form-label col-md-4">
-                            <label for="" class="label-description">
-                                Description:
-                                <span>10 chars min, 1000 max</span>
-                            </label>
-                        </div>
-                        <div class="form-input col-md-8">
-                            <textarea id="description" name="description" data-trigger="keyup" data-rangelength="[10,1000]" class="parsley-validated"><%-data.description%></textarea>
-                        </div>
-                    </div>
-
-
-                    <div class="divider"></div>
-                    <div class="form-row">
-                        <input type="hidden" name="superhidden" id="superhidden" />
-                        <div class="form-input col-md-8 col-md-offset-6">
-                            <!-- //onclick="javascript:$(&apos;#demo-form&apos;).parsley( &apos;validate&apos; );" -->
-                            <!-- onclick="javascript:$('#adduser').parsley('validate' );"  -->
-                            <button  type="button" onclick="window.history.back();"   class="btn ui-state-default medium bg-red mrg15R">
-                                <span class="button-content">Cancel</span>
-                            </button>
-                            <button  type="submit" class="btn ui-state-default medium  primary-bg">
-                                <span class="button-content">Submit</span>
-                            </button>
-                            </div>
-                    </div>
-
-                </form>
-
-        </div>
-
-       
-    </div>
-
-<%}%>
-
-                	</div><!-- #page-content -->
-            </div><!-- #page-main -->
-        </div><!-- #page-wrapper -->
-    </div>
-    </body>
-</html>
-
-
-<script type="text/javascript">
-
-
-    
-      $('#adduser').submit( function() {
-       
-       
+        },
+        messages: {
+            name: {
+                required: "This field is required"
+            },
+            code: {
+                required: "This field is required"
+            },
+            discount: {
+                required: "This field is required."
+            },
+            categoryId: {
+                required: "This field is required"
+            },
+            type: {
+                required: "This field is required"
+            },
+            usageLimit: {
+              required: "This field is required"
+            },
+            minimumAmount: {
+              required: "This field is required"
+            },
+            validupto: {
+              required: "This field is required"
+            },
+            description: {
+              required: "This field is required"
+            },
+            icon: {accept: 'Not an image!'},
+        },
+        submitHandler: function (form) {
+            $(".overlay").show();
             var tempform = $('#adduser');
-           
-            tempform .parsley('validate' );
-
-            if(tempform.parsley('isValid' ))
-            {
-                var ext = $('#icon').val().split('.').pop().toLowerCase();
-                if(ext==null || ext=="") ext=$('#myIcon').attr('src').split('.').pop().toLowerCase();
-                var ext1 = $('#thumbnail').val().split('.').pop().toLowerCase();
-                if(ext1==null || ext1=="") ext1=$('#myThumbnail').attr('src').split('.').pop().toLowerCase();
-
-
-                if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1 ) {
-                    showToastError('Please select only jpg and png files for icon!')
-                return false;
-            }
-
-
             var form_data = new FormData(tempform[0]);
             $(".overlay").show();
-            var id=$('#coupanId').val()
-
             $.ajax({
                 type: 'POST',
                 url: '<%-adminpath%>coupans/update',
@@ -300,23 +230,17 @@ if(data==undefined || data==null || data=='{}' || data.length==0) {%>
                   
                         showToastSuccess(response.message)
 
-window.location.reload()                       
+                         window.location.href="<%-adminpath%>coupans";
+                       
                     } else {
                         showToastError(response.message)
                     }
-                },
-
-                error: function(response)
-                {
-                   var errorResponse=JSON.parse(response.responseText)
-                   showToastError(errorResponse.message)
-
-
                 }
             });
         }
-      });
-    
-  
+        
+    });
     </script>
+</body>
 
+</html>

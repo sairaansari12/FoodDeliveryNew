@@ -22,7 +22,7 @@
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="<%- adminpath %>">Dashboard</a></li>
                                             
-                                            <li class="breadcrumb-item active">Orders</li>
+                                            <li class="breadcrumb-item active">Coupons</li>
                                         </ol>
                                     </div>
                                     <h4 class="page-title">Coupons</h4>
@@ -42,7 +42,7 @@
                                            
                                                 <div class="col-md-12">
                                                     <div class="text-md-right">
-                                                        <button type="button" class="btn btn-danger waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-gift mr-1"></i> Add Coupon</button>
+                                                        <a href="<%- adminpath %>coupans/add"><button type="button" class="btn btn-danger waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-gift mr-1"></i> Add Coupon</button></a>
                                                     </div>
                                                 </div><!-- end col-->
                                         </div>
@@ -72,7 +72,7 @@
                                                     <td><%-data[t].code %> </td>
                                                     <td> <img src="<%-data[t].icon %>" alt="product-img" height="32"/>
                                                     </td>
-                                                    <td><%if(data[t].category) {%><%-data[t].category.name %> <%}%></td>
+                                                    <td><%if(data[t].category) {%><%-data[t].category.name %> <%}else{%>All<% } %></td>
                                                     <% 
                                                         var vtype=data[t].type
                                                         var type="All"

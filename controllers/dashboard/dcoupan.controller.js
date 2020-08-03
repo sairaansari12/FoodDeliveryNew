@@ -18,7 +18,7 @@ app.get('/',adminAuth, async (req, res, next) => {
     const findData = await COUPAN.findAll({
       where: {
         companyId: req.companyId,
-        
+        offerType: "coupon"
       },
       include:[ {
         model: CATEGORY,
@@ -138,16 +138,16 @@ app.post('/add',adminAuth,async (req, res) => {
       });
 
     }
-      ImageFile1 = req.files.thumbnail;    
-      if(ImageFile1)
-      {
-      thumbnail = Date.now() + '_' + ImageFile1.name;
-      ImageFile1.mv(config.UPLOAD_DIRECTORY +"coupans/thumbnails/"+ thumbnail, function (err) {
-          //upload file
-          if (err)
-          return responseHelper.error(res, err.message, 400);   
-      });
-    }
+    //   ImageFile1 = req.files.thumbnail;    
+    //   if(ImageFile1)
+    //   {
+    //   thumbnail = Date.now() + '_' + ImageFile1.name;
+    //   ImageFile1.mv(config.UPLOAD_DIRECTORY +"coupans/thumbnails/"+ thumbnail, function (err) {
+    //       //upload file
+    //       if (err)
+    //       return responseHelper.error(res, err.message, 400);   
+    //   });
+    // }
       }
 
 
@@ -169,12 +169,13 @@ app.post('/add',adminAuth,async (req, res) => {
       const users = await COUPAN.create({
         name: data.name,
         type: data.type,
+        offerType: "coupon",
         usageLimit: data.usageLimit,
         code: data.code,
         discount: data.discount,
         icon: icon,
         validupto:data.validupto,
-        thumbnail: thumbnail,
+        thumbnail: icon,
         description:data.description,
         companyId: req.companyId,
         categoryId:data.categoryId,
@@ -218,30 +219,20 @@ app.post('/update',adminAuth,async (req, res) => {
 
     if (req.files) {
 
-      ImageFile = req.files.icon;    
-      if(ImageFile)
-      {
-         icon = Date.now() + '_' + ImageFile.name;
+        ImageFile = req.files.icon;    
+        if(ImageFile)
+        {
+           icon = Date.now() + '_' + ImageFile.name;
 
-      ImageFile.mv(config.UPLOAD_DIRECTORY +"coupans/icons/"+ icon, function (err) {
-          //upload file
-          if (err)
-          return responseHelper.error(res, err.meessage, 400);   
-      });
+        ImageFile.mv(config.UPLOAD_DIRECTORY +"coupans/icons/"+ icon, function (err) {
+            //upload file
+            if (err)
+            return responseHelper.error(res, err.meessage, 400);   
+        });
 
-    }
-    
-      ImageFile1 = req.files.thumbnail;    
-      if(ImageFile1)
-      {
-      thumbnail = Date.now() + '_' + ImageFile1.name;
-      ImageFile1.mv(config.UPLOAD_DIRECTORY +"coupans/thumbnails/"+ thumbnail, function (err) {
-          //upload file
-          if (err)
-          return responseHelper.error(res, err.message, 400);   
-      });
-    }
       }
+    
+    }
 
 
     const user = await COUPAN.findOne({
@@ -260,7 +251,6 @@ app.post('/update',adminAuth,async (req, res) => {
     if (user) {
     
       if(icon=="") icon=user.dataValues.icon
-      if(thumbnail=="") thumbnail=user.dataValues.thumbnail
 
 
       const users = await COUPAN.update({
@@ -270,19 +260,14 @@ app.post('/update',adminAuth,async (req, res) => {
         discount: data.discount,
         icon: icon,
         usageLimit: data.usageLimit,
-        thumbnail: thumbnail,
+        thumbnail: icon,
         description:data.description,
         companyId: req.companyId,
         validupto:data.validupto,
         minimumAmount:data.minimumAmount,
         categoryId:data.categoryId
-
-
-
-
        },
        {where:{
-
         id: data.coupanId
        }}
        

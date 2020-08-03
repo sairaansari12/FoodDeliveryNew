@@ -487,7 +487,18 @@ body[data-sidebar-color="gradient"][data-sidebar-size="condensed"] #wrapper .lef
     .user-pro-dropdown .dropdown-item:hover {
       background-color: #6658dd;
       color: #fff; }
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+label.error { float: none; color: red; padding-left: 0px; vertical-align: bottom; }
 @media (min-width: 992px) {
   body[data-layout-mode="detached"] .navbar-custom .container-fluid {
     max-width: 95%; }
