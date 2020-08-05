@@ -256,54 +256,54 @@
         <!-- End Page content -->
         <!-- ============================================================== -->
         <div class="col-xl-6">
-                                <div class="card-box">
+            <div class="card-box">
 
-                                    <h4 class="header-title">Cooking Instructions</h4>
+                <h4 class="header-title">Cooking Instructions</h4>
 
-                                    <p class="sub-header">
-                                       <%- data.cookingInstructions %>
-                                    </p>
-                                    <h4 class="header-title">Delivery Instructions</h4>
-                                    <% if(instructions){ %>
-                                        <% for(var t=0;t<instructions.deliveryInstructions.length;t++){ %>
-                                            <p class="sub-header">
-                                               <%- instructions.deliveryInstructions[t].heading %>
-                                            </p>
-                                        <%}%>
-                                    <% } %>
-                                    
-                                    <!-- sample modal content -->
+                <p class="sub-header">
+                   <%- data.cookingInstructions %>
+                </p>
+                <h4 class="header-title">Delivery Instructions</h4>
+                <% if(instructions){ %>
+                    <% for(var t=0;t<instructions.deliveryInstructions.length;t++){ %>
+                        <p class="sub-header">
+                           <%- instructions.deliveryInstructions[t].heading %>
+                        </p>
+                    <%}%>
+                <% } %>
+                
+                <!-- sample modal content -->
 
-                                    <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Assign Employee</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                </div>
-                                                <div class="modal-body p-4">
-                                                    <div class="row">
-                                                    <input type="hidden" id="assignOrderId" value="<%-data.id%>"/>
-                                                        <select class="custom-select" id="status-select" multiple>
-                                                        <%var exists=data.assignedEmployees.map(item => item.employee.id)
-                                                        %>
-                                                            <option value="" disabled/>Choose Employee
-                                                        <%for(var t=0;t<empData.length;t++){%>
-                                                            <option value="<%-empData[t].id%>" <%if(exists.includes(empData[t].id)){%> selected <%}%>   /><%-empData[t].firstName+' '+empData[t].lastName%> 
-                                                           
-                                                        <%}%>
+                <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Assign Employee</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row">
+                                <input type="hidden" id="assignOrderId" value="<%-data.id%>"/>
+                                    <select class="custom-select" id="status-select" multiple>
+                                    <%var exists=data.assignedEmployees.map(item => item.employee.id)
+                                    %>
+                                        <option value="" disabled/>Choose Employee
+                                    <%for(var t=0;t<empData.length;t++){%>
+                                        <option value="<%-empData[t].id%>" <%if(exists.includes(empData[t].id)){%> selected <%}%>   /><%-empData[t].firstName+' '+empData[t].lastName%> 
+                                       
+                                    <%}%>
 
-                                                        </select>
-                                                    </div>
-                                                   
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button"  class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                    <button type="button" onclick="updateAssignemnt()"  class="btn btn-info waves-effect waves-light">Assign</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.modal -->
+                                    </select>
+                                </div>
+                               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button"  class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                <button type="button" onclick="updateAssignemnt()"  class="btn btn-info waves-effect waves-light">Assign</button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal -->
     </div>
     <!-- END wrapper -->
     <!-- Right bar overlay-->
@@ -311,6 +311,10 @@
     <%- include('../partials/script'); -%>
     <%- include('../partials/commonJs'); -%>
     <script>
+    $(function() { 
+        $('#sidebar-menu ul li').find('a[href*="<%-adminpath%>orders"]').parent().addClass('menuitem-active');
+        $('#sidebar-menu ul li a[href^="<%-adminpath%>orders"]').addClass('active');
+    });
     function updateAssignemnt()
     {
         var orderId= $('#assignOrderId').val();
