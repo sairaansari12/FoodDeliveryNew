@@ -121,6 +121,7 @@ app.post('/status',adminAuth,async(req,res,next) => {
       
 
        const userData = await CATEGORY.findOne({
+         attributes:['id','parentId','name'],
          where: {
            id: params.id }
        });
@@ -161,6 +162,7 @@ app.post('/status',adminAuth,async(req,res,next) => {
 
          }
            catch (e) {
+             console.log(e)
              return responseHelper.error(res, e.message, 400);
            }
     

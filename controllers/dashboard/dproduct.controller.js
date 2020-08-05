@@ -227,14 +227,14 @@ app.post('/edit/:id',adminAuth, async(req, res, next)=>{
             { where: { id: id } }
         );
 
-        const updateSpecs = await ProductSpecs.update(
-            {
-                productImages: thumbnail
-            },
-            { where: { productId: id } }
-        );
+        // const updateSpecs = await ProductSpecs.update(
+        //     {
+        //         productImages: thumbnail
+        //     },
+        //     { where: { productId: id } }
+        // );
 
-        console.log("updatesoecs",updateSpecs)
+        // console.log("updatesoecs",updateSpecs)
 
     return res.json({
         status: 200,
