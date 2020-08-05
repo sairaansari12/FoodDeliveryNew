@@ -45,8 +45,9 @@ let modules = [
   require('./serviceRatings'),
   require('./deals'),
   require('./shipment'),
-  require('./instructions')
-
+  require('./instructions'),
+  require('./products'),
+  require('./productSpecifications')
 
 ];
 

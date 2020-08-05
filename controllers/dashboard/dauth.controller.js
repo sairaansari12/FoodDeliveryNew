@@ -6,10 +6,12 @@ const COMPANY= db.models.companies
 const Op = require('sequelize').Op;
 
 function isAdminAuth(req, res, next) {
-    if(req.session.userData){
-      return next();
-    }
-    return res.redirect('/company');
+    // if(req.session.userData){
+    //   return next();
+    // }
+    // return res.redirect('/company');
+
+    return next();
   }
 /**
 *@role Get Login Page
@@ -164,11 +166,11 @@ app.post('/login',async(req,res,next) => {
                   role:2,
                   status:1
             		}
-            	  })  
+                })  
+                
                   
                 if(userData)
                {
-
                 
                 console.log(await hashPassword.generatePass(params.password));
 
