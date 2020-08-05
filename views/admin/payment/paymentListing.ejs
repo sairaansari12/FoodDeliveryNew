@@ -1,217 +1,128 @@
-<!-- AUI Framework -->
 <!DOCTYPE html>
-    <html>
-   <%-include ('../partials/header')%>
-    <body style="overflow: hidden;">
+<html lang="en">
+<%- include('../partials/header'); -%>
+
+<body class="loading"
+    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <%- include('../partials/dashboardHeader'); -%>
         
 
+                    <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
 
-        <div id="page-wrapper" class="demo-example">
+            <div class="content-page">
+                <div class="content">
 
-           
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="<%- adminpath %>">Dashboard</a></li>
+                                            
+                                            <li class="breadcrumb-item active">Payments</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Payments</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
 
-            <!-- #page-header -->
 
-            <%-include ('../partials/side_bar')%>
-            <!-- #page-sidebar -->
-            <div id="page-content-wrapper" >
-                <div class="card">
-                <div class="text-transform-upr  form-bordered">
+                        <div class="row">
+                            <div class="col-xl-8 order-xl-1 order-2">
+                                <div class="card mb-2">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-lg-12">
+                                                <form class="form-inline">
+                                                    <!--<div class="form-group mb-2">
+                                                        <label for="inputPassword2" class="sr-only">Search</label>
+                                                        <input type="search" class="form-control" id ="search" name="search" placeholder="Search...">
+                                                    </div>-->
+                                                    <div class="form-group mx-sm-2 mb-2">
+                                                        <label for="status-select" class="mr-2">Status</label>
+                                                        <select class="custom-select" id="status-select">
+                                                            <option value="" />All 
+                                                              <option value="1" />Success
+                                                              <option value="2" />Failed
+ 
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group mx-sm-1 mb-2">
+                                                        <input type="text" id="basic-datepicker"  name="from" class="fromDate form-control" placeholder="From Date">
+                                                    </div>
+                                                    <div class="form-group mx-sm-1 mb-2">
+                                                        
+                                                            <input type="text" id="toDate" placeholder="To Date"  class="toDate form-control" name="to" />
+                                                    </div>
 
-                    <div  style="background-color:aliceblue"  class="col-md-4  form-bordered  font-size-18 font-bold font-black pad10A  ">Total payments :<span id="totalPaymentCount">0 </span> &nbsp;&nbsp;&nbsp;</div>
-                    <div style="background-color:aliceblue"  class="col-md-4  form-bordered   font-size-18 font-bold font-black pad10A  ">Total Payment :  <%-CURRENCY%>&nbsp;<span id="totalPayment">  </span> </div>
-                    <div style="background-color:aliceblue"  class="col-md-4  form-bordered   font-size-18 font-bold font-black pad10A  ">Escrow Payment :  <%-CURRENCY%> &nbsp;<span id="totalEscrowPayment"> 0 </span> </div>
-                    <div style="background-color:aliceblue"  class="col-md-6 form-bordered    font-size-14  font-bold  primary-font pad10A mrg25B">No. of Success payment :<span id="totalSuccessCount">0</span> &nbsp;&nbsp;&nbsp;  Total Payment : &nbsp;<%-CURRENCY%>&nbsp;<span id="totalSuccessSum"> 0  </span> </div>
-                    <div style="background-color:aliceblue"  class="col-md-6  form-bordered    font-size-14 font-bold  font-red pad10A mrg25B">No. of Failed payment :<span id="totalFailedCount">0</span> &nbsp;&nbsp;&nbsp;Total Payment :  <%-CURRENCY%>&nbsp;<span id="totalFailedSum"> 0 </span> </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="text-lg-left">
+                                                            <a onclick="getFilter(1)" href="javascript:;"><button type="button" class="btn btn-light waves-effect mb-2">Filter</button></a>
+                                                        </div>
+                                                    </div><!-- end col-->
+                                                </form>                            
+                                            </div>
+                                            
+                                        </div>
                 
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                                <div id="orderData">
+                                    
+                                </div>
+                                <div class="col-md-4" style="float:right" id="append_pagination">
+                                </div>
+                        </div>
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+            </div>
                 
-
-                   
-</div><!-- #page-title -->
-<div id="page-content" >
-
-
-<%-include ('../partials/flashMessage')%>
-
-    <div class="example-box">
-    
-
-            <div class="form-row col-lg-2 float-left form-vertical">
-                <div class="form-label">
-                    <label for="from">
-                        From Date:
-                    </label>
-                </div>
-                <div class="form-input">
-                    <input type="text" size="10" class="fromDate" id="fromDate" name="from" />
-                </div>
-            </div>
-    
-            <div class="form-row col-lg-2 float-left form-vertical">
-                <div class="form-label">
-                    <label for="to">
-                        To Date: 
-                    </label>
-                </div>
-                <div class="form-input">
-                    <input type="text" size="10" class="toDate"  id ="toDate" name="to" />
-                </div>
-            </div>
-
-          
-        
-        <div class="form-row col-lg-3 float-left form-vertical dropdown form-label mrg25T">
-            <select data-placeholder="Choose Status" class="chosen-select" id="status">
-                <option value="" /> 
-                <option value="" />All 
-                <option value="1" />Success
-                <option value="2" />Failed
-
-       </select>
-    
-         </div>
-
-         
-
-         <div class="form-row col-lg-2 float-left form-vertical form-label mrg25T">
-            <a onclick="getFilter(1)" href="javascript:;" class="btn medium primary-bg" title="" >
-                <span class="button-content text-center float-none font-size-11 text-transform-upr">
-                    Filter
-                </span>
-            </a>
-    
-         </div>
-
-         <div class="form-row col-lg-2 float-left form-vertical">
-            <div class="form-label">
-                <label for="to">
-                    Search: 
-                </label>
-            </div>
-            <div class="form-input1">
-                <input type="text" size="10" class="search"  id ="search" name="search" />
-            </div>
-        </div>
-         
-         
-        </div>
-
-
-
-<table class="table font-size-13" id="example" style="width:100%">
-
-	<thead>
-		<tr>
-            <th>Customer Name</th>
-            <th>Order No</th>
-            <th>Order Id</th>
-			<th>Order Date</th>
-            <th>Contact</th>
-            <th>Price (<%-CURRENCY%>)</th>
-            <th>Payment Date </th>
-            <th>Action </th>
-
-		</tr>
-    </thead>
-    
-    
-
-  
-    
-    
-	<tbody id="orderData">
-
-	
-
-
-
-
-
-           
-	</tbody>
-	
-</table>
-
-<div class="col-md-4" style="float:right" id="append_pagination">
-     
 </div>
-
-
-
-
-</div>
-
-                	</div><!-- #page-content -->
-            </div><!-- #page-main -->
-        </div><!-- #page-wrapper -->
-
-
-        
-
-
-
-    </body>
-</html>
-
-
-
-
-<script type="text/javascript">
-   
-  
-
-
-    
-
-
-   $('#example').DataTable( {
-        "bPaginate":   false,
-        "bInfo":     false,
-        "bSorting":false,
-        "bFilter":false,
-        "bLengthChangeInfo":false
-    } );
-    $('#example thead th').off('click')
-  
-    </script>
-
-   
+                
+    <!-- END wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+    <%- include('../partials/script'); -%>
+    <%- include('../partials/commonJs'); -%>
 <script>
-
-var dataList=null
-    function changeStatus(id,status,stYpe)
+    $('#search').on( 'keyup', function () {
+       setTimeout(function(){getFilter(1) },800);
+    });
+    $("#toDate").flatpickr();
+ 
+    function StatusChange(id,status)
     {
-
         if( confirm('Are you sure you want to change status for this order?'))
         {
-        $.ajax({
+        $('#loading1').show()
+            $.ajax({
             type: 'POST',
             url: '<%-adminpath%>payment/status',
             dataType: 'json',
             data: {'id':id,'status':status},
             success: function (response) {
                 if (response.code == '200') {
-                   // $('#block_status_'+id).html('');
-
         
                showToastSuccess( response.message)
                if(status == "2")
                     {
-                       $('#block_status_'+id).hide()
-                       $('#unblock_status_'+id).show()
-
-
-
+                      window.location.reload();
                     }else{
-                         
-                         $('#block_status_'+id).show()
-                        $('#unblock_status_'+id).hide()
-                       // $('#block_status_'+id).append("<i  class='fa fa-truck'  aria-hidden='true'></i>")
-
+                      window.location.reload();
                     }
-                    
-                   
-                    
                 }
                 else{
                    
@@ -225,57 +136,16 @@ var dataList=null
 
             }
         });
-    }
-    }
-
-    function find( ) {
-        var item=$('#search').val()
-
-var rows=[];
-
-    for(var i = 0; i < dataList.length; ++i) {
-        //if the name is what we are looking for return it
-        if(dataList[i]['amount'].toString().includes(item) ||
-          dataList[i].user.firstName.toString().includes(item) ||
-          dataList[i].user.lastName.toString().includes(item) ||
-          dataList[i].order.orderNo.toString().includes(item) ||
-          dataList[i].createdAt.toString().includes(item) 
-
-
-          
-          )
-            
-        {  
-
-           rows.push(dataList[i]);
         }
     }
-
-    setData(rows)
-
-
-}
-
- 
-$('#search').on( 'keyup', function () {
-       setTimeout(function(){find() },800);
-} );
-
-
-
-
-  
-    
     function getFilter(currentPage)
     {
         currentPage=currentPage
-        var limit=50
+        var limit=40
         $('#loading1').show()
-        var status=$('#status').val();
-        var fromDate=$('#fromDate').val();
+        var status=$('#status-select').val();
+        var fromDate=$('.fromDate').val();
         var toDate=$('#toDate').val();
-
-        //alert(fromDate)
         $.ajax({
             type: 'POST',
             url: '<%-adminpath%>payment/list',
@@ -284,19 +154,65 @@ $('#search').on( 'keyup', function () {
             success: function (response) {
                 $('#loading1').hide()
 
-                if (response.code == '200') {
+                if (response.code == '200') 
+                {
+                    var row="";
 
                     $('#orderData').html('')
                     var data1=response.body.data
                     var data=response.body.data.rows
-                    dataList=data
-setData(data)
-appendPagination(currentPage,Math.ceil(data1.count/limit))
-appendStat(response.body.counts,response.body.escrow)
+                    for(var t=0;t<data.length;t++)
+                    {
+                        
+                        var status="Failed"
+                        var style="display:none" 
+                        var style1="display:block" 
+             
+                        if(data[t].transactionStatus == '1')
+                        {
+                            var active = 2;
+                            var status = "Success";
+                            var stclass = "bg-soft-info text-info";
+                             var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button"  onclick="StatusChange(\''+data[t].id+'\',\''+active+'\')">'+
+                            '<h5><span class="badge bg-soft-danger text-danger"><i class="mdi mdi-coin"></i>Payment Failed</span></h5></a>';
+                        }else{
+                            var active = 1;
+                            var status = "Pending";
+                             var stclass = "bg-soft-danger text-danger";
+                             var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button"  onclick="StatusChange(\''+data[t].id+'\',\''+active+'\')">'+
+                            '<h5><span class="badge bg-soft-success text-success"><i class="mdi mdi-coin"></i> Payment Paid</span></h5></a>';
+                        }
+                   
+                        row =row+ '<div class="card-box mb-2">'+
+                        '<div class="row align-items-center">'+
+                        '<div class="col-sm-4"><div class="media">'+
 
+                        '<img class="d-flex align-self-center mr-3 rounded-circle" src="'+data[t].user.image+'" alt="Generic placeholder image" height="64">'+
+                        '<div class="media-body">'+
+                        '<h4 class="mt-0 mb-2 font-16">'+data[t].user.firstName+ " "+  data[t].user.lastName+'</h4>'+
+                        '<p class="mb-1 mt-3 mt-sm-0"><i class="mdi mdi-cellphone mr-1"></i> '+data[t].user.countryCode +" "+ data[t].user.phoneNumber+'</p>'+
+                        '<p class="mb-1"><b>Order No.:</b> '+data[t].order.orderNo+'</p>'+
+                        
+                        '</div></div></div>'+
+                        '<div class="col-sm-4">'+
+                        '<p class="mb-1"><b>Order Date:</b> '+format(new Date(data[t].order.createdAt))+'</p>'+
+                        '<p class="mb-1"><b>Payment Date:</b> '+format(new Date(data[t].createdAt)) +'</p>'+
+                        '<p class="mb-0"><i class="mdi mdi-currency-inr mr-1"></i> '+data[t].amount  +'</p>'+
+                        '</div><div class="col-sm-2">'+
+                        '<div class="text-center mt-3 mt-sm-0">'+
+                        '<div class="badge font-14 '+stclass+' p-1">'+status+'</div>'+ 
+                        '</div></div>'+                             
+                        '<div class="col-sm-2"><div class="text-sm-right">'+
+                        ''+payemnt+''+
+                        '<a href="<%-adminpath%>orders/view/'+data[t].order.id +'"  title="View Order" class="action-icon"> <i class="mdi mdi-eye"></i></a>'+
+                        '</div></div></div></div></div>';
+                    }
+                    
+                    $('#orderData').html(row);
+                    appendPagination(currentPage,Math.ceil(data1.count/limit))
+                    //$('#exe').DataTable();
                 }
                 else{
-                   
                     showToastError(response.message)
                 }
             },
@@ -309,159 +225,60 @@ appendStat(response.body.counts,response.body.escrow)
 
             }
         });
-    }
-    
-  
-    function setData(data)
+    } 
+
+
+    function appendPagination(currentPage,count)
     {
-        var row=""
-        for(var t=0;t<data.length;t++)
-{
-    
+        var fd="";
+        if (count >= 1) { 
+            fd=fd+' <ul class="pagination pagination-rounded justify-content-end my-2">'; 
 
-                    var status="Failed"
-                    var style="display:none" 
-                    var style1="display:block" 
-                if(data[t].transactionStatus=="1") {status="Success"
-                 style="display:block"
-                 style1="display:none"
+            if (currentPage > 1) {            
+              fd=fd+'<li class="page-item"><a class="page-link" onclick="getFilter(1)" href="javascript: void(0);" aria-label="Previous"> <span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>';
+            }
+            else{
+                fd=fd+'<li class="page-item"><a class="page-link disabled" href="javascript: void(0);" aria-label="Previous"> <span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>';
+            }
+          var i = 1;
+          if (currentPage > 5) {
+          i = +currentPage - 4;
+          } 
+         // if (i !== 1) { 
+         //      fd=fd+'<a  class="btn medium disabled ui-state-default" href="javascript:;">...</a>';
+         //  } 
+                         
+         // alert(fd);
+          
+         
+            for (i; i<=count; i++) {
+                if (currentPage == i) { 
+                  fd=fd+'<li class="page-item active"><a class="page-link" href="javascript: void(0);">'+currentPage+'</a></li>';
+                } else {
+                    fd=fd+'<li class="page-item"><a class="page-link" onclick="getFilter('+i+')" href="javascript: void(0);">'+i+'</a></li';
                 }
-              
-              
+                if (i == (+currentPage + 4)) {
+                    fd=fd+'<a  class="btn medium disabled ui-state-default" href="javascript:;">...</a>';
+                 break; } 
+              }
+         
+          
+            if (currentPage != count) {
+                fd=fd+'<li class="page-item"><a class="page-link" onclick="getFilter('+count+')" href="javascript: void(0);" aria-label="Previous"> <span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>';
+            } 
+            else{
+                fd=fd+'<li class="page-item"><a class="page-link disabled" href="javascript: void(0);" aria-label="Previous"> <span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>';
+            } 
+             
+            fd=fd+'</ul>';  
+        } 
 
-row =row+ '<tr>'+
-'			<td>'+data[t].user.firstName+ " "+  data[t].user.lastName+' </td>'+
-'			<td><a href=<%-adminpath%>orders/view/'+data[t].order.id +' >'+data[t].order.orderNo+' </a></td>'+
-'			<td><a href=<%-adminpath%>orders/view/'+data[t].order.id +' >'+data[t].order.id+' </a></td>'+
-'			<td>'+format(new Date(data[t].order.createdAt))+' </td>'+
-'            <td>'+data[t].user.countryCode +" "+ data[t].user.phoneNumber+'</td>'+
-'            <td>'+data[t].amount  +'</td>'+
-'            <td>'+format(new Date(data[t].createdAt)) +'</td>              '+
-'              '+
-'            <td>'+
-
-'<a href="javascript:;"   style="'+style+'"  id="block_status_'+data[t].id+'"   onclick="changeStatus(\''+ data[t].id +'\',\'2\')"  class="btn small  bg-green  ">'+
-'                <span class="button-content">'+
-'                    <i class="glyph-icon icon-cog float-left"></i>'+
-'                   Success    '+
-'                </span>'+
-'            </a>'+
-'            <a href="javascript:;"   style="'+style1+'" id="unblock_status_'+data[t].id+'"  onclick="changeStatus(\''+ data[t].id +'\',\'1\')"  class="btn small  bg-red  ">'+
-'                <span class="button-content">'+
-'                    <i class="glyph-icon icon-ban-circle float-left"></i>'+
-'                   Failed '+
-'                </span>'+
-'            </a>'+
-	
-
-'            </td>		'+
-'        </tr>';
-
-}
-
-if(row=="") {$('#orderData').html('&nbsp;&nbsp;&nbsp;No matching records found')
-
-}
-else $('#orderData').html(row);
+           $("#append_pagination").html(fd)  
     }
-   
-function appendPagination(currentPage,count)
-{
-    var fd="";
-//alert(data.pageCount);
- if (count > 1) { 
-fd=fd+'<ul class="button-group center-div">'; 
 
-  if (currentPage > 1) {
-      fd=fd+'<a  href="javascript:;" class="btn medium ui-state-default" onclick="getFilter(1)"><i class="glyph-icon icon-chevron-left"></i></a>';
-  }
-  else{
-    fd=fd+'<a  href="javascript:;" class="btn medium ui-state-default disabled"><i class="glyph-icon icon-chevron-left"></i></a>';
- 
-  }
-  var i = 1;
-  if (currentPage > 5) {
-  i = +currentPage - 4;
-  } 
- if (i !== 1) { 
-      fd=fd+'<a  class="btn medium disabled ui-state-default" href="javascript:;">...</a>';
-  } 
-                 
- // alert(fd);
-  
- 
- for (i; i<=count; i++) {
- if (currentPage == i) { 
-      fd=fd+'<li class="btn medium ui-state-default primary-bg"><span><span>'+currentPage+'</span></span></li>';
-    } else {
-        fd=fd+'<a  class="btn medium  ui-state-default" href="javascript:;" onclick="getFilter('+i+')">'+i+'</a>';
-     }
-    if (i == (+currentPage + 4)) {
-        fd=fd+'<a  class="btn medium disabled ui-state-default" href="javascript:;">...</a>';
-     break; } 
-  }
- 
-  
-  if (currentPage != count) {
-      fd=fd+'<a  class="btn medium ui-state-default"  href="javascript:void(0)" onclick="getFilter('+count+')"> <i class="glyph-icon icon-chevron-right"></i></a>';
- } 
- else{
-      fd=fd+'<a  class="btn medium ui-state-default disabled"  href="javascript:void(0)" > <i class="glyph-icon icon-chevron-right"></i></a>';
- } 
- 
-fd=fd+'</ul>';  
- } 
-
-       $("#append_pagination").html(fd)  
-}
-function appendStat(data,escrow)
-{
-    var total=0;
-    var count=0;
-    var escrow=0
-    $('#totalFailedCount').html(0)
-    $('#totalFailedSum').html(0)
-    $('#totalSuccessCount').html(0)
-    $('#totalSuccessSum').html(0)
-   // alert(total)
-for(var k=0;k<data.length;k++)
-{
-
-    if(data[k].transactionStatus=="2") {
-     $('#totalFailedCount').html(data[k].count)
-    $('#totalFailedSum').html(data[k].totalSum)
-}
-
-if(data[k].transactionStatus=="1") {
-     $('#totalSuccessCount').html(data[k].count)
-    $('#totalSuccessSum').html(data[k].totalSum)
-}
-
-
-
-
-count=count+data[k].count
- total=total+data[k].totalSum
-}
-
-
-for(var k=0;k<escrow.length;k++)
-{
-
-    if(escrow[k].paymentState=="1")escrow= escrow[k].totalSum
-   
-}
-
-
-
-
-$('#totalPayment').html(total)
-$('#totalPaymentCount').html(count)
-$('#totalEscrowPayment').html(escrow)
-}
-
-
-
-var currentPage=1
+    var currentPage=1
     getFilter(currentPage)
 </script>
+</body>
+
+</html>

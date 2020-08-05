@@ -499,6 +499,17 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 label.error { float: none; color: red; padding-left: 0px; vertical-align: bottom; }
+    .overlay {
+      background-color: #fff;
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      top: 50%;
+      margin: -20px 0 0 -20px;
+      z-index: 999999;
+    }
+    
 @media (min-width: 992px) {
   body[data-layout-mode="detached"] .navbar-custom .container-fluid {
     max-width: 95%; }
