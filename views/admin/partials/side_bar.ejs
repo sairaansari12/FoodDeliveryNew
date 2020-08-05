@@ -28,6 +28,7 @@
               </ul>
           </div>
       </li>
+      
 
       <li class="menu-title mt-2">Apps</li>
 
@@ -45,6 +46,31 @@
           </a>
       </li>
 
+      <li>
+        <a href="<%- adminpath %>coupans">
+            <i data-feather="gift"></i>
+            <span> Coupans </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#sidebarEcommerce" data-toggle="collapse">
+            <i data-feather="shopping-cart"></i>
+            <span> Ecommerce </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarEcommerce">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="<%- adminpath %>products/get">All Products</a>
+                </li>
+                <li>
+                    <a href="<%- adminpath %>products/add">Add Products</a>
+                </li>
+            </ul>
+        </div>
+      </li>
+      
       <li>
           <a href="#sidebarEcommerce" data-toggle="collapse">
               <i data-feather="shopping-cart"></i>

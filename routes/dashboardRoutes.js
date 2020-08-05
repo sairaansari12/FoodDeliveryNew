@@ -17,7 +17,7 @@ const faqCtrl              = require('../controllers/dashboard/dfaq.controller')
 const bannerCtrl              = require('../controllers/dashboard/dbanner.controller');
 const paymentCtrl              = require('../controllers/dashboard/dpayment.controller');
 const notificationCtrl              = require('../controllers/dashboard/dnotification.controller');
-
+const productCtrl = require('../controllers/dashboard/dproduct.controller');
 
 
 router.use('/',authController);
@@ -36,7 +36,7 @@ router.use('/faq/',faqCtrl);
 router.use('/banner/',bannerCtrl);
 router.use('/payment/',paymentCtrl);
 router.use('/notification/',notificationCtrl);
-
+router.use('/products/',productCtrl);
 
 router.use((req, res, next) => {
 
