@@ -5,47 +5,102 @@ const Op = require('sequelize').Op;
 
 const COUPAN = db.models.coupan
 const CATEGORY = db.models.categories
-
-COUPAN.belongsTo(CATEGORY,{as: 'category',foreignKey: 'categoryId'})
-
-
+const DEAL = db.models.deals
 
 app.get('/',adminAuth, async (req, res, next) => {
     
   try{
    
     //var newDate = moment(new Date()).format("MM/DD/YYYY");
-    const findData = await COUPAN.findAll({
+    const findData = await DEAL.findAll({
       where: {
-        companyId: req.companyId,
-        offerType: "coupon"
-      },
-      include:[ {
-        model: CATEGORY,
-        as: 'category',
-        attributes: ['name','icon','thumbnail'],
-        required: false
-      }]
-    });
-    
-   
-        return res.render('admin/coupans/coupanListing.ejs',{data:findData});
-
-      } catch (e) {
-        return responseHelper.error(res, e.message, 400);
+        companyId: req.companyId
       }
+    });
+    return res.render('admin/deals/dealListing.ejs',{data:findData});
+  } catch (e) {
+    return responseHelper.error(res, e.message, 400);
+  }
 
 
+});
+
+app.post('/list',adminAuth, async (req, res, next) => {
+  try {
+    var params=req.body
+    var page =1
+    var limit =50
+    if(params.page) page=params.page
+    if(params.limit) limit=parseInt(params.limit)
+    var offset=(page-1)*limit
+
+    var status =  params.status;
+    var where = "";
+    if(status == "")
+    {
+      where={
+        companyId: req.companyId
+      }
+      var arrayofTaskId = ['1', '0'];
+    }else{
+      where={
+        companyId: req.companyId,
+        status: status
+      }
+      var arrayofTaskId = [status];
+    }
+
+    if( params.search != "" ){
+      var findData = await DEAL.findAndCountAll({
+        order: [
+          ['createdAt', 'DESC'],  
+        ],
+        where :{
+          companyId: req.companyId,
+          status: {
+            [Op.in]: arrayofTaskId
+          } ,
+          [Op.or]: [
+            { 
+              dealName: {
+                [Op.like]: `%${params.search}%`
+              }
+            },
+            { 
+              code: { [Op.like]: `%${params.search}%` }
+            }
+          ]
+        },
+        offset: offset, limit: limit ,
+      });
+    }
+    else
+    {
+      var findData = await DEAL.findAndCountAll({
+        order: [
+          ['createdAt', 'DESC'],  
+        ],
+        where :where,
+        offset: offset, limit: limit ,
+      });
+    }
+     
+    var userDtaa={}
+    userDtaa.data=findData
+    return responseHelper.post(res, appstrings.success, userDtaa);
+
+  } catch (e) {
+    console.log(e)
+    return responseHelper.error(res, e.message, 400);
+  }
 });
 
 
 app.get('/add',adminAuth, async (req, res, next) => {
     
   try{
-    var cdata= await commonMethods.getAllCategories(req.companyId)
-    var types=await commonMethods.getUserTypes(req.companyId) 
-
-    return res.render('admin/coupans/addCoupan.ejs',{catData:cdata,types:types});
+  
+    return res.render('admin/deals/dealAdd.ejs');
 
     } catch (e) {
       return responseHelper.error(res, e.message, 400);
@@ -63,7 +118,7 @@ app.post('/status',adminAuth,async(req,res,next) => {
        
       
 
-       const userData = await COUPAN.findOne({
+       const userData = await DEAL.findOne({
          where: {
            id: params.id }
        });
@@ -75,7 +130,7 @@ app.post('/status',adminAuth,async(req,res,next) => {
 
     var status=0
     if(params.status=="0")  status=1
-       const updatedResponse = await COUPAN.update({
+       const updatedResponse = await DEAL.update({
          status: status,
     
        },
@@ -115,11 +170,8 @@ app.post('/status',adminAuth,async(req,res,next) => {
 app.post('/add',adminAuth,async (req, res) => {
   try {
     const data = req.body;
-
-
-    let responseNull= commonMethods.checkParameterMissing([data.minimumAmount,data.name,data.code,data.discount,data.type,data.validupto])
+    let responseNull= commonMethods.checkParameterMissing([data.name,data.code,data.discount,data.validupto])
     if(responseNull) return responseHelper.post(res, appstrings.required_field,null,400);
-
 
     var icon=""
     var thumbnail=""
@@ -129,29 +181,17 @@ app.post('/add',adminAuth,async (req, res) => {
       ImageFile = req.files.icon;    
       if(ImageFile)
       {
-         icon = Date.now() + '_' + ImageFile.name;
+        icon = Date.now() + '_' + ImageFile.name;
 
-      ImageFile.mv(config.UPLOAD_DIRECTORY +"coupans/icons/"+ icon, function (err) {
-          //upload file
-          if (err)
-          return responseHelper.error(res, err.meessage, 400);   
-      });
-
-    }
-    //   ImageFile1 = req.files.thumbnail;    
-    //   if(ImageFile1)
-    //   {
-    //   thumbnail = Date.now() + '_' + ImageFile1.name;
-    //   ImageFile1.mv(config.UPLOAD_DIRECTORY +"coupans/thumbnails/"+ thumbnail, function (err) {
-    //       //upload file
-    //       if (err)
-    //       return responseHelper.error(res, err.message, 400);   
-    //   });
-    // }
+        ImageFile.mv(config.UPLOAD_DIRECTORY +"coupans/icons/"+ icon, function (err) {
+            //upload file
+            if (err)
+            return responseHelper.error(res, err.meessage, 400);   
+        });
       }
+    }
 
-
-    const user = await COUPAN.findOne({
+    const user = await DEAL.findOne({
       attributes: ['id'],
 
       where: {
@@ -159,38 +199,22 @@ app.post('/add',adminAuth,async (req, res) => {
       }
     });
 
-
-
     if (!user) {
-    
-
-
-
-      const users = await COUPAN.create({
-        name: data.name,
-        type: data.type,
-        offerType: "coupon",
+      const users = await DEAL.create({
+        dealName: data.name,
         usageLimit: data.usageLimit,
         code: data.code,
         discount: data.discount,
-        icon: icon,
-        validupto:data.validupto,
+        validUpto:data.validupto,
         thumbnail: icon,
         description:data.description,
         companyId: req.companyId,
-        categoryId:data.categoryId,
-        minimumAmount:data.minimumAmount
-
+        status: '1'
        });
-
-
       if (users) {
-
         responseHelper.post(res, appstrings.add_coupan, null,200);
-       
       }
      else  responseHelper.error(res, appstrings.oops_something, 400);
-
 
     }
       else  responseHelper.error(res, appstrings.already_exists, 400);
@@ -210,7 +234,7 @@ app.post('/update',adminAuth,async (req, res) => {
     const data = req.body;
 
 
-    let responseNull= commonMethods.checkParameterMissing([data.minimumAmount,data.validupto, data.coupanId,data.name,data.code,data.discount,data.type])
+    let responseNull= commonMethods.checkParameterMissing([data.validupto, data.dealId,data.name,data.code,data.discount])
     if(responseNull) return responseHelper.post(res, appstrings.required_field,null,400);
 
 
@@ -235,11 +259,11 @@ app.post('/update',adminAuth,async (req, res) => {
     }
 
 
-    const user = await COUPAN.findOne({
+    const user = await DEAL.findOne({
       attributes: ['id'],
 
       where: {
-        id: data.coupanId,
+        id: data.dealId,
         companyId: req.companyId
 
       }
@@ -250,25 +274,21 @@ app.post('/update',adminAuth,async (req, res) => {
 
     if (user) {
     
-      if(icon=="") icon=user.dataValues.icon
+      if(icon=="") icon=user.dataValues.thumbnail
 
 
-      const users = await COUPAN.update({
-        name: data.name,
-        type: data.type,
+      const users = await DEAL.update({
+        dealName: data.name,
         code: data.code,
         discount: data.discount,
-        icon: icon,
         usageLimit: data.usageLimit,
         thumbnail: icon,
         description:data.description,
         companyId: req.companyId,
-        validupto:data.validupto,
-        minimumAmount:data.minimumAmount,
-        categoryId:data.categoryId
+        validupto:data.validupto
        },
        {where:{
-        id: data.coupanId
+        id: data.dealId
        }}
        
        
@@ -308,34 +328,22 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
   
   var id=req.params.id
   try {
-
-  let responseNull=  common.checkParameterMissing([id])
-  if(responseNull) 
-  { req.flash('errorMessage',appstrings.required_field)
-  return res.redirect(adminpath+"coupans");
-}
-
-
-   
-      const findData = await COUPAN.findOne({
-      where :{companyId :req.companyId, id: id }
+      let responseNull=  common.checkParameterMissing([id])
+      if(responseNull) 
+      { 
+        req.flash('errorMessage',appstrings.required_field)
+        return res.redirect(adminpath+"deals");
+      }
+      const findData = await DEAL.findOne({
+        where :{companyId :req.companyId, id: id }
       });
-   
-      var cdata= await commonMethods.getAllCategories(req.companyId)
-      var types=await commonMethods.getUserTypes(req.companyId) 
-
-      return res.render('admin/coupans/viewCoupan.ejs',{data:findData,catData:cdata,types:types});
-
-
-
-    } catch (e) {
+      
+      return res.render('admin/deals/viewDeal.ejs',{data:findData});
+    }catch (e) {
       req.flash('errorMessage',e.message)
-      return res.redirect(adminpath+"coupans");
+      return res.redirect(adminpath+"deals");
     }
-
-
- 
-});
+  });
 
 
 
@@ -345,34 +353,33 @@ app.get('/delete/:id',adminAuth,async(req,res,next) => {
   let responseNull=  common.checkParameterMissing([req.params.id])
   if(responseNull) 
   { req.flash('errorMessage',appstrings.required_field)
-  return res.redirect(adminpath+"coupans");
+  return res.redirect(adminpath+"deals");
 }
 
   try{
-        //console.log(pool.format('DELETE FROM `reminders` WHERE `reminder_id` = ?', [req.params.id]));
-        const numAffectedRows = await COUPAN.destroy({
-          where: {
-            id: req.params.id
-          }
-          })  
-            
-          if(numAffectedRows>0)
-          {
-           req.flash('successMessage',appstrings.delete_success)
-          return res.redirect(adminpath+"coupans");
+      const numAffectedRows = await DEAL.destroy({
+      where: {
+        id: req.params.id
+      }
+      })  
+        
+      if(numAffectedRows>0)
+      {
+       req.flash('successMessage',appstrings.delete_success)
+      return res.redirect(adminpath+"deals");
 
-          }
+      }
 
-          else {
-            req.flash('errorMessage',appstrings.no_record)
-            return res.redirect(adminpath+"coupans");
-          }
+      else {
+        req.flash('errorMessage',appstrings.no_record)
+        return res.redirect(adminpath+"deals");
+      }
 
-        }catch (e) {
-          //return responseHelper.error(res, e.message, 400);
-          req.flash('errorMessage',appstrings.no_record)
-          return res.redirect(adminpath+"coupans");
-        }
+    }catch (e) {
+      //return responseHelper.error(res, e.message, 400);
+      req.flash('errorMessage',appstrings.no_record)
+      return res.redirect(adminpath+"deals");
+    }
 });
 
 

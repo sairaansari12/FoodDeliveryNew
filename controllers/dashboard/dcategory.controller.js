@@ -173,6 +173,9 @@ app.post('/status',adminAuth,async(req,res,next) => {
 
 app.post('/add',adminAuth,async (req, res) => {
   try {
+
+    console.log(req.files);
+
     const data = req.body;
 
 
@@ -190,7 +193,7 @@ app.post('/add',adminAuth,async (req, res) => {
       {
          icon = Date.now() + '_' + ImageFile.name;
 
-      ImageFile.mv(config.UPLOAD_DIRECTORY +"services/icons/"+ icon, function (err) {
+      ImageFile.mv("./public/assets/images/category/icon/"+ icon, function (err) {
           //upload file
           if (err)
           return responseHelper.error(res, err.message, 400);   
@@ -201,7 +204,7 @@ app.post('/add',adminAuth,async (req, res) => {
       if(ImageFile1)
       {
       thumbnail = Date.now() + '_' + ImageFile1.name;
-      ImageFile1.mv(config.UPLOAD_DIRECTORY +"services/thumbnails/"+ thumbnail, function (err) {
+      ImageFile1.mv("./public/assets/images/category/thumbnail/"+ thumbnail, function (err) {
           //upload file
           if (err)
           return responseHelper.error(res, err.message, 400);   

@@ -238,8 +238,9 @@
                                             { %>
                                             <p class="mb-1"><span class="font-weight-semibold">Emp Name :</span> <%- empDatat[t].employee.firstName  %> <%- empDatat[t].employee.lastName  %></p>
                                             <p class="mb-0"><span class="font-weight-semibold">Mobile :</span> <%- empDatat[t].employee.countryCode  %> <%- empDatat[t].employee.phoneNumber  %></p>
-                                        </div>
+                                        
                                         <% } %>
+
                                     </div>
                                 </div>
                             </div> <!-- end col -->
@@ -286,7 +287,7 @@
                                                         <select class="custom-select" id="status-select" multiple>
                                                         <%var exists=data.assignedEmployees.map(item => item.employee.id)
                                                         %>
-                                                            <option value="" selected disabled/>Choose Employee
+                                                            <option value="" disabled/>Choose Employee
                                                         <%for(var t=0;t<empData.length;t++){%>
                                                             <option value="<%-empData[t].id%>" <%if(exists.includes(empData[t].id)){%> selected <%}%>   /><%-empData[t].firstName+' '+empData[t].lastName%> 
                                                            

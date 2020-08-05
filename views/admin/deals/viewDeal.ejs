@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Edit Coupon</h4>
+                                    <h4 class="page-title">Edit Deal</h4>
                                 </div>
                             </div>
                         </div>     
@@ -23,62 +23,36 @@
                     <div class="container-fluid">
                     <form  role="form" onsubmit="return false"  class="col-md-12"  id="adduser" >
                     <input type="hidden"  name="parentId" id="parentId"   />
-                     <input type="hidden"  name="coupanId" id="coupanId"  value="<%-data.id%>" />
+                     <input type="hidden"  name="dealId" id="dealId"  value="<%-data.id%>" />
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
                                     <div class="row">
-                                        <div class="form-group col-md-4 mb-3">
-                                            <label for="product-name">Coupon Name <span class="text-danger">*</span></label>
-                                            <input type="text" value="<%-data.name%>" id="name" autocomplete="off"  minlength="2" maxlength="100" name="name" class="form-control" placeholder="Coupon Name">
-                                        </div>
-
-                                        <div class="form-group col-md-4 mb-3">
-                                            <label for="product-name">Coupon Code <span class="text-danger">*</span></label>
-                                            <input type="text" id="code" value="<%-data.code%>"  autocomplete="off" minlength="2" maxlength="30" name="code" class="form-control" placeholder="Coupon Code">
-                                        </div>
-
-                                        <div class="form-group col-md-4 mb-3">
-                                            <label for="product-name">Coupon Discount (%) <span class="text-danger">*</span></label>
-                                            <input type="number" id="discount" value="<%-data.discount%>" name="discount" class="form-control" placeholder="Coupon Discount (%)">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group  col-md-6 mb-3">
-                                            <label for="product-category">Categories <span class="text-danger">*</span></label>
-                                            <select class="form-control select2" name="categoryId" id="categoryId">
-                                                <option value="" <% if(data.categoryId == ""){ %> selected <% } %>> All Categories</option>
-                                                <%for(var t=0;t<catData.length;t++){%>
-                                                   <option <% if(catData[t].id == data.categoryId){ %> selected <% } %>  value="<%-catData[t].id%>" /><%-catData[t].name%> 
-                                                <%}%>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group  col-md-6 mb-3">
-                                            <label for="product-category">Type <span class="text-danger">*</span></label>
-                                            <select class="form-control select2" id="type" name="type">
-                                                <option value="0" />All 
-                                                <%for(var p=0;p<types.length;p++){%>
-                                                    <option <%if(data.type==types[p].id){%> selected <%}%>   value="<%-types[p].id%>" ><%-types[p].userType%></option>  
-                                                <%}%>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="product-name">Coupon Usage Limit <span class="text-danger">*</span></label>
-                                            <input type="number" id="usageLimit" value="<%-data.usageLimit%>" name="usageLimit" class="form-control" placeholder="Coupon Usage Limit">
+                                            <label for="product-name">Deal Name <span class="text-danger">*</span></label>
+                                            <input type="text" value="<%-data.dealName%>" id="name" autocomplete="off"  minlength="2" maxlength="100" name="name" class="form-control" placeholder="Deal Name">
                                         </div>
 
                                         <div class="form-group col-md-6 mb-3">
-                                            <label for="product-name">Minimum Order Amount <span class="text-danger">*</span></label>
-                                            <input type="number" id="minimumAmount" value="<%-data.minimumAmount%>" name="minimumAmount" class="form-control" placeholder="Minimum Order Amount">
+                                            <label for="product-name">Deal Code <span class="text-danger">*</span></label>
+                                            <input type="text" id="code" value="<%-data.code%>"  autocomplete="off" minlength="2" maxlength="30" name="code" class="form-control" placeholder="Deal Code">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group col-md-6 mb-3">
-                                            <label>Icon</label> <span class="text-danger">*</span></label>
+                                            <label for="product-name">Deal Discount (%) <span class="text-danger">*</span></label>
+                                            <input type="number" id="discount" value="<%-data.discount%>" name="discount" class="form-control" placeholder="Deal Discount (%)">
+                                        </div>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="product-name">Deal Usage Limit <span class="text-danger">*</span></label>
+                                            <input type="number" id="usageLimit" value="<%-data.usageLimit%>" name="usageLimit" class="form-control" placeholder="Deal Usage Limit">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label>Icon</label></label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                      <input type="file" id="icon" name="icon" class="form-control-file">
@@ -100,11 +74,11 @@
                                             <!-- Date View -->
                                             <div class="form-group">
                                                 <label>Due Date <span class="text-danger">*</span></label>
-                                                <input type="text" value="<%-data.validupto%>" class="form-control" id="validupto" name="validupto" placeholder="Coupon Valid">
+                                                <input type="text" value="<%- commonMethods.format(new Date(data.validUpto)) %>" class="form-control" id="validupto" name="validupto" placeholder="Deal Valid">
                                             </div>
                                         </div>
                                         <div class="form-group  col-md-6 mb-3">
-                                            <label for="product-description">Coupon Description <span class="text-danger">*</span></label>
+                                            <label for="product-description">Deal Description <span class="text-danger">*</span></label>
                                             <textarea class="form-control" id="description" value="<%-data.description%>" name="description" rows="5" placeholder="Please enter description"><%-data.description%></textarea>
                                         </div>
                                     </div>
@@ -116,7 +90,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="text-center mb-3">
-                                    <a href="<%- adminpath %>coupans"><button type="button" class="btn w-sm btn-light waves-effect">Cancel</button></a>
+                                    <a href="<%- adminpath %>deals"><button type="button" class="btn w-sm btn-light waves-effect">Cancel</button></a>
                                     <button type="submit" class="btn w-sm btn-success waves-effect waves-light">Update</button>
                                 </div>
                             </div> <!-- end col -->
@@ -137,8 +111,8 @@
     <%- include('../partials/commonJs'); -%>
     <script>
     $(function() { 
-        $('#sidebar-menu ul li').find('a[href*="<%-adminpath%>coupans"]').parent().addClass('menuitem-active');
-        $('#sidebar-menu ul li a[href^="<%-adminpath%>coupans"]').addClass('active');
+        $('#sidebar-menu ul li').find('a[href*="<%-adminpath%>deals"]').parent().addClass('menuitem-active');
+        $('#sidebar-menu ul li a[href^="<%-adminpath%>deals"]').addClass('active');
     });
     $("#validupto").flatpickr({minDate: "today"});
     $('#name').on('keypress', function (event) {
@@ -160,16 +134,7 @@
             discount: {
                 required: true
             },
-            categoryId: {
-                required: true
-            },
-            type: {
-                required: true
-            },
             usageLimit: {
-                required: true
-            },
-            minimumAmount: {
                 required: true
             },
             validupto: {
@@ -191,16 +156,7 @@
             discount: {
                 required: "This field is required."
             },
-            categoryId: {
-                required: "This field is required"
-            },
-            type: {
-                required: "This field is required"
-            },
             usageLimit: {
-              required: "This field is required"
-            },
-            minimumAmount: {
               required: "This field is required"
             },
             validupto: {
@@ -218,7 +174,7 @@
             $(".overlay").show();
             $.ajax({
                 type: 'POST',
-                url: '<%-adminpath%>coupans/update',
+                url: '<%-adminpath%>deals/update',
                 dataType: 'json',
                 data: form_data,
                 contentType:false,
@@ -230,7 +186,7 @@
                   
                         showToastSuccess(response.message)
 
-                         window.location.href="<%-adminpath%>coupans";
+                         window.location.href="<%-adminpath%>deals";
                        
                     } else {
                         showToastError(response.message)

@@ -71,7 +71,7 @@ if(fromDate!="" && toDate!="")
       where :where,
       
       include: [
-        {model: USER , attributes: ['id','firstName','lastName',"phoneNumber","countryCode","image"]},       
+        {model: USER , attributes: ['id','firstName','lastName',"phoneNumber","countryCode","email","image"]},       
         {model: ORDERS , attributes: ['id','createdAt','orderNo'],required:true},       
 
       

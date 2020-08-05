@@ -246,4 +246,18 @@ app.post('/edit/:id',adminAuth, async(req, res, next)=>{
     // }
 });
 
+app.get('/delete/:id', adminAuth, async(req, res, next)=>{
+    let id = req.params.id;
+
+    await Products.destroy({
+        where: {
+            id: id
+        }
+    });
+
+    req.flash('successMessage',"Product Deleted!")
+    return res.redirect(adminpath+'products/get');
+});
+
+
 module.exports = app;
