@@ -32,15 +32,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="javascript: void(0);" class="btn btn-blue btn-sm ml-2">
-                                            <i class="mdi mdi-autorenew"></i>
-                                        </a>
-                                        <a href="javascript: void(0);" class="btn btn-blue btn-sm ml-1">
-                                            <i class="mdi mdi-filter-variant"></i>
-                                        </a>
                                     </form>
                                 </div>
-                                <h4 class="page-title">Dashboard</h4>
+                                <h4 class="page-title">Dashboard <small>Stats and Revenues</small></h4>
                             </div>
                         </div>
                     </div>
@@ -57,7 +51,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="mt-1">$<span data-plugin="counterup">58,947</span></h3>
+                                            <h3 class="mt-1"  data-plugin="counterup" id="totalEarnings">0</h3>
                                             <p class="text-muted mb-1 text-truncate">Total Revenue</p>
                                         </div>
                                     </div>
@@ -75,8 +69,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span></h3>
-                                            <p class="text-muted mb-1 text-truncate">Today's Sales</p>
+                                            <h3 class="text-dark mt-1"  data-plugin="counterup" id="totalOrders">0</h3>
+                                            <p class="text-muted mb-1 text-truncate">Total Sales</p>
                                         </div>
                                     </div>
                                 </div> <!-- end row-->
@@ -111,8 +105,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="text-dark mt-1"><span data-plugin="counterup">78.41</span>k</h3>
-                                            <p class="text-muted mb-1 text-truncate">Today's Visits</p>
+                                            <h3 class="text-dark mt-1" id="totalUsers">0</h3>
+                                            <p class="text-muted mb-1 text-truncate">Total Users</p>
                                         </div>
                                     </div>
                                 </div> <!-- end row-->
@@ -124,22 +118,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="card-box">
-                                <div class="dropdown float-right">
-                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="mdi mdi-dots-vertical"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    </div>
-                                </div>
+                                
 
                                 <h4 class="header-title mb-0">Total Revenue</h4>
 
@@ -383,209 +362,12 @@
                             </div>
                         </div> <!-- end col -->
 
-                        <div class="col-xl-6">
-                            <div class="card-box">
-                                <div class="dropdown float-right">
-                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="mdi mdi-dots-vertical"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Edit Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    </div>
-                                </div>
-
-                                <h4 class="header-title mb-3">Revenue History</h4>
-
-                                <div class="table-responsive">
-                                    <table class="table table-borderless table-nowrap table-hover table-centered m-0">
-
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th>Marketplaces</th>
-                                                <th>Date</th>
-                                                <th>Payouts</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Themes Market</h5>
-                                                </td>
-
-                                                <td>
-                                                    Oct 15, 2018
-                                                </td>
-
-                                                <td>
-                                                    $5848.68
-                                                </td>
-
-                                                <td>
-                                                    <span class="badge bg-soft-warning text-warning">Upcoming</span>
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-pencil"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Freelance</h5>
-                                                </td>
-
-                                                <td>
-                                                    Oct 12, 2018
-                                                </td>
-
-                                                <td>
-                                                    $1247.25
-                                                </td>
-
-                                                <td>
-                                                    <span class="badge bg-soft-success text-success">Paid</span>
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-pencil"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Share Holding</h5>
-                                                </td>
-
-                                                <td>
-                                                    Oct 10, 2018
-                                                </td>
-
-                                                <td>
-                                                    $815.89
-                                                </td>
-
-                                                <td>
-                                                    <span class="badge bg-soft-success text-success">Paid</span>
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-pencil"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Envato's Affiliates</h5>
-                                                </td>
-
-                                                <td>
-                                                    Oct 03, 2018
-                                                </td>
-
-                                                <td>
-                                                    $248.75
-                                                </td>
-
-                                                <td>
-                                                    <span class="badge bg-soft-danger text-danger">Overdue</span>
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-pencil"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Marketing Revenue</h5>
-                                                </td>
-
-                                                <td>
-                                                    Sep 21, 2018
-                                                </td>
-
-                                                <td>
-                                                    $978.21
-                                                </td>
-
-                                                <td>
-                                                    <span class="badge bg-soft-warning text-warning">Upcoming</span>
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-pencil"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Advertise Revenue</h5>
-                                                </td>
-
-                                                <td>
-                                                    Sep 15, 2018
-                                                </td>
-
-                                                <td>
-                                                    $358.10
-                                                </td>
-
-                                                <td>
-                                                    <span class="badge bg-soft-success text-success">Paid</span>
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-pencil"></i></a>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end .table-responsive-->
-                            </div> <!-- end card-box-->
-                        </div> <!-- end col -->
                     </div>
                     <!-- end row -->
 
                 </div> <!-- container -->
 
             </div> <!-- content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            2015 -
-                            <script>document.write(new Date().getFullYear())</script> &copy; FoodSpot theme by <a
-                                href="">Coderthemes</a>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript:void(0);">About Us</a>
-                                <a href="javascript:void(0);">Help</a>
-                                <a href="javascript:void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
-
         </div>
 
         <!-- ============================================================== -->
@@ -595,432 +377,6 @@
 
     </div>
     <!-- END wrapper -->
-
-    <!-- Right Sidebar -->
-    <div class="right-bar">
-        <div data-simplebar class="h-100">
-
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs nav-bordered nav-justified" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link py-2" data-toggle="tab" href="#chat-tab" role="tab">
-                        <i class="mdi mdi-message-text d-block font-22 my-1"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link py-2" data-toggle="tab" href="#tasks-tab" role="tab">
-                        <i class="mdi mdi-format-list-checkbox d-block font-22 my-1"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link py-2 active" data-toggle="tab" href="#settings-tab" role="tab">
-                        <i class="mdi mdi-cog-outline d-block font-22 my-1"></i>
-                    </a>
-                </li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content pt-0">
-                <div class="tab-pane" id="chat-tab" role="tabpanel">
-
-                    <form class="search-bar p-3">
-                        <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="mdi mdi-magnify"></span>
-                        </div>
-                    </form>
-
-                    <h6 class="font-weight-medium px-3 mt-2 text-uppercase">Group Chats</h6>
-
-                    <div class="p-2">
-                        <a href="javascript: void(0);" class="text-reset notification-item pl-3 mb-2 d-block">
-                            <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-                            <span class="mb-0 mt-1">App Development</span>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item pl-3 mb-2 d-block">
-                            <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-warning"></i>
-                            <span class="mb-0 mt-1">Office Work</span>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item pl-3 mb-2 d-block">
-                            <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-danger"></i>
-                            <span class="mb-0 mt-1">Personal Group</span>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item pl-3 d-block">
-                            <i class="mdi mdi-checkbox-blank-circle-outline mr-1"></i>
-                            <span class="mb-0 mt-1">Freelance</span>
-                        </a>
-                    </div>
-
-                    <h6 class="font-weight-medium px-3 mt-3 text-uppercase">Favourites <a href="javascript: void(0);"
-                            class="font-18 text-danger"><i class="float-right mdi mdi-plus-circle"></i></a></h6>
-
-                    <div class="p-2">
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="../assets/images/users/user-10.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status online"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Andrew Mackie</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">It will seem like simplified English.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="/dist/assets/images/users/user-1.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status away"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Rory Dalyell</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">To an English person, it will seem like simplified
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="/dist/assets/images/users/user-9.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status busy"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Jaxon Dunhill</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">To achieve this, it would be necessary.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <h6 class="font-weight-medium px-3 mt-3 text-uppercase">Other Chats <a href="javascript: void(0);"
-                            class="font-18 text-danger"><i class="float-right mdi mdi-plus-circle"></i></a></h6>
-
-                    <div class="p-2 pb-4">
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="/dist/assets/images/users/user-2.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status online"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Jackson Therry</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">Everyone realizes why a new common language.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="/dist/assets/images/users/user-4.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status away"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Charles Deakin</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">The languages only differ in their grammar.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="/dist/assets/images/users/user-5.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status online"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Ryan Salting</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">If several languages coalesce the grammar of the
-                                            resulting.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="/dist/assets/images/users/user-6.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status online"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Sean Howse</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">It will seem like simplified English.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="/dist/assets/images/users/user-7.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status busy"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Dean Coward</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">The new common language will be more simple.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset notification-item">
-                            <div class="media">
-                                <div class="position-relative mr-2">
-                                    <img src="/dist/assets/images/users/user-8.jpg" class="rounded-circle avatar-sm"
-                                        alt="user-pic">
-                                    <i class="mdi mdi-circle user-status away"></i>
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h6 class="mt-0 mb-1 font-14">Hayley East</h6>
-                                    <div class="font-13 text-muted">
-                                        <p class="mb-0 text-truncate">One could refuse to pay expensive translators.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <div class="text-center mt-3">
-                            <a href="javascript:void(0);" class="btn btn-sm btn-white">
-                                <i class="mdi mdi-spin mdi-loading mr-2"></i>
-                                Load more
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="tab-pane" id="tasks-tab" role="tabpanel">
-                    <h6 class="font-weight-medium p-3 m-0 text-uppercase">Working Tasks</h6>
-                    <div class="px-2">
-                        <a href="javascript: void(0);" class="text-reset item-hovered d-block p-2">
-                            <p class="text-muted mb-0">App Development<span class="float-right">75%</span></p>
-                            <div class="progress mt-2" style="height: 4px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset item-hovered d-block p-2">
-                            <p class="text-muted mb-0">Database Repair<span class="float-right">37%</span></p>
-                            <div class="progress mt-2" style="height: 4px;">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 37%"
-                                    aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset item-hovered d-block p-2">
-                            <p class="text-muted mb-0">Backup Create<span class="float-right">52%</span></p>
-                            <div class="progress mt-2" style="height: 4px;">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 52%"
-                                    aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <h6 class="font-weight-medium px-3 mb-0 mt-4 text-uppercase">Upcoming Tasks</h6>
-
-                    <div class="p-2">
-                        <a href="javascript: void(0);" class="text-reset item-hovered d-block p-2">
-                            <p class="text-muted mb-0">Sales Reporting<span class="float-right">12%</span></p>
-                            <div class="progress mt-2" style="height: 4px;">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 12%"
-                                    aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset item-hovered d-block p-2">
-                            <p class="text-muted mb-0">Redesign Website<span class="float-right">67%</span></p>
-                            <div class="progress mt-2" style="height: 4px;">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 67%"
-                                    aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </a>
-
-                        <a href="javascript: void(0);" class="text-reset item-hovered d-block p-2">
-                            <p class="text-muted mb-0">New Admin Design<span class="float-right">84%</span></p>
-                            <div class="progress mt-2" style="height: 4px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 84%"
-                                    aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="p-3 mt-2">
-                        <a href="javascript: void(0);" class="btn btn-success btn-block waves-effect waves-light">Create
-                            Task</a>
-                    </div>
-
-                </div>
-                <div class="tab-pane active" id="settings-tab" role="tabpanel">
-                    <h6 class="font-weight-medium px-3 m-0 py-2 font-13 text-uppercase bg-light">
-                        <span class="d-block py-1">Theme Settings</span>
-                    </h6>
-
-                    <div class="p-3">
-                        <div class="alert alert-warning" role="alert">
-                            <strong>Customize </strong> the overall color scheme, sidebar menu, etc.
-                        </div>
-
-                        <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">Color Scheme</h6>
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="color-scheme-mode" value="light"
-                                id="light-mode-check" checked />
-                            <label class="custom-control-label" for="light-mode-check">Light Mode</label>
-                        </div>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="color-scheme-mode" value="dark"
-                                id="dark-mode-check" />
-                            <label class="custom-control-label" for="dark-mode-check">Dark Mode</label>
-                        </div>
-
-                        <!-- Width -->
-                        <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">Width</h6>
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="width" value="fluid" id="fluid-check"
-                                checked />
-                            <label class="custom-control-label" for="fluid-check">Fluid</label>
-                        </div>
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="width" value="boxed"
-                                id="boxed-check" />
-                            <label class="custom-control-label" for="boxed-check">Boxed</label>
-                        </div>
-
-                        <!-- Menu positions -->
-                        <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">Menus (Leftsidebar and Topbar) Positon
-                        </h6>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="menus-position" value="fixed"
-                                id="fixed-check" checked />
-                            <label class="custom-control-label" for="fixed-check">Fixed</label>
-                        </div>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="menus-position" value="scrollable"
-                                id="scrollable-check" />
-                            <label class="custom-control-label" for="scrollable-check">Scrollable</label>
-                        </div>
-
-                        <!-- Left Sidebar-->
-                        <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">Left Sidebar Color</h6>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="leftsidebar-color" value="light"
-                                id="light-check" checked />
-                            <label class="custom-control-label" for="light-check">Light</label>
-                        </div>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="leftsidebar-color" value="dark"
-                                id="dark-check" />
-                            <label class="custom-control-label" for="dark-check">Dark</label>
-                        </div>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="leftsidebar-color" value="brand"
-                                id="brand-check" />
-                            <label class="custom-control-label" for="brand-check">Brand</label>
-                        </div>
-
-                        <div class="custom-control custom-switch mb-3">
-                            <input type="radio" class="custom-control-input" name="leftsidebar-color" value="gradient"
-                                id="gradient-check" />
-                            <label class="custom-control-label" for="gradient-check">Gradient</label>
-                        </div>
-
-                        <!-- size -->
-                        <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">Left Sidebar Size</h6>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="leftsidebar-size" value="default"
-                                id="default-size-check" checked />
-                            <label class="custom-control-label" for="default-size-check">Default</label>
-                        </div>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="leftsidebar-size" value="condensed"
-                                id="condensed-check" />
-                            <label class="custom-control-label" for="condensed-check">Condensed <small>(Extra Small
-                                    size)</small></label>
-                        </div>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="leftsidebar-size" value="compact"
-                                id="compact-check" />
-                            <label class="custom-control-label" for="compact-check">Compact <small>(Small
-                                    size)</small></label>
-                        </div>
-
-                        <!-- User info -->
-                        <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">Sidebar User Info</h6>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="checkbox" class="custom-control-input" name="leftsidebar-user" value="fixed"
-                                id="sidebaruser-check" />
-                            <label class="custom-control-label" for="sidebaruser-check">Enable</label>
-                        </div>
-
-
-                        <!-- Topbar -->
-                        <h6 class="font-weight-medium font-14 mt-4 mb-2 pb-1">Topbar</h6>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="topbar-color" value="dark"
-                                id="darktopbar-check" checked />
-                            <label class="custom-control-label" for="darktopbar-check">Dark</label>
-                        </div>
-
-                        <div class="custom-control custom-switch mb-1">
-                            <input type="radio" class="custom-control-input" name="topbar-color" value="light"
-                                id="lighttopbar-check" />
-                            <label class="custom-control-label" for="lighttopbar-check">Light</label>
-                        </div>
-
-
-                        <button class="btn btn-primary btn-block mt-4" id="resetBtn">Reset to Default</button>
-
-                        <a href="https://1.envato.market/FoodSpotadmin" class="btn btn-danger btn-block mt-3"
-                            target="_blank"><i class="mdi mdi-basket mr-1"></i> Purchase Now</a>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </div> <!-- end slimscroll-menu-->
-    </div>
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
@@ -1029,7 +385,243 @@
 
 
     <%- include('../partials/script'); -%>
+    <script>
 
+var date=new Date()
+$('#dash-daterange').val(date)
+var weekdate=new Date(date.getTime() - (7 * 24 * 60 * 60 * 1000))
+$('#dash-daterange').val(weekdate)
+var countLoad=0
+getFilter()
+
+        function morisLine(data)
+        {
+            var filterName=$('#filterName').val()
+            $("#color-bar1").empty();
+
+            var graphData=[]
+            var min= Math.min.apply(Math, data.map(function(o) { return o[filterName]; }))
+            var max= Math.max.apply(Math, data.map(function(o) { return o[filterName]; }))
+          
+           if(min==max) min=0
+            var diff=max-min
+
+
+            for(var k=0;k<=diff;k++)
+            {   
+
+
+            const found =data.find( ( filters ) => filters[filterName] ===(min+k) );
+
+
+            if(found)  
+            graphData.push({filterName1:min+k,value:found.count})
+            else graphData.push({filterName1:min+k,value:0})
+
+            }
+
+
+           // if(graphData.length<2)  graphData.splice(0,0,{filterName1:0,value:0})
+
+        new Morris.Line({
+  // ID of the element in which to draw the chart.
+  element: 'color-bar1',
+  // Chart data records -- each entry in this array corresponds to a point on
+  // the chart.
+//   data: [
+//     { day: 'Day1', value: 0 },
+//     { day: '2009', value: 1 },
+//     { day: '2010', value: 3 },
+//     { day: '2011', value: 4},
+//     { day: '2012', value: 20 }
+//   ],
+ data: graphData,
+  // The name of the data record attribute that contains x-values.
+  xkey: 'filterName1',
+  // A list of names of data record attributes that contain y-values.
+  ykeys: ['value'],
+  parseTime: false,
+
+  // Labels for the ykeys -- will be displayed when you hover over the
+  // chart.
+  xLabels: ['Count'],
+  labels: ['Count'],
+
+});
+
+        }
+
+
+
+  
+function getFilter(currentPage)
+    {
+        var filterName=$('#filterName').val();
+        var fromDate=$('#dash-daterange').val();
+        var toDate=$('#dash-daterange').val();
+
+
+        if(fromDate!="" && toDate!="")
+        {
+            if(countLoad>0)$('#loading1').show()
+            countLoad++;
+
+        //alert(fromDate)
+        $.ajax({
+            type: 'POST',
+            url: '<%-adminpath%>/dashboard',
+            dataType: 'json',
+            data: {'fromDate':fromDate,'filterName':filterName ,'toDate':toDate},
+            success: function (response) {
+                $('#loading1').hide()
+
+                console.log(response)
+                if (response.code == '200') {
+                    var data=response.body
+
+// morisLine(data.ordersDataStat)
+// orderstat(data.ordersDataStat)
+// pieStat(data)
+// sparkStat(data)
+
+// $('#morisDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
+// $('#sparkUserDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
+// $('#sparkPaymentDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
+// $('#sparkCategoryDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
+                $('#totalOrders').html(data.mainTotalOrder);
+                $('#totalUsers').html(data.mainTotalUser);
+                var earnings=data.ordersDataStat.map(item => item.totalSum).reduce(function(acc, val) { return acc + val; }, 0)
+                $('#totalEarnings').html('<%-CURRENCY%>'+earnings); 
+
+                }
+                else{
+                   
+                    showToastError(response.message)
+                }
+            },
+
+            error :function(response)
+            {
+                $('#loading1').hide()
+
+                showToastError(response.message)
+
+            }
+        });
+    }
+    else{
+        showToastError("Please select dates")
+ 
+    }
+    }
+    
+
+
+
+function pieStat(data)
+
+{
+    $("#categoryPieStat").data("easyPieChart").update(((data.totalStatCategory*100)/data.mainTotalCategory));
+    $("#orderPieStat").data("easyPieChart").update(((data.totalStatOrder*100)/data.mainTotalOrder));
+    $("#paymentPieStat").data("easyPieChart").update( data.totalStatPayment!=0? ((data.totalStatPayment*100)/data.mainTotalPayment):0)
+
+            // $("#userPieStat").data("data-percent",((data.totalStatUser*100)/data.mainTotalUser).toString());
+            // $("#orderPieStat").attr("data-percent",((data.totalStatorder*100)/data.mainTotalorder));
+            // $("#payemntPieStat").attr("data-percent",((data.totalStatPayment*100)/data.mainTotalPayment));
+
+
+}
+
+function orderstat(data)
+{
+    var appendData=""
+                        var color=["blue","black","red","orange","blue","green"]
+                        var status=["Pending","Confirmed","Cancelled-User","Precessing","Cancelled-Company","Completed"]
+                        var totalCount=[0,0,0,0,0]
+                        var totalSum=[0,0,0,0,0]
+
+                        for(var t=0; t<data.length; t++)
+                        {
+                         
+                            var index=parseInt(data[t].progressStatus)
+                            totalCount[index]=totalCount[index]+ data[t].count
+                            totalSum[index]=totalSum[index]+ data[t].totalSum
+
+                        
+                        
+                        }
+                        for(var k=0;k<5;k++){
+                          
+                      appendData= appendData+'<tr>'+
+                            '<td>'+(k+1)+'</td>'+
+                            '<td class="font-bold text-left">'+status[k]+' Orders</td>'+
+                            '<td class="text-left"><a href="javascript:;" title="">'+totalSum[k]+'<%-CURRENCY%></a></td>'+
+                            '<td><div class="label bg-'+color[k]+'">+'+totalCount[k]+'</div></td>'+
+                           
+                        '</tr>'
+                       }
+
+                       $('#orderStatListing').html(appendData);
+}
+
+
+function sparkStat(data)
+
+{
+
+var orderStats=[];
+var userStatsActive=[];
+var userStatsLeft=[];
+var paymentStat=[];
+var categoryStat=[];
+
+
+
+// userStatsActive=data.userDataStat.map(item => item.count)
+
+
+
+
+userStatsActive=getDataSpark(data.userDataStat)
+paymentStat=getDataSpark(data.paymentDataStat)
+categoryStat=getDataSpark(data.categoryDataStat)
+
+
+//console.log(userStatsActive)
+$('#userSparksStat').sparkline(userStatsActive,{ type: 'line',width: '100%',height: '55',lineColor: '#fff'});
+$('#paymentSparksStat').sparkline(paymentStat,{ type: 'line',width: '100%',height: '55',lineColor: '#fff'});
+$('#categorySparksStat').sparkline(categoryStat,{ type: 'bar',width: '100%',height: '55',lineColor: '#fff'});
+$('#userTotalHeading').html(data.totalStatUser);
+$('#categoryTotalHeading').html(data.totalStatCategory);
+$('#paymentTotalHeading').html(data.totalStatPayment);
+
+
+
+}
+
+function getDataSpark(data)
+{
+    var arrayActive=[]
+        var filterName=$('#filterName').val()
+
+    var min= Math.min.apply(Math, data.map(function(o) { return o[filterName]; }))
+   var max= Math.max.apply(Math, data.map(function(o) { return o[filterName]; }))
+          
+            if(min==max) min=0
+            var diff=max-min
+            for(var k=0;k<=diff;k++)
+            {   
+            const found =data.find( ( filters ) => filters[filterName] ===(min+k) );
+            if(found)  
+            arrayActive.push(found.count)
+            else arrayActive.push(0)
+            }
+
+            return arrayActive;
+}
+
+
+    </script>
 
 </body>
 
