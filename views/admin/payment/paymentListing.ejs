@@ -70,6 +70,10 @@
                                                             <a onclick="getFilter(1)" href="javascript:;"><button type="button" class="btn btn-light waves-effect mb-2">Filter</button></a>
                                                         </div>
                                                     </div><!-- end col-->
+                                                    <div class="form-group mb-2">
+                                                        <label for="inputPassword2" class="sr-only">Search</label>
+                                                        <input type="text" class="form-control" id ="search" name="search" placeholder="Search...">
+                                                    </div>
                                                 </form>                            
                                             </div>
                                             
@@ -99,7 +103,7 @@
     <%- include('../partials/commonJs'); -%>
 <script>
     $('#search').on( 'keyup', function () {
-       setTimeout(function(){getFilter(1) },800);
+       setTimeout(function(){getSearch(1) },800);
     });
     $("#toDate").flatpickr();
  
@@ -227,6 +231,92 @@
         });
     } 
 
+    function getSearch(currentPage)
+    {
+        currentPage=currentPage
+        var limit=40
+        $('#loading1').show()
+        var search=$('#search').val();
+        $.ajax({
+            type: 'POST',
+            url: '<%-adminpath%>payment/search',
+            dataType: 'json',
+            data: {'search':search},
+            success: function (response) {
+                $('#loading1').hide()
+
+                if (response.code == '200') 
+                {
+                    var row="";
+
+                    $('#orderData').html('')
+                    var data1=response.body.data
+                    var data=response.body.data.rows
+                    for(var t=0;t<data.length;t++)
+                    {
+                        
+                        var status="Failed"
+                        var style="display:none" 
+                        var style1="display:block" 
+             
+                        if(data[t].transactionStatus == '1')
+                        {
+                            var active = 2;
+                            var status = "Success";
+                            var stclass = "bg-soft-info text-info";
+                             var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button"  onclick="StatusChange(\''+data[t].id+'\',\''+active+'\')">'+
+                            '<h5><span class="badge bg-soft-danger text-danger"><i class="mdi mdi-coin"></i>Payment Failed</span></h5></a>';
+                        }else{
+                            var active = 1;
+                            var status = "Pending";
+                             var stclass = "bg-soft-danger text-danger";
+                             var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button"  onclick="StatusChange(\''+data[t].id+'\',\''+active+'\')">'+
+                            '<h5><span class="badge bg-soft-success text-success"><i class="mdi mdi-coin"></i> Payment Paid</span></h5></a>';
+                        }
+                   
+                        row =row+ '<div class="card-box mb-2">'+
+                        '<div class="row align-items-center">'+
+                        '<div class="col-sm-4"><div class="media">'+
+
+                        '<img class="d-flex align-self-center mr-3 rounded-circle" src="'+data[t].user.image+'" alt="Generic placeholder image" height="64">'+
+                        '<div class="media-body">'+
+                        '<h4 class="mt-0 mb-2 font-16">'+data[t].user.firstName+ " "+  data[t].user.lastName+'</h4>'+
+                        '<p class="mb-1 mt-3 mt-sm-0"><i class="mdi mdi-cellphone mr-1"></i> '+data[t].user.countryCode +" "+ data[t].user.phoneNumber+'</p>'+
+                        '<p class="mb-1"><b>Order No.:</b> '+data[t].order.orderNo+'</p>'+
+                        
+                        '</div></div></div>'+
+                        '<div class="col-sm-4">'+
+                        '<p class="mb-1"><b>Order Date:</b> '+format(new Date(data[t].order.createdAt))+'</p>'+
+                        '<p class="mb-1"><b>Payment Date:</b> '+format(new Date(data[t].createdAt)) +'</p>'+
+                        '<p class="mb-0"><i class="mdi mdi-currency-inr mr-1"></i> '+data[t].amount  +'</p>'+
+                        '</div><div class="col-sm-2">'+
+                        '<div class="text-center mt-3 mt-sm-0">'+
+                        '<div class="badge font-14 '+stclass+' p-1">'+status+'</div>'+ 
+                        '</div></div>'+                             
+                        '<div class="col-sm-2"><div class="text-sm-right">'+
+                        ''+payemnt+''+
+                        '<a href="<%-adminpath%>orders/view/'+data[t].order.id +'"  title="View Order" class="action-icon"> <i class="mdi mdi-eye"></i></a>'+
+                        '</div></div></div></div></div>';
+                    }
+                    
+                    $('#orderData').html(row);
+                    appendPagination(currentPage,Math.ceil(data1.count/limit))
+                    //$('#exe').DataTable();
+                }
+                else{
+                    showToastError(response.message)
+                }
+            },
+
+            error :function(response)
+            {
+                $('#loading1').hide()
+
+                showToastError(response.message)
+
+            }
+        });
+    } 
 
     function appendPagination(currentPage,count)
     {
