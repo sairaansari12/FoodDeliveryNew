@@ -2,11 +2,11 @@
 const express = require('express');
 const app     = express();
 
-
-
 app.get('/',adminAuth, async (req, res, next) => {
     
     try {
+      console.log("req idf",req.id);
+
         const findData = await NOTIFICATION.findAll({
         where :{userId :req.id,role:2},
         order: [
@@ -26,6 +26,7 @@ app.get('/',adminAuth, async (req, res, next) => {
 
 
 });
+
 
 app.get('/new',adminAuth, async (req, res, next) => {
     
@@ -56,6 +57,7 @@ app.get('/newEmail',adminAuth, async (req, res, next) => {
 
 
 });
+
 
 app.post('/count',adminAuth,async(req,res,next) => { 
     
@@ -90,6 +92,7 @@ app.post('/count',adminAuth,async(req,res,next) => {
     
     
 });
+
 
 app.post('/push',adminAuth,async(req,res,next) => { 
     
@@ -150,6 +153,7 @@ commonNotification.sendNotification(pushAndroidData)
   
 });
   
+
 app.post('/pushEmail',adminAuth,async(req,res,next) => { 
     
   var params=req.body
@@ -190,6 +194,8 @@ return responseHelper.post(res, appstrings.success,null);
   
   
 });
+
+
 
 app.post('/status',adminAuth,async(req,res,next) => { 
     
@@ -246,6 +252,8 @@ app.post('/status',adminAuth,async(req,res,next) => {
   
 });
 
+
+
 app.get('/delete/:id',adminAuth,async(req,res,next) => { 
    
 
@@ -265,20 +273,17 @@ app.get('/delete/:id',adminAuth,async(req,res,next) => {
             
           if(numAffectedRows>0)
           {
-           req.flash('successMessage',appstrings.delete_success)
-          return res.redirect(adminpath+"notification");
+            return responseHelper.post(res, appstrings.delete_success, null,200);
 
           }
 
           else {
-            req.flash('errorMessage',appstrings.no_record)
-            return res.redirect(adminpath+"notification");
+            return responseHelper.noData(res, appstrings.no_record);
           }
 
         }catch (e) {
           //return responseHelper.error(res, e.message, 400);
-          req.flash('errorMessage',appstrings.no_record)
-          return res.redirect(adminpath+"notification");
+          return responseHelper.noData(res, appstrings.no_record);
         }
 });
 
@@ -295,20 +300,17 @@ app.get('/clearAll',adminAuth,async(req,res,next) => {
             
           if(numAffectedRows>0)
           {
-           req.flash('successMessage',appstrings.delete_success)
-          return res.redirect(adminpath+"notification");
+            return responseHelper.post(res, appstrings.delete_success, null,200);
 
           }
 
           else {
-            req.flash('errorMessage',appstrings.no_record)
-            return res.redirect(adminpath+"notification");
+            return responseHelper.noData(res, appstrings.no_record);
           }
 
         }catch (e) {
           //return responseHelper.error(res, e.message, 400);
-          req.flash('errorMessage',appstrings.no_record)
-          return res.redirect(adminpath+"notification");
+          return responseHelper.noData(res, appstrings.no_record);
         }
 });
 
