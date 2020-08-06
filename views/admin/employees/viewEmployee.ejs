@@ -233,7 +233,7 @@
 
                                                             <a onclick="deleteReview('<%-ratings[t].userId%>')"
                                                                 href="javascript:;" class="font-red" title="">
-                                                                <i class="glyph-icon icon-remove mrg5R"></i>
+                                                                <i class="mdi mdi-delete"></i>
                                                                 Delete
                                                             </a>
                                                         </td>
@@ -407,7 +407,7 @@
 
 
     <script type="text/javascript">
-        $("#dob").flatpickr();
+    $("#dob").flatpickr();
         $("#toDate").flatpickr();
         $('#search').on('keyup', function () {
                                     setTimeout(function () { getSearch(1) }, 800);
@@ -664,7 +664,7 @@
                                                         '                    <li class="divider"></li>' +
                                                         '                    <li>' +
                                                         '                        <a onclick="return confirm(\'Are you sure you want to delete this?\');"  href="<%-adminpath%>orders/delete/' + data[t].id + '" data-id="' + data[t].id + '" class="font-red" title="">' +
-                                                        '                            <i class="glyph-icon icon-archive mrg5R"></i>' +
+                                                        '                            <i class="mdi mdi-delete"></i>' +
                                                         '                            Delete' +
                                                         '                        </a>' +
                                                         '                    </li>' +

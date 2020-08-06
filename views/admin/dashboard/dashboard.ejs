@@ -30,6 +30,7 @@
                                                         <i class="mdi mdi-calendar-range"></i>
                                                     </span>
                                                 </div>
+                                               
                                             </div>
                                         </div>
                                     </form>
@@ -116,247 +117,114 @@
                     <!-- end row-->
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        
+                        <div class="col-md-6 col-lg-4">
                             <div class="card-box">
-                                
-
-                                <h4 class="header-title mb-0">Total Revenue</h4>
-
-                                <div class="widget-chart text-center" dir="ltr">
-
-                                    <div id="total-revenue" class="mt-0" data-colors="#f1556c"></div>
-
-                                    <h5 class="text-muted mt-0">Total sales made today</h5>
-                                    <h2>$178</h2>
-
-                                    <p class="text-muted w-75 mx-auto sp-line-2">Traditional heading elements are
-                                        designed to work best in the meat of your page content.</p>
-
-                                    <div class="row mt-3">
-                                        <div class="col-4">
-                                            <p class="text-muted font-15 mb-1 text-truncate">Target</p>
-                                            <h4><i class="fe-arrow-down text-danger mr-1"></i>$7.8k</h4>
-                                        </div>
-                                        <div class="col-4">
-                                            <p class="text-muted font-15 mb-1 text-truncate">Last week</p>
-                                            <h4><i class="fe-arrow-up text-success mr-1"></i>$1.4k</h4>
-                                        </div>
-                                        <div class="col-4">
-                                            <p class="text-muted font-15 mb-1 text-truncate">Last Month</p>
-                                            <h4><i class="fe-arrow-down text-danger mr-1"></i>$15k</h4>
-                                        </div>
-                                    </div>
-
+                                <h4 class="header-title">Category</h4>
+                                <div class="mt-4">
+                                    <div class="chart-alt"  id="categoryPieStat" ><span>55</span>%</div>
                                 </div>
                             </div> <!-- end card-box -->
-                        </div> <!-- end col-->
-
-                        <div class="col-lg-8">
-                            <div class="card-box pb-2">
-                                <div class="float-right d-none d-md-inline-block">
-                                    <div class="btn-group mb-2">
-                                        <button type="button" class="btn btn-xs btn-light">Today</button>
-                                        <button type="button" class="btn btn-xs btn-light">Weekly</button>
-                                        <button type="button" class="btn btn-xs btn-secondary">Monthly</button>
-                                    </div>
-                                </div>
-
-                                <h4 class="header-title mb-3">Sales Analytics</h4>
-
-                                <div dir="ltr">
-                                    <div id="sales-analytics" class="mt-4" data-colors="#1abc9c,#4a81d4"></div>
+                        </div> <!-- end col -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card-box">
+                                <h4 class="header-title">Orders</h4>
+                                <div class="mt-4">
+                                    <div class="chart-alt"   id="orderPieStat"><span>46</span>%</div>
                                 </div>
                             </div> <!-- end card-box -->
-                        </div> <!-- end col-->
+                        </div> <!-- end col -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card-box">
+                                <h4 class="header-title">Payments</h4>
+                                <div class="mt-4">
+                                   <div class="chart-alt"   id="paymentPieStat" ><span>92</span>%</div>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
                     </div>
                     <!-- end row -->
+ <!-- end row-->
 
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card-box">
+                                    <div class="dropdown float-right">
+                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="header-title mb-0">Total Revenue</h4>
+
+                                    <div class="widget-chart text-center" dir="ltr">
+                                        
+                                        <div id="total-revenue" class="mt-0"  data-colors="#f1556c"></div>
+
+                                        <h5 class="text-muted mt-0">Total sales made today</h5>
+                                        <h2>$178</h2>
+
+                                        <p class="text-muted w-75 mx-auto sp-line-2">Traditional heading elements are designed to work best in the meat of your page content.</p>
+
+                                        <div class="row mt-3">
+                                            <div class="col-4">
+                                                <p class="text-muted font-15 mb-1 text-truncate">Target</p>
+                                                <h4><i class="fe-arrow-down text-danger mr-1"></i>$7.8k</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <p class="text-muted font-15 mb-1 text-truncate">Last week</p>
+                                                <h4><i class="fe-arrow-up text-success mr-1"></i>$1.4k</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <p class="text-muted font-15 mb-1 text-truncate">Last Month</p>
+                                                <h4><i class="fe-arrow-down text-danger mr-1"></i>$15k</h4>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col-->
+
+                            <div class="col-lg-8">
+                                <div class="card-box pb-2">
+                                    <div class="float-right d-none d-md-inline-block">
+                                        <div class="btn-group mb-2">
+                                            <button type="button" class="btn btn-xs btn-light">Today</button>
+                                            <button type="button" class="btn btn-xs btn-light">Weekly</button>
+                                            <button type="button" class="btn btn-xs btn-secondary">Monthly</button>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="header-title mb-3">Sales Analytics</h4>
+
+                                    <div dir="ltr">
+                                        <div id="sales-analytics" class="mt-4" data-colors="#1abc9c,#4a81d4"></div>
+                                    </div>
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row -->
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="card-box">
-                                <div class="dropdown float-right">
-                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="mdi mdi-dots-vertical"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Edit Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    </div>
-                                </div>
-
-                                <h4 class="header-title mb-3">Top 5 Users Balances</h4>
+                                <h4 class="header-title mb-3">Order Stats</h4>
 
                                 <div class="table-responsive">
                                     <table class="table table-borderless table-hover table-nowrap table-centered m-0">
 
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th colspan="2">Profile</th>
-                                                <th>Currency</th>
-                                                <th>Balance</th>
-                                                <th>Reserved in orders</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td style="width: 36px;">
-                                                    <img src="/dist/assets/images/users/user-2.jpg" alt="contact-img"
-                                                        title="contact-img" class="rounded-circle avatar-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Tomaslau</h5>
-                                                    <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-btc text-primary"></i> BTC
-                                                </td>
-
-                                                <td>
-                                                    0.00816117 BTC
-                                                </td>
-
-                                                <td>
-                                                    0.00097036 BTC
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-plus"></i></a>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-danger"><i
-                                                            class="mdi mdi-minus"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="width: 36px;">
-                                                    <img src="/dist/assets/images/users/user-3.jpg" alt="contact-img"
-                                                        title="contact-img" class="rounded-circle avatar-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Erwin E. Brown</h5>
-                                                    <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-eth text-primary"></i> ETH
-                                                </td>
-
-                                                <td>
-                                                    3.16117008 ETH
-                                                </td>
-
-                                                <td>
-                                                    1.70360009 ETH
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-plus"></i></a>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-danger"><i
-                                                            class="mdi mdi-minus"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 36px;">
-                                                    <img src="/dist/assets/images/users/user-4.jpg" alt="contact-img"
-                                                        title="contact-img" class="rounded-circle avatar-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Margeret V. Ligon</h5>
-                                                    <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-eur text-primary"></i> EUR
-                                                </td>
-
-                                                <td>
-                                                    25.08 EUR
-                                                </td>
-
-                                                <td>
-                                                    12.58 EUR
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-plus"></i></a>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-danger"><i
-                                                            class="mdi mdi-minus"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 36px;">
-                                                    <img src="/dist/assets/images/users/user-5.jpg" alt="contact-img"
-                                                        title="contact-img" class="rounded-circle avatar-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Jose D. Delacruz</h5>
-                                                    <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-cny text-primary"></i> CNY
-                                                </td>
-
-                                                <td>
-                                                    82.00 CNY
-                                                </td>
-
-                                                <td>
-                                                    30.83 CNY
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-plus"></i></a>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-danger"><i
-                                                            class="mdi mdi-minus"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 36px;">
-                                                    <img src="/dist/assets/images/users/user-6.jpg" alt="contact-img"
-                                                        title="contact-img" class="rounded-circle avatar-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-0 font-weight-normal">Luke J. Sain</h5>
-                                                    <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-btc text-primary"></i> BTC
-                                                </td>
-
-                                                <td>
-                                                    2.00816117 BTC
-                                                </td>
-
-                                                <td>
-                                                    1.00097036 BTC
-                                                </td>
-
-                                                <td>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
-                                                            class="mdi mdi-plus"></i></a>
-                                                    <a href="javascript: void(0);" class="btn btn-xs btn-danger"><i
-                                                            class="mdi mdi-minus"></i></a>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
+                                        <tbody id="orderStatListing">
+                       
+                                         </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -385,6 +253,7 @@
 
 
     <%- include('../partials/script'); -%>
+    <%- include('../partials/commonJs'); -%>
     <script>
 
 var date=new Date()
@@ -460,7 +329,6 @@ function getFilter(currentPage)
         var fromDate=$('#dash-daterange').val();
         var toDate=$('#dash-daterange').val();
 
-
         if(fromDate!="" && toDate!="")
         {
             if(countLoad>0)$('#loading1').show()
@@ -469,25 +337,23 @@ function getFilter(currentPage)
         //alert(fromDate)
         $.ajax({
             type: 'POST',
-            url: '<%-adminpath%>/dashboard',
+            url: '<%-adminpath%>dashboard',
             dataType: 'json',
             data: {'fromDate':fromDate,'filterName':filterName ,'toDate':toDate},
             success: function (response) {
                 $('#loading1').hide()
-
-                console.log(response)
                 if (response.code == '200') {
                     var data=response.body
+                    //console.log(data)
+                 //morisLine(data.ordersDataStat)
+                orderstat(data.ordersDataStat)
+                //pieStat(data)
+                // sparkStat(data)
 
-// morisLine(data.ordersDataStat)
-// orderstat(data.ordersDataStat)
-// pieStat(data)
-// sparkStat(data)
-
-// $('#morisDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
-// $('#sparkUserDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
-// $('#sparkPaymentDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
-// $('#sparkCategoryDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
+                //$('#morisDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
+                // $('#sparkUserDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
+                // $('#sparkPaymentDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
+                // $('#sparkCategoryDate').html(format(new Date(fromDate)) +' To '+format(new Date(toDate)))
                 $('#totalOrders').html(data.mainTotalOrder);
                 $('#totalUsers').html(data.mainTotalUser);
                 var earnings=data.ordersDataStat.map(item => item.totalSum).reduce(function(acc, val) { return acc + val; }, 0)
@@ -525,7 +391,7 @@ function pieStat(data)
     $("#orderPieStat").data("easyPieChart").update(((data.totalStatOrder*100)/data.mainTotalOrder));
     $("#paymentPieStat").data("easyPieChart").update( data.totalStatPayment!=0? ((data.totalStatPayment*100)/data.mainTotalPayment):0)
 
-            // $("#userPieStat").data("data-percent",((data.totalStatUser*100)/data.mainTotalUser).toString());
+             //$("#categoryPieStat").data("data-percent",((data.totalStatCategory*100)/data.mainTotalCategory).toString());
             // $("#orderPieStat").attr("data-percent",((data.totalStatorder*100)/data.mainTotalorder));
             // $("#payemntPieStat").attr("data-percent",((data.totalStatPayment*100)/data.mainTotalPayment));
 
@@ -619,7 +485,6 @@ function getDataSpark(data)
 
             return arrayActive;
 }
-
 
     </script>
 
