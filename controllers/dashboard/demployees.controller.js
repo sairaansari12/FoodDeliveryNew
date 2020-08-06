@@ -6,7 +6,12 @@ const EMPLOYEE= db.models.employees
 const SERVICES = db.models.services
 const Op = require('sequelize').Op;
 //SERVICES.belongsTo(SERVICES,{as: 'category',foreignKey: 'parentId'})
-
+function isAdminAuth(req, res, next) {
+  if(req.session.userData){
+    return next();
+  }
+  return res.redirect('/company');
+}
 
 app.get('/',adminAuth, async (req, res, next) => {
     
@@ -18,9 +23,9 @@ app.get('/',adminAuth, async (req, res, next) => {
         ],      
 
         });
+        console.log('findData>>>>>>>>>>>>>>>>>>',findData);
      
-        return res.render('admin/employees/employeesListing.ejs',{data:findData});
-
+       return res.render('admin/employees/employeesListing.ejs',{data:findData});
 
 
       } catch (e) {
@@ -175,6 +180,8 @@ if(services && services.length>0)
 
 
 app.post('/add',adminAuth,async (req, res) => {
+  console.log('control 11111111111111111');
+
   try {
     const data = req.body;
     var profileImage="",idProof="",coverImage=""
@@ -266,28 +273,39 @@ app.post('/add',adminAuth,async (req, res) => {
         companyId: req.companyId
        });
 
+       console.log('userssssssss>>>>>>>>>>>');
+
+
 
       if (users) {
 
-        responseHelper.post(res, appstrings.add_emp_success, null,200);
+        //responseHelper.post(res, appstrings.add_emp_success, null,200);
+        req.flash('successMessage',appstrings.add_emp_success);
+        return res.redirect(adminpath+"employees");
+
+
        
       }
-     else  responseHelper.error(res, appstrings.oops_something, 400);
-
+     else 
+     // responseHelper.error(res, appstrings.oops_something, 400);
+     req.flash('errorMessage',appstrings.oops_something)
 
     }
-      else  responseHelper.error(res, appstrings.already_exists, 400);
-
-    
+      else  
+      //responseHelper.error(res, appstrings.already_exists, 400);
+      req.flash('errorMessage',appstrings.already_exists)
 
   } catch (e) {
-    return responseHelper.error(res, appstrings.oops_something, e.message);
+     //return responseHelper.error(res, appstrings.oops_something, e.message);
+    return req.flash('errorMessage',appstrings.oops_something)
+
   }
 
 })
 
 
 app.get('/add',adminAuth, async (req, res, next) => {
+  console.log('control reqqqqq');
     
   try{
     const servicesData = await CATEGORY.findAll({
@@ -301,7 +319,6 @@ app.get('/add',adminAuth, async (req, res, next) => {
         ['orderby','ASC']
       ],
     })
-
     return res.render('admin/employees/addEmployee.ejs',{services: servicesData});
 
     } catch (e) {
@@ -326,6 +343,8 @@ app.get('/map',adminAuth, async (req, res, next) => {
 
 
 app.post('/update',adminAuth,async (req, res) => {
+  console.log('reqqqqqqqqq>>>>>>',req);
+
   try {
     const data = req.body;
     var assignedServices=[]
@@ -559,7 +578,8 @@ app.get('/orders',adminAuth,async(req,res) => {
   var rating=0
    var dataRating=await commonMethods.getEmpAvgRating(id) 
    if(dataRating && dataRating.dataValues && dataRating.dataValues.totalRating) rating=dataRating.dataValues.totalRating
-   return res.render('admin/employees/viewEmployeeOrders.ejs',{data:findData,ratings:user,avgRating :rating});
+  //  return res.render('admin/employees/viewEmployeeOrders.ejs',{data:findData,ratings:user,avgRating :rating});
+  return res.render('admin/employees/viewEmployee.ejs',{data:findData,ratings:user,avgRating :rating});
 
           
      
@@ -721,6 +741,78 @@ app.get('/delete/:id',adminAuth,async(req,res,next) => {
           return res.redirect(adminpath+"employees");
         }
 });
+
+
+
+
+app.post('/search',adminAuth, async (req, res, next) => {
+  try {
+    var params=req.body
+    var page =1
+    var limit =50
+    var search=params.search
+    if(params.page) page=params.page
+    if(params.limit) limit=parseInt(params.limit)
+    var offset=(page-1)*limit
+  
+    where={
+      companyId:req.companyId,
+      [Op.or]: [
+        { 'orderNo': { [Op.like]: '%' + search + '%' }},
+        { 'serviceDateTime': { [Op.like]: '%' + new Date(search) + '%' }},
+        { 'orderPrice': { [Op.like]: '%' + search + '%' }},
+        { 'totalOrderPrice': { [Op.like]: '%' + search + '%' }},
+      ]
+    }
+
+
+    whereAddress= {[Op.or]: [
+            
+      { 'addressName': { [Op.like]: '%' + search + '%' }},
+      { 'houseNo': { [Op.like]: '%' + search + '%' }},
+      { 'town': { [Op.like]: '%' + search + '%' }},
+      { 'city': { [Op.like]: '%' + search + '%' }},
+      { 'landmark': { [Op.like]: '%' + search + '%' }}]}
+
+
+      whereUser= 
+        {
+          phoneNumber :{[Op.not]:""},
+          [Op.or]: [
+            { 'phoneNumber': { [Op.like]: '%' + search + '%' }},
+            { 'firstName': { [Op.like]: '%' + search + '%' }},
+            { 'lastName': { [Op.like]: '%' + search + '%' }}
+        ]}
+       // { '$Comment.body$': { like: '%' + query + '%' }
+var findData= await findSearchData(where,{},{},offset,limit)
+
+
+if(findData.rows.length==0)
+{
+ findData= await findSearchData({companyId:req.companyId},whereAddress,{},offset,limit)
+}
+
+
+
+if(findData.rows.length==0)
+{
+
+ findData= await findSearchData({companyId:req.companyId},{},whereUser,offset,limit)
+}
+      var userDtaa={}
+      userDtaa.data=findData
+      userDtaa.counts=countDataq
+     
+  
+      return responseHelper.post(res, appstrings.success, userDtaa);
+  
+    } catch (e) {
+      console.log(e)
+      return responseHelper.error(res, e.message, 400);
+    }
+  
+  
+  });
 
 
 
