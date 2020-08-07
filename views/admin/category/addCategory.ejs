@@ -41,7 +41,8 @@
                                 <div class="form-group fg-line">
                                     <p class="f-500 c-black m-b-10">Choose Category  <span class="c-red m-l-3" >*</span> </p>
                                     <select data-placeholder="Choose Category"  class="chosen form-control" name="category" id="category">
-                                        <option value="" selected disabled/> 
+                                         
+                                        <option value="0">No Parent Category</option>
                                         <%for(var t=0;t<catData.length;t++){%>
                                             <option  value="<%-catData[t].id%>" /><%-catData[t].name%> 
                                         <%}%>

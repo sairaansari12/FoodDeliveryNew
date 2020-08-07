@@ -92,13 +92,32 @@
         </div>
     </li>
 
-      <li>
+    <li>
+        <a href="#sidebarNotification" data-toggle="collapse">
+            <i data-feather="bell"></i>
+            <span> Notifications </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarNotification">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="<%- adminpath %>notification">View Notifications</a>
+                    
+                </li>
+                <li>
+                    <a href="<%- adminpath %>notification/new">New Push Notification</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+      <!-- <li>
         <a href="<%- adminpath %>notification">
             <i data-feather="shopping-cart"></i>
             <span> Notifications</span>
         </a>
         
-    </li>
+    </li> -->
 
       <li>
           <a href="<%- adminpath %>payment">
