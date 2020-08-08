@@ -279,8 +279,7 @@ app.post('/status',adminAuth,async(req,res,next) => {
        
        if(userData)
        {
-       
-
+      
      
     const updatedResponse = await ORDERS.update({
          progressStatus: params.status,
@@ -331,10 +330,6 @@ app.post('/status',adminAuth,async(req,res,next) => {
         
                   }
                 }
-        
-
-
-
 
             commonNotification.insertNotification(notifPushUserData)   
              commonNotification.sendNotification(notifPushUserData)

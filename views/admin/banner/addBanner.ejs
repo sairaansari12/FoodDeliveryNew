@@ -45,13 +45,13 @@
                                             <div class="form-group fg-line">
                                                 <p class="f-500 c-black m-b-10"> Name <span class="c-red m-l-3" >*</span> </p>
                                                 <div class="fg-line">
-                                                <input type="text" id="name" placeholder="Banner Name" id="name" name="name"  minlength="2" maxlength="100"  class="form-control" />
+                                                <input required type="text" id="name" placeholder="Banner Name" id="name" name="name"  minlength="2" maxlength="100"  class="form-control" />
                                                 </div> 
                                             </div>
                                              <br/>
                                             <div class="form-group fg-line">
                                                 <p class="f-500 c-black m-b-10">Choose Order  <span class="c-red m-l-3" >*</span> </p>
-                                                <select data-placeholder="Choose Order"  class="chosen form-control" name="order" id="category">
+                                                <select required data-placeholder="Choose Order"  class="chosen form-control" name="order" id="category">
                                                      <option value="1" />1 
                                                         <option value="2" />2
                                                         <option value="3" />3
@@ -72,7 +72,7 @@
         
                                           
                                                 <div class="fallback">
-                                                    <input type="file" name="banner" />
+                                                    <input required type="file" name="banner" />
                                                 </div>
         
                                                 <div class="dz-message needsclick">

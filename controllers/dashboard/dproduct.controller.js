@@ -7,6 +7,7 @@ const ProductSpecs = db.models.productSpecifications;
 const CATEGORY = db.models.categories;
 
 const { Validator } = require('node-input-validator');
+const Op = require('sequelize').Op;
 
 // ProductSpecs.hasMany(Products,{foreign_key: 'productId'});
 Products.hasMany(ProductSpecs,{foreignKey: 'productId'})
@@ -28,13 +29,17 @@ function isAdminAuth(req, res, next) {
 app.get('/get',adminAuth,async(req,res,next) => {
 
     const products = await Products.findAll({
+        where: {companyId: req.companyId},
         include: [
             {
                 model: ProductSpecs,
                 attributes: ['productImages']
             }
         ]
-    });
+    },
+    { order: [['createdAt', 'DESC']] }
+    );
+
     const categories = await CATEGORY.findAll({ order: [['createdAt', 'DESC']] });
 
     return res.render('admin/products/viewproducts.ejs',{products,categories});
@@ -94,6 +99,18 @@ app.post('/add', adminAuth, async(req, res, next)=> {
 
                 let thumbnailFile = req.files.files;
 
+                if("name" in thumbnailFile){
+                    
+                    let name = Date.now() +thumbnailFile.name;
+                    thumbnailFile.mv('./public/assets/images/products/'+name , function(err) {
+                        if (err)
+                            console.log(err) 
+                    });
+
+                    thumbnail = name;
+
+                }else{
+
                 for(j=0;j<thumbnailFile.length;j++){
                     let name = Date.now() +thumbnailFile[j].name;
                     thumbnailFile[j].mv('./public/assets/images/products/'+name , function(err) {
@@ -105,10 +122,10 @@ app.post('/add', adminAuth, async(req, res, next)=> {
                     thumbArray.push(name);
 
                 }
+                 thumbnail = thumbArray.join();
+                }
 
             }
-
-            thumbnail = thumbArray.join();
         
 
         }
@@ -154,6 +171,49 @@ app.get('/edit/:id', adminAuth, async(req, res, next)=>{
     const categories = await CATEGORY.findAll({ order: [['createdAt', 'DESC']] });
 
     return res.render('admin/products/editproducts.ejs',{product,categories});
+
+});
+
+app.post('/search', adminAuth, async(req, res, next)=>{
+
+
+    const body = req.body;
+
+    let whereQuery = {
+        name: {
+            [Op.like]: `${body.search}%`
+        },
+        companyId: req.companyId
+    };
+
+    if("search" in body){
+
+        if(body.search == "" || body.search == null){
+
+            whereQuery = {
+                companyId: req.companyId
+            }
+        }
+
+    }
+
+    const searchProduct = await Products.findAll({
+        where: whereQuery
+    });
+
+    if(searchProduct){
+        return res.json({
+            status: 200,
+            message: "Search Results Found!",
+            data: searchProduct
+        });
+    }else{
+        return res.json({
+            status: 201,
+            message: "No Results Found!",
+            data: null
+        });
+    }
 
 });
 

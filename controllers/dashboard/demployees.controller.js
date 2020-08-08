@@ -814,9 +814,6 @@ if(findData.rows.length==0)
   
   });
 
-
-
-
 module.exports = app;
 
 //Edit User Profile

@@ -328,17 +328,20 @@
             success: function (response) {
                 $('#loading1').hide();
                 if (response.code == '200') {
-                    showToastSuccess( response.message)
-                    window.location.reload()
+                    toastr.success( response.message);
+                    setInterval(function(){
+                        window.location.reload();
+                    },2000);
+
                 }
                 else{
-                    showToastError(response.message)
+                    toastr.error(response.message)
                 }
             },
             error :function(response)
             {$('#loading1').hide();
 
-                showToastError(response.message)
+            toastr.error(response.message)
 
             }
         });

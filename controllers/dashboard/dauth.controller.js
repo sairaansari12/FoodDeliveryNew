@@ -25,6 +25,7 @@ app.get('/', async (req, res, next) => {
         return res.render(adminfilepath+'dashboard.ejs',{data:null});
 
     }
+
     return res.render(adminfilepath+'login.ejs');
 });
 

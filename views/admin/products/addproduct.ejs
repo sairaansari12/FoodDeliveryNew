@@ -681,8 +681,17 @@
 
                 if(responseText.status == 200){
                     toastr.success(responseText.message);
+
+                    setInterval(function(){
+                        window.location.href = '<%=adminpath %>products/get';
+                    },2000)
+
                 }else{
-                    toastr.error("Error Occured");
+                    $.each(responseText.message,function(k,v){
+                        toastr.error(v.message);
+
+                    });
+                    
                 }
 
                 $("#addProduct")[0].reset();

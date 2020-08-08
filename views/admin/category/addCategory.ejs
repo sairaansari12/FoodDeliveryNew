@@ -40,7 +40,7 @@
                             <div class="card-body card-padding">
                                 <div class="form-group fg-line">
                                     <p class="f-500 c-black m-b-10">Choose Category  <span class="c-red m-l-3" >*</span> </p>
-                                    <select data-placeholder="Choose Category"  class="chosen form-control" name="category" id="category">
+                                    <select required data-placeholder="Choose Category"  class="chosen form-control" name="category" id="category">
                                          
                                         <option value="0">No Parent Category</option>
                                         <%for(var t=0;t<catData.length;t++){%>
@@ -51,7 +51,7 @@
                                 <div class="form-group fg-line">
                                     <p class="f-500 c-black m-b-10">Category Name <span class="c-red m-l-3" >*</span> </p>
                                     <div class="fg-line">
-                                        <input type="text" id="serviceName" placeholder="Category Name" minlength="2" maxlength="100" name="serviceName"  class="form-control" />
+                                        <input required type="text" id="serviceName" placeholder="Category Name" minlength="2" maxlength="100" name="serviceName"  class="form-control" />
                                     </div> 
                                 </div>
                                 <br/>
@@ -59,7 +59,7 @@
                                  <div class="form-group fg-line ">
                                     <p class="f-500 c-black m-b-10">Color Code <span class="c-red m-l-3" >*</span> </p>
                                     <div class="fg-line">
-                                       <input type="color" class="jscolor form-control" value="ab2567"  id="colorCode"   name="colorCode" />
+                                       <input required type="color" class="jscolor form-control" value="ab2567"  id="colorCode"   name="colorCode" />
                                     </div>        
                                 </div>
                                 
@@ -69,7 +69,7 @@
     
                                       
                                             <div class="fallback">
-                                                <input type="file" name="thumbnail" />
+                                                <input required type="file" name="thumbnail" />
                                             </div>
     
                                             <div class="dz-message needsclick">
@@ -90,7 +90,7 @@
     
                                         
                                             <div class="fallback">
-                                                <input type="file" name="icon" />
+                                                <input required type="file" name="icon" />
                                             </div>
     
                                             <div class="dz-message needsclick">

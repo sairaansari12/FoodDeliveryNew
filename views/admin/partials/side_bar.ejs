@@ -12,7 +12,7 @@
       </li>
       
 
-      <li class="menu-title mt-2">Apps</li>
+      <!-- <li class="menu-title mt-2">Apps</li> -->
       <li>
         <a href="<%- adminpath %>orders">
           <i data-feather="shopping-cart"></i>
@@ -47,7 +47,10 @@
         <div class="collapse" id="sidebarCategory">
             <ul class="nav-second-level">
                 <li>
-                    <a href="<%- adminpath %>category/">Categories</a>
+                    <a href="<%- adminpath %>category/parent">Parent Categories</a>
+                </li>
+                <li>
+                    <a href="<%- adminpath %>category/">Sub Categories</a>
                 </li>
                 <li>
                     <a href="<%- adminpath %>category/add">Add Category</a>
