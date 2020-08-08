@@ -87,7 +87,7 @@
                                 <div class="product-info">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h5 class="font-16 mt-0 sp-line-1"><a href="ecommerce-product-detail.html" class="text-dark"><%=products[i].dataValues.name %></a> </h5>
+                                            <h5 class="font-16 mt-0 sp-line-1"><a href="<%=adminpath %>products/single/<%=products[i].dataValues.id %>" class="text-dark"><%=products[i].dataValues.name %></a> </h5>
                                             <div class="text-warning mb-2 font-13">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -606,7 +606,7 @@
 
     <script>
 
-        $("#inputPassword2").keypress(function(){
+        $("#inputPassword2").keyup(function(){
 
             var search = $(this).val();
 
@@ -617,9 +617,11 @@
                     success: function(data){
 
                         var obj = data.data;
+                        console.log(obj);
                         $.each(obj,function(key,value){
                             
                             var pic = value.thumbnail;
+                            // console.log("pic",value.thumbnail);
                             var split = pic.split(",");
                             var picture = split[0];
                             // console.log(pic);

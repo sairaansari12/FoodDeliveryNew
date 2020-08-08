@@ -7,6 +7,7 @@ const ProductSpecs = db.models.productSpecifications;
 const CATEGORY = db.models.categories;
 
 const { Validator } = require('node-input-validator');
+const products = require('../../db/models/products');
 const Op = require('sequelize').Op;
 
 // ProductSpecs.hasMany(Products,{foreign_key: 'productId'});
@@ -50,6 +51,21 @@ app.get('/add', adminAuth, async(req, res, next)=>{
     const categories = await CATEGORY.findAll({ order: [['createdAt', 'DESC']] });
     return res.render('admin/products/addproduct.ejs',{categories});
 
+});
+
+app.get('/single/:id', adminAuth, async(req, res, next)=> {
+    const id = req.params.id;
+
+    const product = await Products.findOne({
+        where: {id: id},
+        include : [
+            {
+                model: ProductSpecs
+            }
+        ]
+    });
+
+    return res.render('admin/products/viewSingleProduct.ejs',{product});
 });
 
 app.post('/add', adminAuth, async(req, res, next)=> {
@@ -200,6 +216,8 @@ app.post('/search', adminAuth, async(req, res, next)=>{
     const searchProduct = await Products.findAll({
         where: whereQuery
     });
+
+    console.log("searchproduct",searchProduct);
 
     if(searchProduct){
         return res.json({
