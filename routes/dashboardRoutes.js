@@ -19,6 +19,7 @@ const paymentCtrl              = require('../controllers/dashboard/dpayment.cont
 const notificationCtrl              = require('../controllers/dashboard/dnotification.controller');
 const productCtrl = require('../controllers/dashboard/dproduct.controller');
 const dealCtrl              = require('../controllers/dashboard/ddeal.controller');
+const settingCtrl = require('../controllers/dashboard/dsettings.controller');
 
 
 router.use('/',authController);
@@ -39,6 +40,7 @@ router.use('/payment/',paymentCtrl);
 router.use('/notification/',notificationCtrl);
 router.use('/products/',productCtrl);
 router.use('/deals/',dealCtrl);
+router.use('/settings/',settingCtrl);
 
 router.use((req, res, next) => {
 
