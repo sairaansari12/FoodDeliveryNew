@@ -343,7 +343,12 @@
                           </div>
                         </div>
                 
-                        
+                        <p class="text-right">
+                            
+                            <button class="btn btn-secondary buttonPrevious btn-sm">Prev</button>
+                            <button class="btn btn-info buttonNext btn-sm">Next</button>
+                            <button class="btn btn-primary buttonFinish btn-sm">Finish</button>
+                        </p>
                 
                     </div>
 
@@ -802,12 +807,7 @@
 
                     </div>
 
-                    <p class="text-right">
-                        <button class="btn btn-info buttonNext btn-sm">Next</button>
-                        <button class="btn btn-secondary buttonPrevious btn-sm">Prev</button>
-                
-                        <button class="btn btn-primary buttonFinish btn-sm">Finish</button>
-                    </p>
+                    
 
                 </div>
                 
@@ -948,11 +948,11 @@
                             $("#loading1").hide();
                             if (response.code == 200) {
                           
-                                showToastSuccess(response.message)
+                                toastr.success(response.message)
         
                         //  window.location.reload()                       
                             } else {
-                                showToastError(response.message)
+                                toastr.error(response.message)
                             }
                         },
         
@@ -974,8 +974,8 @@
         
                 var activeTab = $(document).find(".active");
                 $.each(activeTab,function(key,value){
-                    if(typeof $(this).children("a").data("toggle") !== typeof undefined && $(this).children("a").data("toggle") !== false){
-                        $(this).next("li").children("a").trigger("click");
+                    if(typeof $(this).data("toggle") !== typeof undefined && $(this).data("toggle") !== false){
+                        $(this).parent("li").next("li").children("a").trigger("click");
                     }
                 });
         
@@ -984,8 +984,8 @@
             function prevButton(){
                 var activeTab = $(document).find(".active");
                 $.each(activeTab,function(key,value){
-                    if(typeof $(this).children("a").data("toggle") !== typeof undefined && $(this).children("a").data("toggle") !== false){
-                        $(this).prev("li").children("a").trigger("click");
+                    if(typeof $(this).data("toggle") !== typeof undefined && $(this).data("toggle") !== false){
+                        $(this).parent("li").prev("li").children("a").trigger("click");
                     }
                 });
             }
