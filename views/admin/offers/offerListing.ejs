@@ -18,86 +18,81 @@
                     <!-- Start Content-->
                     <div class="container-fluid">
                         
-                        <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apps</a></li>
-                                            <li class="breadcrumb-item active">Companies</li>
+                                            <li class="breadcrumb-item"><a href="<%- adminpath %>">Dashboard</a></li>
+                                            
+                                            <li class="breadcrumb-item active">Offers</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Companies</h4>
+                                    <h4 class="page-title">Offers</h4>
                                 </div>
                             </div>
                         </div>     
                         <!-- end page title --> 
 
-
+                         <% if(!data){ %>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
                                     <div class="row">
-                                        <div class="col-lg-8">
-                                            <form class="form-inline">
-                                                <div class="form-group">
-                                                    <label for="inputPassword2" class="sr-only">Search</label>
-                                                    <input type="search" class="form-control" id="inputPassword2" placeholder="Search...">
-                                                </div>
-                                                <div class="form-group mx-sm-3">
-                                                    <label for="status-select" class="mr-2">Sort By</label>
-                                                    <select class="custom-select" id="status-select">
-                                                        <option>Select</option>
-                                                        <option>Date</option>
-                                                        <option selected>Name</option>
-                                                        <option>Revenue</option>
-                                                        <option>Employees</option>
-                                                    </select>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="col-lg-4">
+                                       
+                                        <div class="col-lg-12">
                                             <div class="text-lg-right mt-3 mt-lg-0">
-                                                <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="mdi mdi-cog"></i></button>
-                                                <button type="button" class="btn btn-danger waves-effect waves-light mr-1"><i class="mdi mdi-plus-circle mr-1"></i> Add New</button>
+                                                <a href="<%-adminpath%>offers/add %>"><button type="button" class="btn btn-danger waves-effect waves-light mr-1"><i class="mdi mdi-plus-circle mr-1"></i> Add New</button></a>
                                             </div>
                                         </div><!-- end col-->
+                                        
                                     </div> <!-- end row -->
                                 </div> <!-- end card-box -->
                             </div><!-- end col-->
                         </div>
                         <!-- end row -->        
-
+                        <% } %>
                         <div class="row">
                             <div class="col-lg-4">
+                             <% if(data){ %>
                                 <div class="card-box bg-pattern">
                                     <div class="text-center">
-                                        <img src="../assets/images/companies/amazon.png" alt="logo" class="avatar-xl rounded-circle mb-3">
-                                        <h4 class="mb-1 font-20">Amazon Inc.</h4>
-                                        <p class="text-muted  font-14">Seattle, Washington</p>
+                                        <img src="<%= data.icon %>" alt="logo" class="avatar-xl rounded-circle mb-3">
+                                        <h4 class="mb-1 font-20"><%= data.name %></h4>
+                                        <p class="text-muted  font-14"><%= data.code %></p>
                                     </div>
 
                                     <p class="font-14 text-center text-muted">
-                                        Amazon.com, Inc., doing business as Amazon, is an American electronic commerce and cloud computing company based in Seattle..
+                                        <%= data.description %>
                                     </p>
 
                                     <div class="text-center">
-                                        <a href="javascript:void(0);" class="btn btn-sm btn-light">Update</a>
+                                        <a href="<%-adminpath%>offers/view/<%- data.id %>" class="btn btn-sm btn-light">Update</a>
+                                        <a href="<%-adminpath%>offers/delete/<%- data.id %>" class="btn btn-sm btn-light">Delete</a>
                                     </div>
 
                                     <div class="row mt-4 text-center">
                                         <div class="col-6">
                                             <h5 class="font-weight-normal text-muted">Valid Upto</h5>
-                                            <h4>17,786 cr</h4>
+                                            <h4><%-commonMethods.format(new Date(data.validupto)) %></h4>
                                         </div>
                                         <div class="col-6">
                                             <h5 class="font-weight-normal text-muted">Usage Limit</h5>
-                                            <h4>566k</h4>
+                                            <h4><%-data.usageLimit %> </h4>
                                         </div>
                                     </div>
                                 </div> <!-- end card-box -->
+                            <% }else{ %>
+                                <div class="card-box bg-pattern">
+                                   
+
+                                    <p class="font-14 text-center text-muted">
+                                       Currently, No Active Offer
+                                    </p>
+
+                                    
+                                </div> <!-- end card-box -->
+                            <% } %>
                             </div><!-- end col -->
                         </div>
                         <!-- end row -->

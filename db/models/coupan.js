@@ -25,6 +25,11 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '',
       allowNull: true, 
     },
+    offerType: {
+      type: DataTypes.STRING(255),
+      defaultValue: 'coupon',
+      allowNull: false, 
+    },
     description: {
       type: DataTypes.STRING(255),
       defaultValue: '',
