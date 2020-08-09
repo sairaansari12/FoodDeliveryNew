@@ -2,12 +2,6 @@
 <html lang="en">
 <%- include('../partials/header'); -%>
 
-<style>
-    .form-row{
-        margin-bottom: 20px;
-    }
-</style>
-
 <body class="loading"
     data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
     <!-- <div class="login-logo">
@@ -22,152 +16,341 @@
                 <!-- Start Content-->
                 <div class="container-fluid">
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box">
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="<%- adminpath %>">Dashboard</a></li>
-                                        
-                                        <li class="breadcrumb-item">Settings</li>
+                    <div class="card">
 
-                                        <li class="breadcrumb-item active">Edit Profile</li>
-                                    </ol>
+                        <div class="card-body">
+
+                        <ul class="nav nav-pills">
+                          <li class="nav-item"><a class="nav-link active" data-toggle="pill" href="#home">General Settings</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#menu1">About Us Details</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#menu2">Privacy Information</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#menu3">Terms & Conditions Information</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#menu4">Final Steps</a></li>
+                        </ul>
+                      
+                        <div class="tab-content">
+                          <div id="home" class="tab-pane fade show active">
+                            <h3 class="mb-3">General Settings</h3>
+                            
+                            <form  id="generalForm" onsubmit="return false" class="col-md-10 center-margin " method="" />
+                            <input type="hidden"  name="documentId" id="documentId"   <%if(data){%> value="<%-data.id%>"  <%}%>/>
+                
+                            <div class="form-row form-group">
+                                <div class="form-label col-md-4">
+                                    <label for="">
+                                        Currency:
+                                        <span class="required">*</span>
+                                    </label>
                                 </div>
-                                <h4 class="page-title">Edit Profile</h4>
+                                <div class="form-input col-md-8">
+                                    <input type="text" id="currency" data-required="true"  <%if(data){%>  value="<%-data.currency%>" <%}%> class="form-control" name="currency"   data-trigger="change"  />
+                
+                                </div>
+                               
                             </div>
-                        </div>
-                    </div>     
-                    <!-- end page title --> 
-
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="card">
-
-                    <div class="card-body">
-
-                    <form  role="form" onsubmit="return false"  class="form-bordered data-parsley-focus"  id="adduser" >
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Company Name:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
-
-                            <div class="form-input col-md-8">
-                                <input type="text" id="companyName" data-required="true" value="<%-data.companyName%>" class="form-control" name="companyName"   data-trigger="change"  />
-
-                            </div>
+                
                            
-                        </div>
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Company Email:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
-                            
-                            <div class="form-input col-md-8">
-                                <input type="email" id="email" data-required="true" value="<%-data.email%>" class="form-control" name="email"   data-trigger="change"  />
-
-                            </div>
-                           
-                        </div>
-
+                            <div class="form-row form-group">
+                                <div class="form-label col-md-4">
+                                    <label for="" >
+                                        Language:
+                                        <span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="form-input col-md-8">
+                                    <select data-placeholder="Choose Language"  name="language" class="chosen-select form-control" id="language">
+                                        <option <%if(data && data.language=='EN'){%> selected <%}%>  value="EN" />ENGLISH 
+                                        <option  <%if(data && data.language=='FR'){%> selected <%}%>  value="FR" />SPANISH
+                                        
                         
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Phone Number:
-                                    <span class="required">*</span>
-                                </label>
+                               </select>                                                      
+                              </div>
                             </div>
-                            
-                            <div class="form-input col-md-8">
-                                <input type="text" id="phoneNumber" data-required="true" value="<%-data.phoneNumber%>" class="form-control" name="phoneNumber" data-trigger="change"  />
-
-                            </div>
-                           
-                        </div>
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Address 1:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
-                            
-                            <div class="form-input col-md-8">
-                                <input type="text" id="address1" data-required="true" value="<%-data.address1%>" class="form-control" name="address1"   data-trigger="change"  />
-
-                            </div>
-                           
-                        </div>
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Address 2:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
-                            
-                            <div class="form-input col-md-8">
-                                <input type="text" id="address2" data-required="true" value="<%-data.address2%>" class="form-control" name="address2"   data-trigger="change"  />
-
-                            </div>
-                           
-                        </div>
-
-                        <div class="col-lg-12">
+                 
+                
+                
+                            <div class="form-row form-group">
+                                <div class="form-label col-md-4">
+                                    <label for="">
+                                       Order Auto Assignment:
+                                    </label>
+                                </div>
+                
                                 
-                            <div class="card-box">
-                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Select Logo Here</h5>
+                                
 
-                              
-                                    <div class="fallback">
-                                        <input type="file" name="image" />
-                                    </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" <%if(data && data.autoAssign=='yes'){%> checked <%}%> id="autoAssign" name="autoAssign" class="custom-control-input">
+                                    <label class="custom-control-label" value="yes" for="autoAssign">Yes</label>
+                                  </div>
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="autoAssign2" name="autoAssign"  <%if(data && data.autoAssign=='no'){%> checked <%}%> class="custom-control-input" value="no">
+                                    <label class="custom-control-label" for="autoAssign2">No</label>
+                                  </div>
 
-                                    <div class="fallback">
-                                        <input type="file" name="image2" />
-                                    </div>
-
-                                    <div class="fallback">
-                                        <input type="file" name="image3" />
-                                    </div>
-
-                                    <div class="dz-message needsclick">
-                                        <i class="h1 text-muted dripicons-cloud-upload"></i>
-                                        <h3>Drop files here or click to upload.</h3>
-                                        <span class="text-muted font-13">(This is just a demo dropzone. Selected files are
-                                            <strong>not</strong> actually uploaded.)</span>
-                                    </div>
+                            </div>
+                
+                
+                
+                            </form>
+                
+                          </div>
+                          <div id="menu1" class="tab-pane fade">
+                            <h3 class="mb-3">About Us Details</h3>
                             
+                            <form  id="aboutusForm" onsubmit="return false" class="col-md-12 center-margin " method="" />
 
-                                <!-- Preview -->
-                                <div class="dropzone-previews mt-3" id="file-previews"></div>
-
-                            </div> <!-- end col-->
+                            <input type="hidden"  name="documentId" id="documentId"   <%if(data){%> value="<%-data.id%>"  <%}%>/>
                 
-                    </form>
-
+                         
+                            <div class="form-row form-group">
+                                <div class="form-label col-md-12">
+                                    <label for="" class="label-description">
+                                        <span>About Us Link</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="aboutusLink"   <%if(data){%>  value="<%-data.aboutusLink%>" <%}%> name="aboutusLink" autocomplete="off"  data-rangelength="[10,200]"  data-trigger="change"  />
+                
+                                   
+                                </div>
+                               
+                            </div>
+                
+                            <div class="form-row">
+                                <div class="form-label col-md-12">
+                
+                                <label for="" class="label-description">
+                                    <span>About Us Content</span>
+                                </label>
+                                    <textarea id="aboutusTiny"     data-trigger="keyup"  class="parsley-validated" > <%if(data)%> <%-data.aboutus%> </textarea>
+                                    <input type="hidden"  id="aboutus"  name="aboutus"  />
+                
+                                </div>
+                            </div>
+                
+                
+                            
+                 
+                            </form>
+                
+                          </div>
+                          <div id="menu2" class="tab-pane fade">
+                            <h3>Privacy Information</h3>
+                           
+                            <form  id="privacyForm" onsubmit="return false" class="col-md-12 center-margin " method="" />
+                            <input type="hidden"  name="documentId" id="documentId"   <%if(data){%> value="<%-data.id%>"  <%}%>/>
+                
+                         
+                            <div class="form-row">
+                                <div class="form-label col-md-12">
+                                    <label for="" class="label-description">
+                                        <span>Privacy Link</span>
+                                    </label>
+                                    <input type="text" id="privacyLink"   <%if(data){%>  value="<%-data.privacyLink%>" <%}%> name="privacyLink" autocomplete="off"  data-rangelength="[10,200]" class="form-control"  data-trigger="change"  />
+                
+                                   
+                                </div>
+                               
+                            </div>
+                
+                            <div class="form-row">
+                                <div class="form-label col-md-12">
+                
+                                <label for="" class="label-description">
+                                    <span>Privacy Content</span>
+                                </label>
+                                    <textarea id="privacyTiny"     data-trigger="keyup"  class="parsley-validated" > <%if(data)%> <%-data.privacyContent%> </textarea>
+                                    <input type="hidden"  id="privacy"  name="privacyContent"  />
+                
+                                </div>
+                            </div>
+                
+                
+                
+                 
+                            </form>
+                
+                          </div>
+                          <div id="menu3" class="tab-pane fade">
+                            <h3>Terms & Condition Information</h3>
+                            
+                            <form  id="termsForm" onsubmit="return false" class="col-md-12 center-margin " method="" />
+                            <input type="hidden"  name="documentId" id="documentId"   <%if(data){%> value="<%-data.id%>"  <%}%>/>
+                
+                         
+                            <div class="form-row">
+                                <div class="form-label col-md-12">
+                                    <label for="" class="label-description">
+                                        <span>Terms & Condition Link</span>
+                                    </label>
+                                    <input type="text" id="termsLink" class="form-control"  <%if(data){%>  value="<%-data.termsLink%>" <%}%> name="termsLink" autocomplete="off"  data-rangelength="[10,200]"  data-trigger="change"  />
+                
+                                   
+                                </div>
+                               
+                            </div>
+                
+                            <div class="form-row">
+                                <div class="form-label col-md-12">
+                
+                                <label for="" class="label-description">
+                                    <span>Terms & Condition Content</span>
+                                </label>
+                                    <textarea id="termsTiny"  data-trigger="keyup"  class="parsley-validated" > <%if(data)%> <%-data.termsContent%> </textarea>
+                                    <input type="hidden"  id="terms"  name="termsContent"  />
+                
+                                </div>
+                            </div>
+                
+                
+                           
+                
+                 
+                            </form>
+                
+                
+                          </div>
+                          <div id="menu4" class="tab-pane fade">
+                            <h3>Final Steps</h3>
+                          
+                            <form  id="linkForm" onsubmit="return false" class="col-md-12 center-margin " method="" />
+                            <input type="hidden"  name="documentId" id="documentId"   <%if(data){%> value="<%-data.id%>"  <%}%>/>
+                
+                         
+                            <div class="form-row">
+                                <div class="form-label col-md-2">
+                                    <label for="">
+                                        Website Link
+                                    </label>
+                                </div>
+                                <div class="form-input col-md-9">
+                                    <div class="input-append-wrapper">
+                                        <div class="input-append bg-orange">
+                                            <i class="glyph-icon icon-dashboard"></i>
+                                        </div>
+                                        <div class="append-left">
+                                            <input type="text" class="form-control" placeholder="Website link" name="websiteLink" <%if(data){%> value="<%-data.websiteLink%>"  <%}%>  id="websiteLink" />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                
+                            <div class="form-row">
+                                <div class="form-label col-md-2">
+                                    <label for="">
+                                        Facebook Link
+                                    </label>
+                                </div> 
+                                <div class="form-input col-md-9">
+                                    <div class="input-append-wrapper">
+                                        <div class="input-append primary-bg">
+                                            <i class="glyph-icon icon-facebook"></i>
+                                        </div>
+                                        <div class="append-left">
+                                            <input type="text" class="form-control" placeholder="Facebook link"  <%if(data){%> value="<%-data.facebookLink%>"  <%}%> name="facebookLink" id="facebookLink" />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                
+                            <div class="form-row">
+                                <div class="form-label col-md-2">
+                                    <label for="">
+                                        Gmail Link
+                                    </label>
+                                </div> 
+                                <div class="form-input col-md-9">
+                                    <div class="input-append-wrapper">
+                                        <div class="input-append bg-red">
+                                            <i class="glyph-icon icon-google-plus"></i>
+                                        </div>
+                                        <div class="append-left">
+                                            <input type="text" class="form-control" placeholder="Gmail link" <%if(data){%> value="<%-data.gmailLink%>"  <%}%>  name="gmailLink" id="gmailLink" />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                
+                            <div class="form-row">
+                                <div class="form-label col-md-2">
+                                    <label for="">
+                                        Linkedin Link
+                                    </label>
+                                </div> 
+                                <div class="form-input col-md-9">
+                                    <div class="input-append-wrapper">
+                                        <div class="input-append primary-bg">
+                                            <i class="glyph-icon icon-linkedin"></i>
+                                        </div>
+                                        <div class="append-left">
+                                            <input type="text" class="form-control" placeholder="Linkedin link" <%if(data){%> value="<%-data.linkedinLink%>"  <%}%>  name="linkedinLink" id="linkedinLink" />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                
+                
+                            <div class="form-row">
+                                <div class="form-label col-md-2">
+                                    <label for="">
+                                        Twitter Link 
+                                    </label>
+                                </div> 
+                                <div class="form-input col-md-9">
+                                    <div class="input-append-wrapper">
+                                        <div class="input-append bg-twitter">
+                                            <i class="glyph-icon icon-twitter"></i>
+                                        </div>
+                                        <div class="append-left">
+                                            <input type="text" class="form-control" <%if(data){%> value="<%-data.twitterLink%>"  <%}%>  placeholder="Twitter link" name="twitterLink" id="twitterLink" />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                
+                
+                
+                
+                             <div class="form-row">
+                                <div class="form-label col-md-2">
+                                    <label for="">
+                                        Instagram Link
+                                    </label>
+                                </div> 
+                                <div class="form-input col-md-9">
+                                    <div class="input-append-wrapper">
+                                        <div class="input-append bg-red">
+                                            <i class="glyph-icon icon-instagram"></i>
+                                        </div>
+                                        <div class="append-left">
+                                            <input type="text" class="form-control" placeholder="Instagram link"  <%if(data){%> value="<%-data.instaLink%>"  <%}%> name="instaLink" id="instaLink" />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                
+                           
+                
+                 
+                            </form>
+                
+                            </div>
+                          </div>
                         </div>
-                </div>
-            </div>
                 
-            </div>
+                        <p class="text-right">
+                            
+                            <button class="btn btn-secondary buttonPrevious btn-sm">Prev</button>
+                            <button class="btn btn-info buttonNext btn-sm">Next</button>
+                            <button class="btn btn-primary buttonFinish btn-sm">Finish</button>
+                        </p>
+                
+                    </div>
 
                 </div> <!-- container -->
 
@@ -624,10 +807,17 @@
 
                     </div>
 
+                    
+
                 </div>
+                
             </div>
 
+            
+
         </div> <!-- end slimscroll-menu-->
+
+        
     </div>
     <!-- /Right-bar -->
 
@@ -637,6 +827,171 @@
 
 
     <%- include('../partials/script'); -%>
+
+
+    <script>
+        var count=0
+         
+        $(document).ready(function(){
+        
+            $(".buttonFinish").hide();
+        
+          $(function(event){
+            $(".buttonFinish").on("click", function(){
+        
+        
+               if(count==4)
+               { 
+                callUpdateAPI("linkForm")
+            }
+        
+            
+            });
+            $(".buttonNext").on("click", function(){
+        
+                if(count==0) callUpdateAPI("generalForm");
+                if(count==1) callUpdateAPI("aboutusForm");
+                if(count==2) callUpdateAPI("privacyForm");
+                if(count==3) callUpdateAPI("termsForm");
+        
+                count++;
+        
+                if(count==4){
+                    $(".buttonNext").hide();
+                    $(".buttonFinish").show();
+                }
+        
+                nextButton();
+                
+            });
+        
+            $(".buttonPrevious").on("click", function(){
+                count--;
+        
+                if(count<4){
+                    $(".buttonNext").show();
+                    $(".buttonFinish").hide();
+                }
+        
+                prevButton();
+                
+            });
+        
+          });
+        });
+        
+        
+        </script>
+        
+        
+        <script>
+            tinymce.init({
+              selector: '#aboutusTiny',plugins: "autoresize"
+            });
+            tinymce.init({
+              selector: '#privacyTiny',
+              plugins: "autoresize"
+        
+            });
+            tinymce.init({
+              selector: '#termsTiny',
+              plugins: "autoresize"
+            });
+          </script>
+        <script type="text/javascript">
+        
+           
+        
+        function callUpdateAPI(formName)
+        {
+        
+        if(formName=="aboutusForm")
+        {
+            var temp =tinymce.get('aboutusTiny').getContent();
+               $('#aboutus').val(temp)
+        }
+        
+        
+        if(formName=="privacyForm")
+        {
+            var temp =tinymce.get('privacyTiny').getContent();
+               $('#privacy').val(temp)
+        }
+        
+        
+        
+        if(formName=="termsForm")
+        {
+            var temp =tinymce.get('termsTiny').getContent();
+               $('#terms').val(temp)
+        }
+        
+        
+        
+        
+            var tempform = $('#'+formName);
+               tempform .parsley('validate' );
+              if(tempform.parsley('isValid' ))
+                    {
+        
+              var form_data = new FormData(tempform[0]);
+            $("#loading1").show();
+            $.ajax({
+                        type: 'POST',
+                        url: '<%-adminpath%>settings/update',
+                        dataType: 'json',
+                        data:form_data ,
+                        contentType:false,
+                        cache:false,
+                        processData:false,
+                        success: function (response) {
+                            $("#loading1").hide();
+                            if (response.code == 200) {
+                          
+                                toastr.success(response.message)
+        
+                        //  window.location.reload()                       
+                            } else {
+                                toastr.error(response.message)
+                            }
+                        },
+        
+                        error: function(response)
+                        {
+                            $("#loading1").hide();
+                           var errorResponse=JSON.parse(response.responseText)
+                           showToastError(errorResponse.message)
+        
+        
+                        }
+                    });
+                }
+        
+        
+            }
+        
+            function nextButton(){
+        
+                var activeTab = $(document).find(".active");
+                $.each(activeTab,function(key,value){
+                    if(typeof $(this).data("toggle") !== typeof undefined && $(this).data("toggle") !== false){
+                        $(this).parent("li").next("li").children("a").trigger("click");
+                    }
+                });
+        
+            }
+        
+            function prevButton(){
+                var activeTab = $(document).find(".active");
+                $.each(activeTab,function(key,value){
+                    if(typeof $(this).data("toggle") !== typeof undefined && $(this).data("toggle") !== false){
+                        $(this).parent("li").prev("li").children("a").trigger("click");
+                    }
+                });
+            }
+        
+        
+            </script>
 
 
 </body>

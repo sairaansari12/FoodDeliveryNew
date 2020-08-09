@@ -19,7 +19,11 @@ const paymentCtrl              = require('../controllers/dashboard/dpayment.cont
 const notificationCtrl              = require('../controllers/dashboard/dnotification.controller');
 const productCtrl = require('../controllers/dashboard/dproduct.controller');
 const dealCtrl              = require('../controllers/dashboard/ddeal.controller');
+
 const offerCtrl              = require('../controllers/dashboard/doffer.controller');
+
+const settingCtrl = require('../controllers/dashboard/dsettings.controller');
+
 
 router.use('/',authController);
 router.use('/category/',categoryController);
@@ -39,7 +43,11 @@ router.use('/payment/',paymentCtrl);
 router.use('/notification/',notificationCtrl);
 router.use('/products/',productCtrl);
 router.use('/deals/',dealCtrl);
+
 router.use('/offers/',offerCtrl);
+
+router.use('/settings/',settingCtrl);
+
 router.use((req, res, next) => {
 
    return res.render('admin/partials/404.ejs');
