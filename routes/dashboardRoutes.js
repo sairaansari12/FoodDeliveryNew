@@ -23,7 +23,7 @@ const dealCtrl              = require('../controllers/dashboard/ddeal.controller
 const offerCtrl              = require('../controllers/dashboard/doffer.controller');
 
 const settingCtrl = require('../controllers/dashboard/dsettings.controller');
-
+const osettingCtrl = require('../controllers/dashboard/dinstruction.controller');
 
 router.use('/',authController);
 router.use('/category/',categoryController);
@@ -47,6 +47,8 @@ router.use('/deals/',dealCtrl);
 router.use('/offers/',offerCtrl);
 
 router.use('/settings/',settingCtrl);
+
+router.use('/ordersetting/',osettingCtrl)
 
 router.use((req, res, next) => {
 

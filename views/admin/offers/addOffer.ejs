@@ -43,27 +43,6 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group  col-md-6 mb-3">
-                                            <label for="product-category">Categories <span class="text-danger">*</span></label>
-                                            <select class="form-control select2" name="categoryId" id="categoryId">
-                                                <option value="" > All Categories</option>
-                                                <%for(var t=0;t<catData.length;t++){%>
-                                                    <option value="<%-catData[t].id%>" /><%-catData[t].name%> 
-                                                <%}%>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group  col-md-6 mb-3">
-                                            <label for="product-category">Type <span class="text-danger">*</span></label>
-                                            <select class="form-control select2" id="type" name="type">
-                                                <option value="0" />All 
-                                                <%for(var p=0;p<types.length;p++){%>
-                                                    <option value="<%-types[p].id%>" ><%-types[p].userType%></option> 
-                                                <%}%>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="product-name">Offer Usage Limit <span class="text-danger">*</span></label>
                                             <input type="number" id="usageLimit" name="usageLimit" class="form-control" placeholder="Offer Usage Limit">
@@ -153,9 +132,6 @@
             discount: {
                 required: true
             },
-            type: {
-                required: true
-            },
             usageLimit: {
                 required: true
             },
@@ -180,9 +156,6 @@
             },
             discount: {
                 required: "This field is required."
-            },
-            type: {
-                required: "This field is required"
             },
             usageLimit: {
               required: "This field is required"

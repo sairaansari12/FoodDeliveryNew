@@ -22,13 +22,7 @@ app.get('/',adminAuth, async (req, res, next) => {
         validupto: {
           [Op.gte] : newDate
         }
-      },
-      include:[ {
-        model: CATEGORY,
-        as: 'category',
-        attributes: ['name','icon','thumbnail'],
-        required: false
-      }]
+      }
     });
     
     console.log(findData);
@@ -120,7 +114,7 @@ app.post('/add',adminAuth,async (req, res) => {
     const data = req.body;
 
 
-    let responseNull= commonMethods.checkParameterMissing([data.minimumAmount,data.name,data.code,data.discount,data.type,data.validupto])
+    let responseNull= commonMethods.checkParameterMissing([data.minimumAmount,data.name,data.code,data.discount,data.validupto])
     if(responseNull) return responseHelper.post(res, appstrings.required_field,null,400);
 
 
@@ -171,7 +165,6 @@ app.post('/add',adminAuth,async (req, res) => {
 
       const users = await COUPAN.create({
         name: data.name,
-        type: data.type,
         offerType: "overall",
         usageLimit: data.usageLimit,
         code: data.code,
@@ -181,7 +174,6 @@ app.post('/add',adminAuth,async (req, res) => {
         thumbnail: icon,
         description:data.description,
         companyId: req.companyId,
-        categoryId:data.categoryId,
         minimumAmount:data.minimumAmount
 
        });
@@ -213,7 +205,7 @@ app.post('/update',adminAuth,async (req, res) => {
     const data = req.body;
 
 
-    let responseNull= commonMethods.checkParameterMissing([data.minimumAmount,data.validupto, data.coupanId,data.name,data.code,data.discount,data.type])
+    let responseNull= commonMethods.checkParameterMissing([data.minimumAmount,data.validupto, data.coupanId,data.name,data.code,data.discount])
     if(responseNull) return responseHelper.post(res, appstrings.required_field,null,400);
 
 
@@ -258,7 +250,6 @@ app.post('/update',adminAuth,async (req, res) => {
 
       const users = await COUPAN.update({
         name: data.name,
-        type: data.type,
         code: data.code,
         discount: data.discount,
         icon: icon,
@@ -267,8 +258,7 @@ app.post('/update',adminAuth,async (req, res) => {
         description:data.description,
         companyId: req.companyId,
         validupto:data.validupto,
-        minimumAmount:data.minimumAmount,
-        categoryId:data.categoryId
+        minimumAmount:data.minimumAmount
        },
        {where:{
         id: data.coupanId
