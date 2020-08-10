@@ -36,6 +36,7 @@ const jwt = require('jsonwebtoken');
  DEALS=db.models.deals
  SHIPMENT=db.models.shipment
  INSTRUCTIONS=db.models.instructions
+ PLANS = db.models.plans
 
 
 

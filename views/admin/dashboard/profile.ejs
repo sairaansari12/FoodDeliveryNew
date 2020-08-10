@@ -46,7 +46,7 @@
 
                     <div class="card-body">
 
-                    <form  role="form" onsubmit="return false"  class="form-bordered data-parsley-focus"  id="adduser" >
+                    <form  role="form" method="POST" action="<%=adminpath %>profile/companyUpdate"   class="form-bordered data-parsley-focus"  id="profileSubmit" enctype="multipart/form-data">
 
                         <div class="form-row">
                             
@@ -160,6 +160,8 @@
                                 <div class="dropzone-previews mt-3" id="file-previews"></div>
 
                             </div> <!-- end col-->
+
+                            <button class="btn btn-info btn-sm" type="submit">Save</button>
                 
                     </form>
 
@@ -633,11 +635,41 @@
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
-
+    <div class="loader" style="position:fixed;top:50%;left:50%;display: none;">
+        <img src="/assets/images/loader-dark.gif" alt="">
+    </div>
 
 
     <%- include('../partials/script'); -%>
+    <script>
+        
 
+        var options = { 
+            // beforeSubmit:  showRequest,
+            success:       showResponse  // post-submit callback 
+        }; 
+ 
+        // bind form using 'ajaxForm' 
+        $('#profileSubmit').ajaxForm(options);
+
+        function showResponse(responseText, statusText, xhr, $form){
+            setTimeout(function(){
+
+                $(".loader").css("display","none");
+
+                if(responseText.code == 200){
+                    toastr.success(responseText.message);
+                }else if(responseText.code == 400){
+                    toastr.error("Error Occured");
+                }
+
+                $("#profileSubmit")[0].reset();
+
+            },2000)
+            
+        }
+
+    </script>
 
 </body>
 
