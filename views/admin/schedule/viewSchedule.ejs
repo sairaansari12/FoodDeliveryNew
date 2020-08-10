@@ -85,7 +85,7 @@
                                                 <label for="simpleinput">Start Time:
                                                     <span class="required"></span>
                                                 </label>
-                                                <input class="form-control timepicker input"  <%if(data){%>
+                                                <input id="fromTime" class="form-control input"  <%if(data){%>
                                             value="<%-data.startTime%>" <%}%> id="fromTime"  data-required="true" onchange="getTimeSlots()"
                                               name="startTime" type="text" />
 
@@ -97,7 +97,7 @@
                                                 <label for="example-email">End Time:
                                                     <span class="required"></span>
                                                 </label>
-                                                <input class="form-control timepicker input"   <%if(data){%>
+                                                <input  id="toTime" class="form-control input"   <%if(data){%>
                                             value="<%-data.endTime%>" <%}%>  id="toTime"  data-required="true" onchange="getTimeSlots()" name="endTime" type="text" />
 
                                             </div>
@@ -188,7 +188,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <input class="form-control" type="hidden" name="superhidden" id="superhidden" />
-                                        <div class="form-group text-center mb-0">
+                                        <div class="form-group text-center mb-2">
                                             <button type="submit"
                                                 class="btn btn-primary waves-effect waves-light">Submit</button>
 
@@ -271,8 +271,8 @@
 <script type="text/javascript">
      $("#fromDate").flatpickr();
      $("#toDate").flatpickr();
-
-
+$("#fromTime").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"h:i K"});
+$("#toTime").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"h:i K"});
     var breakRow = 0
     var slotRow = 0
     var breakTime = []
@@ -473,28 +473,28 @@ $('#adduser').validate({
 
         while (slotTime < endTime) {
             if (!isInBreak(slotTime, x.breakTime)) {
-                timeSlots = timeSlots + '<div class="form-input col-md-12">' +
+                timeSlots = timeSlots + '<div class="form-input col-md-12" style="padding-top: 12px;"><div class="row">' +
                     '<input type="hidden" value="' + slotTime.format("hh:mm A") + '"  name= "slotsTime" id ="timeValue_' + slotRow + '">' +
                     '                       <div class="form-label col-md-2 font-size-16"><label> ' + slotTime.format("hh:mm A") + '</label></div>' +
-                    '                        <div class="form-label col-md-3 font-size-11"><label>Maximum Bookings:</label></div>';
+                    '                        <div class="form-label col-md-2 font-size-11"><label>Maximum Bookings:</label></div>';
 
                 // '<input class="form-input col-md-5" data-required="true"  value="0" id="slotQuantity_'+slotRow+'"  data-type="number" />'+
 
                 var timeSlots1 = "";
                 if (dataValue && dataValue.length > 0 && dataValue[slotRow]) {
                     timeSlots = timeSlots + '<div class="col-md-2"> <input  data-required="true" class="form-control"  oninput="remainingSlots(' + slotRow + ',' + dataValue[slotRow].bookings + ',' + (dataValue[slotRow].bookings - dataValueSlots[slotRow].bookings) + ')"   name= "slotsQuantity"  value="' + dataValue[slotRow].bookings + '" id="slotQuantity_' + slotRow + '"  data-type="number" /></div> ';
-                    timeSlots1 = '<input class="col-md-1 form-control"   readonly  name= "slotsQuantity1"  value="' + dataValueSlots[slotRow].bookings + '" id="slotQuantity1_' + slotRow + '"  data-type="number" /> ';
+                    timeSlots1 = '<input class="col-md-2 form-control"   readonly  name= "slotsQuantity1"  value="' + dataValueSlots[slotRow].bookings + '" id="slotQuantity1_' + slotRow + '"  data-type="number" /> ';
                 }
                 else {
 
                     timeSlots = timeSlots + '<div class="col-md-2"><input data-required="true"  name= "slotsQuantity"   value="0"  id="slotQuantity_' + slotRow + '"  data-type="number" /></div>';
-                    timeSlots1 = '<input class="form-input  col-md-1" data-required="true"  readonly  name= "slotsQuantity1"   value="0" id="slotQuantity1_' + slotRow + '"  data-type="number" />';
+                    timeSlots1 = '<input class="form-input  col-md-2" data-required="true"  readonly  name= "slotsQuantity1"   value="0" id="slotQuantity1_' + slotRow + '"  data-type="number" />';
 
                 }
 
 
-                timeSlots = timeSlots + '<div class="form-label col-md-3 font-size-11"><label> Remaining Today:</label></div>';
-                timeSlots = timeSlots + timeSlots1 + '</div>'
+                timeSlots = timeSlots + '<div class="form-label col-md-2 font-size-11"><label> Remaining Today:</label></div>';
+                timeSlots = timeSlots + timeSlots1 + '</div></div><br/>'
                 times.push(slotTime.format("hh:mm"));
                 slotRow++;
 
