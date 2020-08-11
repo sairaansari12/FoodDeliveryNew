@@ -18,20 +18,24 @@
                     <div class="container-fluid">
                         
                         <!-- start page title -->
+                        
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
+                                    <% if(parseInt(data.progressStatus) != 5) { %>
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal">Assignment</button>
                                         </ol>
                                     </div>
+                                    <% } %>
                                     <h4 class="page-title">Order Detail</h4>
                                     
                                     
                                 </div>
                             </div>
                         </div>     
+                        
                         <!-- end page title --> 
 
                         <div class="row">

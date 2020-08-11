@@ -117,7 +117,7 @@ app.get('/changePassword',adminAuth, async (req, res, next) => {
 });
 
 ///////////////////////////////////////////////////////
-/////////////////////// Roles ////////////////////////
+/////////////////////// Staff Roles ////////////////////////
 //////////////////////////////////////////////////////
 app.get('/roles',adminAuth, async (req, res, next) => {
     const findData = await STAFFROLE.findAll({
@@ -212,6 +212,104 @@ app.post('/role/update',adminAuth,async (req, res) => {
   }
 
 })
+
+///////////////////////////////////////////////////////
+/////////////////////// User Roles ////////////////////////
+//////////////////////////////////////////////////////
+app.get('/userroles',adminAuth, async (req, res, next) => {
+    const findData = await ROLETYPE.findAll({
+      where: {
+        companyId: req.companyId
+      }
+    });
+    return res.render('admin/settings/userroles.ejs',{data:findData});
+});
+/**
+*@role Add New Role
+*/
+app.post('/userrole/add',adminAuth,async (req, res) => {
+  try {
+    const data = req.body;
+    const findData = await ROLETYPE.findOne({
+      where: {
+        companyId: req.companyId,
+        userType: data.name
+      }
+    });
+    if(findData){
+      return responseHelper.post(res,"Already Exist!",null,400);
+    }else{
+      const users = await ROLETYPE.create({
+        userType: data.name,
+        companyId: req.companyId
+      });
+    }
+    return responseHelper.post(res, appstrings.success, null,200);
+  } catch (e) {
+    return responseHelper.error(res, appstrings.oops_something, e.message);
+  }
+
+})
+
+
+/**
+*@role Add New Role
+*/
+app.post('/userrole/update',adminAuth,async (req, res) => {
+  try {
+    const data = req.body;
+    const findData = await ROLETYPE.findOne({
+      where: {
+        companyId: req.companyId,
+        userType: data.nameedit,
+        id: {
+          [Op.ne]: data.istid
+        }
+      }
+    });
+    if(findData){
+      return responseHelper.post(res,"Already Exist!",null,400);
+    }else{
+      const users = await ROLETYPE.update({
+        userType: data.nameedit
+      },{
+        where: {
+          id: data.istid
+        }
+      });
+    }
+    return responseHelper.post(res, appstrings.success, null,200);
+  } catch (e) {
+    return responseHelper.error(res, appstrings.oops_something, e.message);
+  }
+
+})
+
+/**
+*@role Delete Staff Role
+*/
+app.get('/userrole/delete/:id',adminAuth,async(req,res,next) => { 
+  try{
+    const numAffectedRows = await ROLETYPE.destroy({
+      where: {
+        id: req.params.id,
+        companyId: req.companyId
+      }
+    })  
+    if(numAffectedRows>0)
+    {
+      req.flash('successMessage',appstrings.delete_success)
+      return res.redirect(adminpath+"settings/userroles");
+    }
+    else {
+      req.flash('errorMessage',appstrings.no_record)
+      return res.redirect(adminpath+"settings/userroles");
+    }
+  }catch (e) {
+    req.flash('errorMessage',appstrings.no_record)
+    return res.redirect(adminpath+"settings/userroles");
+  }
+});
 
 module.exports = app;
 

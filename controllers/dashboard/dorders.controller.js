@@ -581,12 +581,12 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
             
       });
 
-
-
       var empData = await EMPLOYEE.findAll({
-        where :{companyId:req.companyId}
-    
-    });
+        where :{companyId:req.companyId,
+          role:  {
+            [Op.in]: ['1','2']
+          }}
+      });
       var instructions = await INSTRUCTIONS.findOne({
         where :{companyId:req.companyId}
     
