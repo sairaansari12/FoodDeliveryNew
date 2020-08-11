@@ -5,7 +5,9 @@ const bcrypt  = require('bcryptjs');
 const v       = require('node-input-validator');
 const jwt     = require('jsonwebtoken');
 const hashPassword = require('../../helpers/hashPassword');
-const COMPANY= db.models.companies
+const Op = require('sequelize').Op;
+const COMPANY= db.models.companies;
+const STAFFROLE= db.models.staffRoles;
 function isAdminAuth(req, res, next) {
     if(req.session.userData){
       return next();
@@ -114,6 +116,102 @@ app.get('/changePassword',adminAuth, async (req, res, next) => {
    return res.render(adminfilepath+'changePassword.ejs');
 });
 
+///////////////////////////////////////////////////////
+/////////////////////// Roles ////////////////////////
+//////////////////////////////////////////////////////
+app.get('/roles',adminAuth, async (req, res, next) => {
+    const findData = await STAFFROLE.findAll({
+      where: {
+        companyId: req.companyId
+      }
+    });
+    return res.render('admin/settings/roles.ejs',{data:findData});
+});
+/**
+*@role Add New Role
+*/
+app.post('/role/add',adminAuth,async (req, res) => {
+  try {
+    const data = req.body;
+    const findData = await STAFFROLE.findOne({
+      where: {
+        companyId: req.companyId,
+        userType: data.name
+      }
+    });
+    if(findData){
+      return responseHelper.post(res,"Already Exist!",null,400);
+    }else{
+      const users = await STAFFROLE.create({
+        userType: data.name,
+        companyId: req.companyId
+      });
+    }
+    return responseHelper.post(res, appstrings.success, null,200);
+  } catch (e) {
+    return responseHelper.error(res, appstrings.oops_something, e.message);
+  }
+
+})
+
+/**
+*@role Delete Staff Role
+*/
+app.get('/role/delete/:id',adminAuth,async(req,res,next) => { 
+  try{
+    const numAffectedRows = await STAFFROLE.destroy({
+      where: {
+        id: req.params.id,
+        companyId: req.companyId
+      }
+    })  
+    if(numAffectedRows>0)
+    {
+      req.flash('successMessage',appstrings.delete_success)
+      return res.redirect(adminpath+"settings/roles");
+    }
+    else {
+      req.flash('errorMessage',appstrings.no_record)
+      return res.redirect(adminpath+"settings/roles");
+    }
+  }catch (e) {
+    req.flash('errorMessage',appstrings.no_record)
+    return res.redirect(adminpath+"settings/roles");
+  }
+});
+
+/**
+*@role Add New Role
+*/
+app.post('/role/update',adminAuth,async (req, res) => {
+  try {
+    const data = req.body;
+    const findData = await STAFFROLE.findOne({
+      where: {
+        companyId: req.companyId,
+        userType: data.nameedit,
+        id: {
+          [Op.ne]: data.istid
+        }
+      }
+    });
+    if(findData){
+      return responseHelper.post(res,"Already Exist!",null,400);
+    }else{
+      const users = await STAFFROLE.update({
+        userType: data.nameedit
+      },{
+        where: {
+          id: data.istid
+        }
+      });
+    }
+    return responseHelper.post(res, appstrings.success, null,200);
+  } catch (e) {
+    return responseHelper.error(res, appstrings.oops_something, e.message);
+  }
+
+})
 
 module.exports = app;
 

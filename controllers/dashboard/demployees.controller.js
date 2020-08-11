@@ -5,6 +5,7 @@ const app     = express();
 const EMPLOYEE= db.models.employees
 const SERVICES = db.models.services
 const Op = require('sequelize').Op;
+const STAFFROLE= db.models.staffRoles;
 //SERVICES.belongsTo(SERVICES,{as: 'category',foreignKey: 'parentId'})
 function isAdminAuth(req, res, next) {
   if(req.session.userData){
@@ -23,7 +24,6 @@ app.get('/',adminAuth, async (req, res, next) => {
         ],      
 
         });
-        console.log('findData>>>>>>>>>>>>>>>>>>',findData);
      
        return res.render('admin/employees/employeesListing.ejs',{data:findData});
 
@@ -259,6 +259,7 @@ app.post('/add',adminAuth,async (req, res) => {
       
       const users = await EMPLOYEE.create({
         firstName: data.firstName,
+        role: data.role,
         email: data.email,
         dob: data.dob,
         address: data.address,
@@ -305,7 +306,6 @@ app.post('/add',adminAuth,async (req, res) => {
 
 
 app.get('/add',adminAuth, async (req, res, next) => {
-  console.log('control reqqqqq');
     
   try{
     const servicesData = await CATEGORY.findAll({
@@ -319,7 +319,13 @@ app.get('/add',adminAuth, async (req, res, next) => {
         ['orderby','ASC']
       ],
     })
-    return res.render('admin/employees/addEmployee.ejs',{services: servicesData});
+
+    const findData = await STAFFROLE.findAll({
+      where: {
+        companyId: req.companyId
+      }
+    });
+    return res.render('admin/employees/addEmployee.ejs',{services: servicesData,findData});
 
     } catch (e) {
       return responseHelper.error(res, e.message, 400);
@@ -432,6 +438,7 @@ if(data.service) assignedServices.push(data.service)
       const users = await EMPLOYEE.update({
         firstName: data.firstName,
         email: data.email,
+        role: data.role,
         address: data.address,
         dob: data.dob,
         phoneNumber: data.phoneNumber,
@@ -492,7 +499,7 @@ app.get('/view/:id',adminAuth,async(req,res) => {
 }
 
 
-   
+    
       const findData = await EMPLOYEE.findOne({
       where :{companyId :req.companyId, id: id },
       order: [
@@ -513,10 +520,14 @@ app.get('/view/:id',adminAuth,async(req,res) => {
           ['orderby','ASC']
         ],
       })
+      const roletypess = await STAFFROLE.findAll({
+      where: {
+        companyId: req.companyId
+      }
+    });
 
 
-
-      return res.render('admin/employees/viewEmployee.ejs',{data:findData,services:servicesData});
+      return res.render('admin/employees/viewEmployee.ejs',{data:findData,services:servicesData,roletypess});
 
 
 

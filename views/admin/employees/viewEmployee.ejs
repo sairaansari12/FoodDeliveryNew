@@ -294,6 +294,19 @@
                                                         </div>
 
                                                     </div>
+                                                     <div class="row">
+                                                        <div class="form-group col-md-12">
+                                                            <label for="simpleinput">Role</label>
+                                                             <select name="role" class=" form-control parsley-validated select2" id="role">
+                                                                <% for(var i=0;i<roletypess.length;i++){ %>
+<option value="<%- roletypess[i].id %>" <% if(data.role == roletypess[i].id){ %> selected <% } %>><%- roletypess[i].userType %></option>
+                                                                <% } %>
+                                                            </select>
+                                                        </div>
+
+                                                       
+
+                                                    </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-3">
                                                             <label for="simpleinput">Country Code</label>

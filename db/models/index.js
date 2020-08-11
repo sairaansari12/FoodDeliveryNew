@@ -48,7 +48,8 @@ let modules = [
   require('./instructions'),
   require('./products'),
   require('./productSpecifications'),
-  require('./plans')
+  require('./plans'),
+  require('./staffRoles')
 
 ];
 
