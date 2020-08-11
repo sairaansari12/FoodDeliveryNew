@@ -617,27 +617,54 @@ app.get('/tip',adminAuth, async (req, res, next) => {
   }
 });
 
+/**
+*@role Add Tip
+*/
 app.post('/addtip',adminAuth, async (req, res, next) => {
   try {
     const data = req.body;
     console.log(data);
-    return false;
     const findData = await INSTRUCTIONS.findOne({
       where: {
         companyId: req.companyId,
       }
     });
     if(findData){
-      if(findData.dataValues.tips != ""){
-         var inst = JSON.parse(findData.dataValues.tips);
-      }else{
-        var inst = [];
+      var inst = data.tip;
+      var mainArray = [];
+      for (var i = 0; i < inst.length; i++) {
+        var array         = {};
+        if(inst[i] != ""){
+          var heading       = parseInt(inst[i]);
+          mainArray.push(heading);
+        }
       }
-     
+      //Update Instruction
+      const users = await INSTRUCTIONS.update({
+        tips: JSON.stringify(mainArray)
+      },
+      {
+        where: {
+          companyId: req.companyId
+        }
+      });
     }else{
-      var inst = [];
+      const tips = data.tip;
+      var mainArray = [];
+      for (var i = 0; i < tips.length; i++) {
+        var array         = {};
+        if(tips[i] != ""){
+          var heading       = parseInt(tips[i]);
+          mainArray.push(heading);
+        }
+      }
+      //Update Instruction
+      const users = await INSTRUCTIONS.create({
+        tips: JSON.stringify(mainArray),
+        companyId: req.companyId
+      });
     }
-    return res.render('admin/ordersetting/tip.ejs',{inst});
+    return responseHelper.post(res, appstrings.success, null,200);
   } catch (e) {
     return responseHelper.error(res, e.message, 400);
   }

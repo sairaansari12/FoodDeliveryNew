@@ -26,10 +26,10 @@
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="<%- adminpath %>">Dashboard</a></li>
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Order Setting</a></li>
-                                            <li class="breadcrumb-item active">Pick Up</li>
+                                            <li class="breadcrumb-item active">Tip</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Pick Up Instructions</h4>
+                                    <h4 class="page-title">Tips</h4>
                                 </div>
                             </div>
                         </div>     
@@ -38,47 +38,52 @@
 
                         <div class="row">
                             <form  role="form" onsubmit="return false"  class="col-md-12"  id="adduser" >
-                    <input type="hidden"  name="parentId" id="parentId"   />
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card-box">
-                                    <% for(var i =0;i<inst.length;i++){ %>
-                                    <div class="row after-add-more">
-                                        <div class="form-group  col-md-4 mb-3">
-                                            <label for="product-name">Add Tip <span class="text-danger">*</span></label>
-                                            <input type="number" id="tip[]" value="<%- inst[i] %>" autocomplete="off"  minlength="1" maxlength="100" name="tip" class="form-control" placeholder="Add Tip">
-                                        </div>
-                                    </div>
-                                    <% } %>
-                                    <div class="col-md-2">
-                                        <div class="form-group change">
-                                            <label for="">&nbsp;</label><br/>
-                                            <a class="btn btn-success add-more">+ Add More</a>
-                                        </div>
-                                    </div>
-                                </div> <!-- end card-box -->
-                            </div> <!-- end col -->
-                            
-                        </div>
-                        <!-- end row -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card-box">
+                                            <% for(var i =0;i<inst.length;i++){ %>
+                                            <div class="row after-add-more">
+                                                <div class="form-group  col-md-4 mb-3">
+                                                    <label for="product-name">Add Tip <span class="text-danger">*</span></label>
+                                                    <input type="number" id="tip[]" value="<%- inst[i] %>" autocomplete="off"  minlength="1" maxlength="100" name="tip" class="form-control" placeholder="Add Tip">
+                                                </div>
+                                                <% if(i != 0){ %>
+                                                    <div class="text-center form-group" style="margin-top: 28px;">
+                                                        <button type="button" class='btn w-sm btn-danger remove waves-effect waves-light form-control'>- Remove</button>
+                                                    </div>
+                                                    
+                                                <% } %>
+                                            </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-center mb-3">
-                                    <a href="<%- adminpath %>coupans"><button type="button" class="btn w-sm btn-light waves-effect">Cancel</button></a>
-                                    <button type="submit" class="btn w-sm btn-success waves-effect waves-light">Save</button>
+                                            <% } %>
+                                            <div class="newinputs">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group change">
+                                                    <label for="">&nbsp;</label><br/>
+                                                    <button type="button" class="btn w-sm btn-success  waves-effect waves-light add-more">+ Add More</button>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end card-box -->
+                                    </div> <!-- end col -->
+                                    
                                 </div>
-                            </div> <!-- end col -->
+                                <!-- end row -->
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-center mb-3">
+                                            <a href="<%- adminpath %>coupans"><button type="button" class="btn w-sm btn-light waves-effect">Cancel</button></a>
+                                            <button type="submit" class="btn w-sm btn-success waves-effect waves-light">Save</button>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                            <!-- end row -->
+                            </form>
                         </div>
                         <!-- end row -->
-                    </form>
-                        </div>
-                        <!-- end row -->
-                        
                     </div> <!-- container -->
-
                 </div> <!-- content -->
-
             </div>
 
             <!-- ============================================================== -->
@@ -93,65 +98,71 @@
     <%- include('../partials/script'); -%>
     <%- include('../partials/commonJs'); -%>
 <script>
-$(document).ready(function() {
-    $("body").on("click",".add-more",function(){ 
-        var html = $(".after-add-more").first().clone();
-        //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
-        $(html).append("<button class='btn w-sm btn-danger remove waves-effect waves-light'>- Remove</button>");
-        $(".after-add-more").last().after(html);
-      
-     
-       
-    });
-
     $("body").on("click",".remove",function(){ 
         $(this).parents(".after-add-more").remove();
     });
-});
-
-$("#adduser").validate({
-        rules: {
-            tip: {
-              required: true
-            }
-        },
-        messages: {
-            tip: {
-                required: "This field is required"
-            }
-        },
-        submitHandler: function (form) {
- 
-            $(".overlay").show();
-            var tempform = $('#adduser');
-            var form_data = new FormData(tempform[0]);
-            console.log(form_data);
-            $(".overlay").show();
-            $.ajax({
-                type: 'POST',
-                url: '<%-adminpath%>ordersetting/addtip',
-                dataType: 'json',
-                data: form_data,
-                contentType:false,
-                cache:false,
-                processData:false,
-                success: function (response) {
-                    $(".overlay").hide();
-                    if (response.code == 200) {
-                  
-                        //showToastSuccess(response.message)
-
-                        window.location.reload();
-                       
-                    } else {
-                        showToastError(response.message)
-                    }
-                }
-            });
-        }
-        
+    jQuery(document).ready( function () {                                 
+        $(".add-more").click( function(e) {
+             e.preventDefault();
+            $(".newinputs").append('<div class="row after-add-more">\
+                <div class="form-group  col-md-4 mb-3">\
+                <label for="product-name">Add Tip <span class="text-danger">*</span></label>\
+                <input type="number" id="tip[]" autocomplete="off"  minlength="1" maxlength="100" name="tip" class="form-control" placeholder="Add Tip">\
+                </div><div class="text-center form-group" style="margin-top: 28px;">\
+                <button type="button" class="btn w-sm btn-danger remove waves-effect waves-light form-control remove_this">- Remove</button>\
+                </div></div>');
+            return false;
+        });
     });
+    jQuery(document).on('click', '.remove_this', function() {
+       $(this).parents(".newinputs").remove();
+        return false;
+    });
+    $(document).ready(function(){
 
+        $("#adduser").validate({
+            rules: {
+                tip: {
+                  required: true
+                }
+            },
+            messages: {
+                tip: {
+                    required: "This field is required"
+                }
+            },
+            submitHandler: function (form) {
+     
+                $(".overlay").show();
+                var tempform = $('#adduser');
+                var form_data = new FormData(tempform[0]);
+                console.log(form_data);
+                $(".overlay").show();
+                $.ajax({
+                    type: 'POST',
+                    url: '<%-adminpath%>ordersetting/addtip',
+                    dataType: 'json',
+                    data: form_data,
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success: function (response) {
+                        $(".overlay").hide();
+                        if (response.code == 200) {
+                      
+                            //showToastSuccess(response.message)
+
+                            window.location.reload();
+                           
+                        } else {
+                            showToastError(response.message)
+                        }
+                    }
+                });
+            }
+            
+        });
+    });
 </script>
 </body>
 

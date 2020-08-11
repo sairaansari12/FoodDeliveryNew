@@ -201,7 +201,7 @@
                         '<div class="col-sm-4">'+
                         '<p class="mb-1"><b>Order Date:</b> '+format(new Date(data[t].order.createdAt))+'</p>'+
                         '<p class="mb-1"><b>Payment Date:</b> '+format(new Date(data[t].createdAt)) +'</p>'+
-                        '<p class="mb-0"><i class="mdi mdi-currency-inr mr-1"></i> '+data[t].amount  +'</p>'+
+                        '<p class="mb-0"> <%- CURRENCY %> '+data[t].amount  +'</p>'+
                         '</div><div class="col-sm-2">'+
                         '<div class="text-center mt-3 mt-sm-0">'+
                         '<div class="badge font-14 '+stclass+' p-1">'+status+'</div>'+ 

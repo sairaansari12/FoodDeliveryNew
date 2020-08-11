@@ -168,6 +168,14 @@
                                                         <td><%-CURRENCY +' '+ data.offerPrice%></td>
                                                     </tr>
                                                     <tr>
+                                                        <th scope="row" colspan="4" class="text-right">Loyalty value :</th>
+                                                        <td><%-CURRENCY +' '+ data.offerPrice%></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" colspan="4" class="text-right">Loyalty Discount :</th>
+                                                        <td><%-CURRENCY +' '+ data.offerPrice%></td>
+                                                    </tr>
+                                                    <tr>
                                                         <th scope="row" colspan="4" class="text-right">Total :</th>
                                                         <td><div class="font-weight-bold"> <%-CURRENCY +' '+ data.totalOrderPrice%></div></td>
                                                     </tr>
@@ -208,9 +216,9 @@
                                                 <p class="mb-2"><span class="font-weight-semibold mr-2">Transaction Id:</span><%-  data.payment.transactionId %></p>
                                                 <p class="mb-2"><span class="font-weight-semibold mr-2">Transaction Status:</span>
                                                 <% if(data.payment.transactionStatus == '1'){ %>
-                                                Paid
+                                                    Paid
                                                 <% }else{ %>
-                                                Not Paid
+                                                    Not Paid
                                                 <% } %></p>
                                                
                                             </li>
