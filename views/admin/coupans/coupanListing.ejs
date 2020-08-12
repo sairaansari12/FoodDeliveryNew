@@ -143,20 +143,37 @@
                         {
                            $('#block_status_'+id).hide()
                            $('#unblock_status_'+id).show()
-                           showToastSuccess( "Service inactive successfully")
+                           setTimeout(function(){
+                                toastr.success("Service inactive successfully");
+                            }, 2000);
+
+                        
                         }else{
                             $('#block_status_'+id).show()
                             $('#unblock_status_'+id).hide()
-                            showToastSuccess( "Service active successfully")
+                            setTimeout(function(){
+                                toastr.success("Service active successfully");
+                            }, 2000);
                         }
                     }
                     else{
-                        showToastError(response.message)
+                        setTimeout(function(){
+                        
+                       toastr.error(response.message);
+                    }, 2000);
+
+                       // showToastError(response.message)
                     }
                 },
                 error :function(response)
                 {
-                    showToastError(response.message)
+                    setTimeout(function(){
+                        
+                       toastr.error(response.message);
+                    }, 2000);
+
+                    
+                    //showToastError(response.message)
 
                 }
             });

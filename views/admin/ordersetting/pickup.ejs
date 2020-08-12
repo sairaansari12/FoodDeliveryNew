@@ -209,13 +209,15 @@ $("#editInst").validate({
                 success: function (response) {
                     $(".overlay").hide();
                     if (response.code == 200) {
-                  
+                        toastr.success("Instruction updated successfully!");
+                        setTimeout(function(){
+                           window.location.reload();
+                        }, 2000);
                         //showToastSuccess(response.message)
-
-                        window.location.reload();
-                       
                     } else {
-                        showToastError(response.message)
+                        setTimeout(function(){
+                          toastr.success(response.message);
+                        }, 2000);
                     }
                 }
             });
@@ -255,13 +257,15 @@ $("#editInst").validate({
                 success: function (response) {
                     $(".overlay").hide();
                     if (response.code == 200) {
-                  
+                        toastr.success("Instruction added successfully!");
+                        setTimeout(function(){
+                           window.location.reload();
+                        }, 2000);
                         //showToastSuccess(response.message)
-
-                        window.location.reload();
-                       
                     } else {
-                        showToastError(response.message)
+                        setTimeout(function(){
+                          toastr.success(response.message);
+                        }, 2000);
                     }
                 }
             });

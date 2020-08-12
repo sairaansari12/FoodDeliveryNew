@@ -227,13 +227,14 @@
                 success: function (response) {
                     $(".overlay").hide();
                     if (response.code == 200) {
-                  
-                        showToastSuccess(response.message)
-
-                         window.location.href="<%-adminpath%>coupans";
+                         toastr.success(response.message);
+                        setTimeout(function(){
+                            window.location.href="<%-adminpath%>coupans";
+                        }, 2000);
                        
                     } else {
-                        showToastError(response.message)
+                        toastr.error(response.message);
+                        //showToastError(response.message)
                     }
                 }
             });
