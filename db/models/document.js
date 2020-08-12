@@ -108,7 +108,23 @@ autoAssign: {
   allowNull: true,
    defaultValue: 'yes'
 },
+loyalityPoints: {
+  type: DataTypes.STRING(20),
+  allowNull: false,
+  defaultValue: ''
+},
 
+onelPValue: {
+  type: DataTypes.STRING(20),
+  allowNull: false,
+  defaultValue: ''
+},
+
+lpOrderPercentage: {
+  type: DataTypes.STRING(20),
+  allowNull: false,
+  defaultValue: ''
+},
 companyId: {
   type: DataTypes.UUID,
   allowNull: false,

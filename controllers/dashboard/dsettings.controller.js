@@ -67,6 +67,9 @@ app.post('/update',adminAuth,async(req,res,next) => {
                   currency:  params.currency,
                   language:  params.language,
                   autoAssign:  params.autoAssign,
+                  onelPValue:  params.onelPValue,
+                  loyalityPoints:  params.loyalityPoints,
+                  lpOrderPercentage:  params.lpOrderPercentage,
                   companyId: req.id
 
  },
@@ -95,6 +98,9 @@ app.post('/update',adminAuth,async(req,res,next) => {
                     currency:  params.currency,
                     language:  params.language,
                     autoAssign:  params.autoAssign,
+                    onelPValue:  params.onelPValue,
+                  loyalityPoints:  params.loyalityPoints,
+                  lpOrderPercentage:  params.lpOrderPercentage,
                     companyId: req.id
    }) ; 
    CURRENCY=params.currency

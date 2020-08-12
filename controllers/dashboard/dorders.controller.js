@@ -589,9 +589,7 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
       });
       var AllempData = await EMPLOYEE.findAll({
         where :{
-          companyId:{
-           [Op.ne] :req.companyId
-          },
+          companyId:req.parentCompany,
           role:  {
             [Op.in]: ['1']
           }
