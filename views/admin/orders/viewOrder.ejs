@@ -24,9 +24,15 @@
                                 <div class="page-title-box">
                                     <% if(parseInt(data.progressStatus) != 5) { %>
                                     <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal">Assignment</button>
+                                    <ol class="breadcrumb m-0">
+                                            <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal">My Dispatchers</button>
                                         </ol>
+                                    </div>
+                                    <div class="page-title-right" style="margin-right: 10px;">
+                                        <ol class="breadcrumb m-0">
+                                            <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal-all">All Dispatchers</button>
+                                        </ol>
+                                        
                                     </div>
                                     <% } %>
                                     <h4 class="page-title">Order Detail</h4>
@@ -305,6 +311,37 @@
                                        
                                     <%}%>
 
+                                    </select>
+                                </div>
+                               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button"  class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                <button type="button" onclick="updateAssignemnt()"  class="btn btn-info waves-effect waves-light">Assign</button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal -->
+
+                 <!-- sample modal content -->
+
+                <div id="con-close-modal-all" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Assign Employee</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row">
+                                <input type="hidden" id="assignOrderId" value="<%-data.id%>"/>
+                                    <select class="custom-select" id="status-select" multiple>
+                                    <%var exists=data.assignedEmployees.map(item => item.employee.id)
+                                    %>
+                                    <option value="" disabled/>Choose Employee
+                                    <%for(var t=0;t<AllempData.length;t++){%>
+                                        <option value="<%-AllempData[t].id%>" <%if(exists.includes(AllempData[t].id)){%> selected <%}%>   /><%-AllempData[t].firstName+' '+AllempData[t].lastName%>
+                                    <%}%>
                                     </select>
                                 </div>
                                

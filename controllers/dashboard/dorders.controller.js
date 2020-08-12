@@ -584,8 +584,18 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
       var empData = await EMPLOYEE.findAll({
         where :{companyId:req.companyId,
           role:  {
-            [Op.in]: ['1','2']
+            [Op.in]: ['1']
           }}
+      });
+      var AllempData = await EMPLOYEE.findAll({
+        where :{
+          companyId:{
+           [Op.ne] :req.companyId
+          },
+          role:  {
+            [Op.in]: ['1']
+          }
+        }
       });
       var instructions = await INSTRUCTIONS.findOne({
         where :{companyId:req.companyId}
@@ -593,7 +603,7 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
     });
 
 
-      return res.render('admin/orders/viewOrder.ejs',{data:findData,empData:empData,instructions});
+      return res.render('admin/orders/viewOrder.ejs',{data:findData,empData:empData,instructions,AllempData});
 
 
 
