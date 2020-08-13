@@ -10,16 +10,6 @@
               <span> Dashboard </span>
           </a>
       </li>
-      
-
-      <!-- <li class="menu-title mt-2">Apps</li> -->
-      <li>
-        <a href="<%- adminpath %>orders">
-          <i data-feather="shopping-cart"></i>
-          <span> Orders </span>
-        </a>
-      </li>
-
       <li>
         <a href="#sidebarProduct" data-toggle="collapse">
             <i data-feather="box"></i>
@@ -58,25 +48,107 @@
             </ul>
         </div>
       </li>
-      
-      <!-- <li>
-          <a href="#sidebarEcommerce" data-toggle="collapse">
-              <i data-feather="shopping-cart"></i>
-              <span> Orders </span>
+      <li>
+        <a href="#sidebarCrm" data-toggle="collapse">
+            <i data-feather="users"></i>
+            <span> Staff </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarCrm">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="<%-adminpath%>employees/">Staff Listing</a>
+                </li>
+                <li>
+                    <a href="<%-adminpath%>employees/add">Staff Add</a>
+                </li>
+                <li>
+                    <a href="<%-adminpath%>employees/map">View On Map</a>
+                </li>
+               
+            </ul>
+        </div>
+    </li>
+
+     <li>
+        <a href="<%-adminpath%>schedule/">
+            <i data-feather="calendar"></i>
+            <span> Schedule</span>
+        </a>
+    </li>
+      <li>
+          <a href="<%- adminpath %>coupans">
+              <i data-feather="gift"></i>
+              <span> Coupons </span>
+          </a>
+      </li>
+
+      <li>
+          <a href="<%- adminpath %>deals">
+              <i data-feather="archive"></i>
+              <span> Deals </span>
+          </a>
+      </li>
+       <li>
+          <a href="<%- adminpath %>offers">
+              <i data-feather="archive"></i>
+              <span> Offers </span>
+          </a>
+      </li>
+    
+      <li>
+        <a href="<%- adminpath %>orders">
+          <i data-feather="shopping-cart"></i>
+          <span> Orders </span>
+        </a>
+      </li>
+      <li>
+          <a href="<%- adminpath %>payment">
+              <i data-feather="credit-card"></i>
+              <span> Payment </span>
+          </a>
+      </li>
+      <li>
+          <a href="#sidebarRating" data-toggle="collapse">
+              <i data-feather="users"></i>
+              <span> Ratings & Reviews </span>
               <span class="menu-arrow"></span>
           </a>
-          <div class="collapse" id="sidebarEcommerce">
+          <div class="collapse" id="sidebarRating">
               <ul class="nav-second-level">
                   <li>
-                      <a href="<%- adminpath %>orders">Orders</a>
+                      <a href="<%-adminpath%>ratings/">Product Reviews</a>
                   </li>
                   <li>
-                      <a href="javascript:;">Order Setting</a>
+                      <a href="<%-adminpath%>ratings/company">Restaurant Reviews</a>
                   </li>
+                 
               </ul>
           </div>
-      </li> -->
-
+      </li>
+      <li>
+        <a href="#sidebaroSettings" data-toggle="collapse">
+            <i data-feather="settings"></i>
+            <span> Order Settings </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebaroSettings">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="<%- adminpath %>ordersetting/delivery">Delivery Instructions</a>
+                </li>
+                <li>
+                    <a href="<%- adminpath %>ordersetting/cooking">Cooking Instructions</a>
+                </li>
+                <li>
+                    <a href="<%- adminpath %>ordersetting/pickup">Pick Up Instructions</a>
+                </li>
+                <li>
+                    <a href="<%- adminpath %>ordersetting/tip">Order Tips</a>
+                </li>
+            </ul>
+        </div>
+    </li>
       <li>
         <a href="#sidebarSettings" data-toggle="collapse">
             <i data-feather="settings"></i>
@@ -106,29 +178,7 @@
             </ul>
         </div>
     </li>
-    <li>
-        <a href="#sidebaroSettings" data-toggle="collapse">
-            <i data-feather="settings"></i>
-            <span> Order Settings </span>
-            <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebaroSettings">
-            <ul class="nav-second-level">
-                <li>
-                    <a href="<%- adminpath %>ordersetting/delivery">Delivery Instructions</a>
-                </li>
-                <li>
-                    <a href="<%- adminpath %>ordersetting/cooking">Cooking Instructions</a>
-                </li>
-                <li>
-                    <a href="<%- adminpath %>ordersetting/pickup">Pick Up Instructions</a>
-                </li>
-                <li>
-                    <a href="<%- adminpath %>ordersetting/tip">Order Tips</a>
-                </li>
-            </ul>
-        </div>
-    </li>
+    
     <li>
         <a href="#sidebarNotification" data-toggle="collapse">
             <i data-feather="bell"></i>
@@ -155,81 +205,16 @@
         </a>
         
     </li> -->
-
-      <li>
-          <a href="<%- adminpath %>payment">
-              <i data-feather="credit-card"></i>
-              <span> Payment </span>
-          </a>
-      </li>
-      <li>
-          <a href="<%- adminpath %>coupans">
-              <i data-feather="gift"></i>
-              <span> Coupons </span>
-          </a>
-      </li>
-
-      <li>
-          <a href="<%- adminpath %>deals">
-              <i data-feather="archive"></i>
-              <span> Deals </span>
-          </a>
-      </li>
-       <li>
-          <a href="<%- adminpath %>offers">
-              <i data-feather="archive"></i>
-              <span> Offers </span>
-          </a>
-      </li>
-      <li>
-        <a href="#sidebarCrm" data-toggle="collapse">
-            <i data-feather="users"></i>
-            <span> Staff </span>
-            <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarCrm">
-            <ul class="nav-second-level">
-                <li>
-                    <a href="<%-adminpath%>employees/">Staff Listing</a>
-                </li>
-                <li>
-                    <a href="<%-adminpath%>employees/add">Staff Add</a>
-                </li>
-                <li>
-                    <a href="<%-adminpath%>employees/map">View On Map</a>
-                </li>
-               
-            </ul>
-        </div>
-    </li>
-
-     <li>
-        <a href="<%-adminpath%>schedule/">
-            <i data-feather="calendar"></i>
-            <span> Schedule</span>
-        </a>
-    </li>
-
-
-
     <li>
-        <a href="#sidebarRating" data-toggle="collapse">
-            <i data-feather="users"></i>
-            <span> Ratings & Reviews </span>
-            <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarRating">
-            <ul class="nav-second-level">
-                <li>
-                    <a href="<%-adminpath%>ratings/">Product Reviews</a>
-                </li>
-                <li>
-                    <a href="<%-adminpath%>ratings/company">Restaurant Reviews</a>
-                </li>
-               
-            </ul>
-        </div>
-    </li>
+          <a href="<%- adminpath %>faq">
+              <i data-feather="book-open"></i>
+              <span> FAQ </span>
+          </a>
+      </li>
+     
+
+
+
 
    
 

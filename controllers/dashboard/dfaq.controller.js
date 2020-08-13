@@ -142,7 +142,7 @@ app.post('/update',adminAuth,async (req, res) => {
     var profileImage=""
 
 
-    let responseNull= commonMethods.checkParameterMissing([data.faqId,data.question,data.answer,data.language])
+    let responseNull= commonMethods.checkParameterMissing([data.faqId,data.questionedit,data.answeredit,data.languageedit])
     if(responseNull) return responseHelper.post(res, appstrings.required_field,null,400);
 
 
@@ -163,9 +163,9 @@ app.post('/update',adminAuth,async (req, res) => {
       
     
       const users = await FAQ.update({
-        question: data.question,
-        answer: data.answer,
-        language: data.language,
+        question: data.questionedit,
+        answer: data.answeredit,
+        language: data.languageedit,
         companyId: req.companyId
        },
 
@@ -207,8 +207,7 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
 
   let responseNull=  common.checkParameterMissing([id])
   if(responseNull) 
-  { req.flash('errorMessage',appstrings.required_field)
-  return res.redirect(adminpath+"faq");
+  { return responseHelper.error(res, e.message, null);
 }
 
 
@@ -220,14 +219,13 @@ app.get('/view/:id',adminAuth,async(req,res,next) => {
       ],      
 
       });
-   
-      return res.render('admin/faq/viewFaq.ejs',{data:findData});
+    return responseHelper.post(res, appstrings.success,findData);
+     // return res.render('admin/faq/viewFaq.ejs',{data:findData});
 
 
 
     } catch (e) {
-      req.flash('errorMessage',e.message)
-      return res.redirect(adminpath+"faq");
+      return responseHelper.error(res, e.message, null);
     }
 
 
