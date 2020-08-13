@@ -121,8 +121,7 @@
 </div>
                 
     <!-- END wrapper -->
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
+
     <%- include('../partials/script'); -%>
     <%- include('../partials/commonJs'); -%>
 <script>
@@ -144,7 +143,7 @@
                            $('#block_status_'+id).hide()
                            $('#unblock_status_'+id).show()
                            setTimeout(function(){
-                                toastr.success("Service inactive successfully");
+                                toastr.success("Coupon inactive successfully");
                             }, 2000);
 
                         
@@ -152,7 +151,7 @@
                             $('#block_status_'+id).show()
                             $('#unblock_status_'+id).hide()
                             setTimeout(function(){
-                                toastr.success("Service active successfully");
+                                toastr.success("Coupon active successfully");
                             }, 2000);
                         }
                     }

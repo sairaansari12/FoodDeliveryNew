@@ -170,6 +170,11 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         defaultValue: 1
       },
+    loginstatus: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: 1
+    },
     createdAt: {
       type: DataTypes.INTEGER(11),
       allowNull: false,

@@ -97,8 +97,7 @@
 </div>
                 
     <!-- END wrapper -->
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
+  
     <%- include('../partials/script'); -%>
     <%- include('../partials/commonJs'); -%>
 <script>
@@ -119,8 +118,8 @@
             data: {'id':id,'status':status},
             success: function (response) {
                 if (response.code == '200') {
-        
-               showToastSuccess( response.message)
+                toastr.success(response.message);
+               //showToastSuccess( response.message)
                if(status == "2")
                     {
                       window.location.reload();
@@ -130,13 +129,19 @@
                 }
                 else{
                    
-                    showToastError(response.message)
+                    setTimeout(function(){
+                        toastr.error(response.message);
+                       window.location.reload();
+                    }, 2000);
                 }
             },
 
             error :function(response)
             {
-                showToastError(response.message)
+                setTimeout(function(){
+                    toastr.error(response.message);
+                   window.location.reload();
+                }, 2000);
 
             }
         });
@@ -177,14 +182,14 @@
                             var active = 2;
                             var status = "Success";
                             var stclass = "bg-soft-info text-info";
-                             var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button"  onclick="StatusChange(\''+data[t].id+'\',\''+active+'\')">'+
-                            '<h5><span class="badge bg-soft-danger text-danger"><i class="mdi mdi-coin"></i>Payment Failed</span></h5></a>';
+                             var payemnt = '<a href="javascript:;"  class="btn btn-success waves-effect waves-light"  onclick="StatusChange(\''+data[t].id+'\',\''+active+'\')">'+
+                            '<h5>Pending</h5></a>';
                         }else{
                             var active = 1;
                             var status = "Pending";
                              var stclass = "bg-soft-danger text-danger";
-                             var payemnt = '<a href="javascript:;"  class="btn bg-green font-size-10 pad5A tooltip-button"  onclick="StatusChange(\''+data[t].id+'\',\''+active+'\')">'+
-                            '<h5><span class="badge bg-soft-success text-success"><i class="mdi mdi-coin"></i> Payment Paid</span></h5></a>';
+                             var payemnt = '<a href="javascript:;"  class="btn btn-success waves-effect waves-light"  onclick="StatusChange(\''+data[t].id+'\',\''+active+'\')">'+
+                            '<h5>PaidW</h5></a>';
                         }
                    
                         row =row+ '<div class="card-box mb-2">'+
@@ -196,7 +201,7 @@
                         '<h4 class="mt-0 mb-2 font-16">'+data[t].user.firstName+ " "+  data[t].user.lastName+'</h4>'+
                         '<p class="mb-1 mt-3 mt-sm-0"><i class="mdi mdi-cellphone mr-1"></i> '+data[t].user.countryCode +" "+ data[t].user.phoneNumber+'</p>'+
                         '<p class="mb-1"><b>Order No.:</b> '+data[t].order.orderNo+'</p>'+
-                        
+                         '<p class="mb-1 badge font-14 '+stclass+' p-1"><b>Payment Status:</b> '+status+'</p>'+
                         '</div></div></div>'+
                         '<div class="col-sm-4">'+
                         '<p class="mb-1"><b>Order Date:</b> '+format(new Date(data[t].order.createdAt))+'</p>'+
@@ -204,7 +209,7 @@
                         '<p class="mb-0"> <%- CURRENCY %> '+data[t].amount  +'</p>'+
                         '</div><div class="col-sm-2">'+
                         '<div class="text-center mt-3 mt-sm-0">'+
-                        '<div class="badge font-14 '+stclass+' p-1">'+status+'</div>'+ 
+                        //'<div class="badge font-14 '+stclass+' p-1">'+status+'</div>'+ 
                         '</div></div>'+                             
                         '<div class="col-sm-2"><div class="text-sm-right">'+
                         ''+payemnt+''+
@@ -217,7 +222,10 @@
                     //$('#exe').DataTable();
                 }
                 else{
-                    showToastError(response.message)
+                    setTimeout(function(){
+                            toastr.error(response.message);
+                           window.location.reload();
+                        }, 2000);
                 }
             },
 
@@ -225,7 +233,10 @@
             {
                 $('#loading1').hide()
 
-                showToastError(response.message)
+                setTimeout(function(){
+                            toastr.error(response.message);
+                           window.location.reload();
+                        }, 2000);
 
             }
         });
@@ -304,7 +315,10 @@
                     //$('#exe').DataTable();
                 }
                 else{
-                    showToastError(response.message)
+                    setTimeout(function(){
+                            toastr.error(response.message);
+                           window.location.reload();
+                        }, 2000);
                 }
             },
 
@@ -312,7 +326,10 @@
             {
                 $('#loading1').hide()
 
-                showToastError(response.message)
+                setTimeout(function(){
+                            toastr.error(response.message);
+                           window.location.reload();
+                        }, 2000);
 
             }
         });

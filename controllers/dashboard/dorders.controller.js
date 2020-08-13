@@ -49,9 +49,11 @@ app.get('/',adminAuth, async (req, res, next) => {
     where :{companyId:req.companyId}
 
 });
+const findDataSetting = await DOCUMENT.findOne({
+          where :{companyId :req.companyId }
+        });
 
-
-      return res.render('admin/orders/ordersListing.ejs',{data:findData,empData:empData});
+      return res.render('admin/orders/ordersListing.ejs',{data:findData,empData:empData,findDataSetting});
 
     
 
@@ -263,7 +265,7 @@ app.post('/status',adminAuth,async(req,res,next) => {
         if(responseNull) return responseHelper.post(res, appstrings.required_field,null,400);
        
       
-
+        console.log('adasdsd',params);
        var userData = await ORDERS.findOne({
          where: {
            id: params.id },
@@ -280,17 +282,46 @@ app.post('/status',adminAuth,async(req,res,next) => {
        if(userData)
        {
       
-     
-    const updatedResponse = await ORDERS.update({
-         progressStatus: params.status,
+     //Check Auto Assignment
+      if(params.status == '1')
+      {
+        var date2 = new Date();
+        var dateTime2 = moment(date2).format("YYYY-MM-DD");
+        const findDataSetting = await DOCUMENT.findOne({
+          where :{companyId :req.companyId }
+        });
+        if(findDataSetting.dataValues.autoAssign == "yes")
+        {
+          var items = await EMPLOYEE.findOne({
+            where: {
+              loginstatus: '1',
+              companyId: req.companyId,
+              role: '1',
+              id: {
+                [Op.notIn]:  [sequelize.literal(`select empId from assignedEmployees where jobStatus = 1 AND DATE(createdAt) = `+dateTime2)]
+              }
+            }
+          });
+        }
+        //Add Empl
+        await ASSIGNMENT.create({
+          empId: items.dataValues.id,
+          orderId: params.id
+        });
+      }
+        const updatedResponse = await ORDERS.update({
+            progressStatus: params.status
 
-       },
-       {
-         where : {
-         id: userData.dataValues.id
-       }
-       });
-       
+          },
+          {
+            where : {
+              id: userData.dataValues.id
+          }
+        });
+        
+
+      
+      //Check Auto Assignment
        if(updatedResponse)
              {
               var status=commonMethods.getOrderStatus(params.status)

@@ -274,11 +274,12 @@ formatAMPM:function (date) {
 getOrderStatus :function(input)
 {
   var status="Not Confirmed"
-  if(input=="1") status="Confirmed"
-  if(input=="2") status="Cancelled"
-  if(input=="3") status="Processing"
-  if(input=="4") status="Cancelled by Comapny"
-  if(input=="5") status="Completed"
+  if(input=="1") status="Order Confirmed"
+  if(input=="2") status="Order Cancelled By user"
+  if(input=="3") status="Order Prepare by restaurent"
+  if(input=="4") status="Order Cancelled By restaurant"
+  if(input=="5") status="Order Delivered"
+  if(input=="6") status="Order Picked up"
   return status;
 },
 short:function (data,length) {

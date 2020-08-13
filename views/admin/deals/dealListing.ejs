@@ -82,8 +82,7 @@
 </div>
                 
     <!-- END wrapper -->
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
+
     <%- include('../partials/script'); -%>
     <%- include('../partials/commonJs'); -%>
 <script>
@@ -108,22 +107,33 @@
                     if (response.code == '200') {
                         if(status == "1")
                         {
-                           showToastSuccess( "Deal inactive successfully");
-                           window.location.reload();
+                            toastr.success("Deal inactive successfully");
+                            setTimeout(function(){
+                               window.location.reload();
+                            }, 2000);
+                           
 
                         }else{
-                           
-                            showToastSuccess( "Deal active successfully");
-                            window.location.reload();
+                           toastr.success("Deal active successfully");
+                            setTimeout(function(){
+                               window.location.reload();
+                            }, 2000);
                         }
                     }
                     else{
-                        showToastError(response.message)
+
+                        setTimeout(function(){
+                            toastr.error(response.message);
+                           window.location.reload();
+                        }, 2000);
                     }
                 },
                 error :function(response)
                 {
-                    showToastError(response.message)
+                    setTimeout(function(){
+                        toastr.error(response.message);
+                       window.location.reload();
+                    }, 2000);
 
                 }
             });
@@ -182,9 +192,10 @@
                         '<div class="col-sm-4">'+
                         '<p class="mb-1 mt-3 mt-sm-0"><i class="mdi mdi-gift mr-1"></i> '+data[t].discount+' Discount(%)</p>'+
                         '<p class="mb-0"><i class="mdi mdi-chart-donut mr-1"></i> '+data[t].usageLimit+' Usage Limit</p>'+
+                        '<p class="mb-0 badge font-14 '+stclass+' p-1"> '+status+' </p>'+
                         '</div><div class="col-sm-2">'+
                         '<div class="text-center mt-3 mt-sm-0">'+
-                        '<div class="badge font-14 '+stclass+' p-1">'+status+'</div>'+ 
+                        // '<div class="badge font-14 '+stclass+' p-1">'+status+'</div>'+ 
                         '</div></div>'+                             
                         '<div class="col-sm-2"><div class="text-sm-right">'+
                         ''+payemnt+''+

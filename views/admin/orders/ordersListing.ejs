@@ -26,6 +26,13 @@
                                         </ol>
                                     </div>
                                     <h4 class="page-title">Orders</h4>
+                                    <h5>Order Auto Assignment: 
+                                    <% if(findDataSetting.autoAssign == "yes"){ %>
+                                        ON
+                                    <% }else{ %>
+                                        OFF
+                                    <% } %>
+                                    </h5>
                                 </div>
                             </div>
                         </div>     
@@ -40,15 +47,15 @@
                                                 <form class="form-inline">
                                                     
                                                     <div class="form-group mx-sm-2 mb-2">
-                                                        <label for="status-select" class="mr-2">Status</label>
                                                         <select class="custom-select" id="status-select">
                                                             <option value="" />All 
-                                                            <option value="0" />Pending 
-                                                            <option value="1" />Confirmed
-                                                            <option value="2" />Cancelled-User
-                                                            <option value="3" />Processing 
-                                                            <option value="3" />Cancelled-Company 
-                                                            <option value="5" />Completed 
+                                                            <option value="0"/>Order Pending 
+                                                            <option value="1"/>Order Confirmed
+                                                            <option value="3"/>Order Processing
+                                                            <option value="6"/>Order Picked up
+                                                            <option value="5"/>Order Delivered
+                                                            <option value="2"/>Cancelled User
+                                                            <option value="4"/>Cancelled Restaurant
                                                         </select>
                                                     </div>
                                                     <div class="form-group mx-sm-1 mb-2">
@@ -60,7 +67,7 @@
 
                                                     <div class="col-lg-2">
                                                         <div class="text-lg-left">
-                                                            <a onclick="getFilter(1)" href="javascript:;"><button type="button" class="btn btn-light waves-effect mb-2">Filter</button></a>
+                                                            <a onclick="getFilter(1)" href="javascript:;"><button type="button" class="btn btn-light waves-effect mb-2">Apply</button></a>
                                                         </div>
                                                     </div><!-- end col-->
                                                     <div class="form-group mb-2">
@@ -144,8 +151,7 @@
 </div>
                 
     <!-- END wrapper -->
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
+
     <%- include('../partials/script'); -%>
     <%- include('../partials/commonJs'); -%>
 <script>
@@ -171,29 +177,26 @@
                     success: function (response) {
                         console.log(response)
                         if (response.code == '200') {
-                           // $('#block_status_'+id).html('');
-                               showToastSuccess( response.message)
-                               //var btnBg=getOrderColor(status)
-                                //$("#black-modal-60").attr('class','hide ui-dialog-content ui-widget-content'); 
-                                // $('#block_statustext_'+id).html(stYpe)
-                                // $('#block_statusvalue_'+id).val(status)
-                                // $('#block_status_'+id).removeClass()
-                                // $('#block_status_'+id).addClass('btn font-size-11 '+btnBg)
-                                window.location.reload()
-
-                           
-                            
+                            toastr.success( response.message);
+                            setTimeout(function(){
+                               window.location.reload();
+                            }, 2000);
                         }
                         else{
                            
-                            showToastError(response.message)
+                            setTimeout(function(){
+                                toastr.error(response.message);
+                                window.location.reload();
+                            }, 2000);
                         }
                     },
 
                     error :function(response)
                     {
-
-                        showToastError(response.message)
+                        setTimeout(function(){
+                            toastr.error(response.message);
+                           window.location.reload();
+                        }, 2000);
 
                     }
                 });
