@@ -158,9 +158,9 @@
                                 <div class="form-label col-md-12">
                 
                                 <label for="" class="label-description">
-                                    <span>About Us Content</span>
+                                    <span>About Us Content</span>  
                                 </label>
-                                    <textarea id="aboutusTiny"     data-trigger="keyup"  class="parsley-validated" > <%if(data)%> <%-data.aboutus%> </textarea>
+                                    <textarea id="aboutusTiny"     data-trigger="keyup"  class="parsley-validated" > <%if(data){%> <%-data.aboutus%>  <%}%></textarea>
                                     <input type="hidden"  id="aboutus"  name="aboutus"  />
                 
                                 </div>
@@ -197,7 +197,7 @@
                                 <label for="" class="label-description">
                                     <span>Privacy Content</span>
                                 </label>
-                                    <textarea id="privacyTiny"     data-trigger="keyup"  class="parsley-validated" > <%if(data)%> <%-data.privacyContent%> </textarea>
+                                    <textarea id="privacyTiny"     data-trigger="keyup"  class="parsley-validated" > <%if(data){%> <%-data.privacyContent%><% } %> </textarea>
                                     <input type="hidden"  id="privacy"  name="privacyContent"  />
                 
                                 </div>
@@ -234,7 +234,7 @@
                                 <label for="" class="label-description">
                                     <span>Terms & Condition Content</span>
                                 </label>
-                                    <textarea id="termsTiny"  data-trigger="keyup"  class="parsley-validated" > <%if(data)%> <%-data.termsContent%> </textarea>
+                                    <textarea id="termsTiny"  data-trigger="keyup"  class="parsley-validated" > <%if(data){%> <%-data.termsContent%><% } %> </textarea>
                                     <input type="hidden"  id="terms"  name="termsContent"  />
                 
                                 </div>
@@ -273,7 +273,7 @@
                                 </div>
                                
                             </div>
-                
+                             <br/>
                             <div class="form-row">
                                 <div class="form-label col-md-2">
                                     <label for="">
@@ -292,7 +292,7 @@
                                 </div>
                                
                             </div>
-                
+                             <br/>
                             <div class="form-row">
                                 <div class="form-label col-md-2">
                                     <label for="">
@@ -311,7 +311,7 @@
                                 </div>
                                
                             </div>
-                
+                             <br/>
                             <div class="form-row">
                                 <div class="form-label col-md-2">
                                     <label for="">
@@ -331,7 +331,7 @@
                                
                             </div>
                 
-                
+                            <br/>
                             <div class="form-row">
                                 <div class="form-label col-md-2">
                                     <label for="">
@@ -350,7 +350,7 @@
                                 </div>
                                
                             </div>
-                
+                             <br/>
                 
                 
                 

@@ -93,16 +93,18 @@ app.get('/getprofile',adminAuth,async(req,res,next) => {
             companyName: data.companyName,
             email: data.email,
             address1: data.address1,
-            address2: data.address2,
+            address2: '',
             address1LatLongPoint:point,
-            address1LatLong: data.address1LatLong,
-            address2LatLong: data.address2LatLong,
+            address1LatLong: '',
+            address2LatLong: '',
             websiteLink: data.websiteLink,
             logo1:logo1,
             logo2:logo2,
             logo3:logo3,
             phoneNumber: data.phoneNumber,
             countryCode: data.countryCode,
+            latitude: data.latitude,
+            longitude: data.longitude
           },
           {
             where :{id :req.companyId }

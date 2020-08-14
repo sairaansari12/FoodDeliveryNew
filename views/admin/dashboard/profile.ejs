@@ -41,128 +41,129 @@
                     <!-- end page title --> 
 
                     <div class="row">
-                        <div class="col-8">
-                            <div class="card">
+                    <div class="col-8">
+                        <div class="card">
 
-                    <div class="card-body">
+                            <div class="card-body">
 
-                    <form  role="form" method="POST" action="<%=adminpath %>profile/companyUpdate"   class="form-bordered data-parsley-focus"  id="profileSubmit" enctype="multipart/form-data">
+                                <form  role="form" method="POST" action="<%=adminpath %>profile/companyUpdate"   class="form-bordered data-parsley-focus"  id="profileSubmit" enctype="multipart/form-data">
 
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Company Name:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
+                                    <div class="form-row">
+                                        
+                                        <div class="form-label col-md-4">
+                                            <label for="">
+                                                Company Name:
+                                                <span class="required">*</span>
+                                            </label>
+                                        </div>
 
-                            <div class="form-input col-md-8">
-                                <input type="text" id="companyName" data-required="true" value="<%-data.companyName%>" class="form-control" name="companyName"   data-trigger="change"  />
+                                        <div class="form-input col-md-8">
+                                            <input type="text" id="companyName" data-required="true" value="<%-data.companyName%>" class="form-control" name="companyName"   data-trigger="change"  />
 
-                            </div>
-                           
-                        </div>
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Company Email:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
-                            
-                            <div class="form-input col-md-8">
-                                <input type="email" id="email" data-required="true" value="<%-data.email%>" class="form-control" name="email"   data-trigger="change"  />
-
-                            </div>
-                           
-                        </div>
-
-                        
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Phone Number:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
-                            
-                            <div class="form-input col-md-8">
-                                <input type="text" id="phoneNumber" data-required="true" value="<%-data.phoneNumber%>" class="form-control" name="phoneNumber" data-trigger="change"  />
-
-                            </div>
-                           
-                        </div>
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Address 1:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
-                            
-                            <div class="form-input col-md-8">
-                                <input type="text" id="address1" data-required="true" value="<%-data.address1%>" class="form-control" name="address1"   data-trigger="change"  />
-                                <input type="hidden" name="address1LatLong" value="<%-data.address1LatLong %>" id="address1LatLong" placeholder="Address 1" class="form-control">
-                            </div>
-                           
-                        </div>
-
-                        <div class="form-row">
-                            
-                            <div class="form-label col-md-4">
-                                <label for="">
-                                    Address 2:
-                                    <span class="required">*</span>
-                                </label>
-                            </div>
-                            
-                            <div class="form-input col-md-8">
-                                <input type="text" id="address2" data-required="true" value="<%-data.address2%>" class="form-control" name="address2"   data-trigger="change"  />
-                                <input type="hidden" name="address2LatLong" value="<%-data.address2LatLong %>" id="address2LatLong" placeholder="Address 1" class="form-control">
-                            </div>
-                           
-                        </div>
-
-                        <div class="col-lg-12">
-                                
-                            <div class="card-box">
-                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Select Logo Here</h5>
-
-                              
-                                    <div class="form-group fallback">
-                                        <input type="file" class="form-control-file" name="image" />
-                                    </div>
-                                    <br/>
-                                    <div class=" form-group fallback">
-                                        <input type="file" class="form-control-file" name="image2" />
-                                    </div>
-                                    <br/>
-                                    <div class="form-group fallback">
-                                        <input type="file" class="form-control-file" name="image3" />
+                                        </div>
+                                       
                                     </div>
 
-                                <!-- Preview -->
-                                <div class="dropzone-previews mt-3" id="file-previews"></div>
+                                    <div class="form-row">
+                                        
+                                        <div class="form-label col-md-4">
+                                            <label for="">
+                                                Company Email:
+                                                <span class="required">*</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-input col-md-8">
+                                            <input type="email" id="email" data-required="true" value="<%-data.email%>" class="form-control" name="email"   data-trigger="change"  />
 
-                            </div> <!-- end col-->
+                                        </div>
+                                       
+                                    </div>
 
-                            <button class="btn btn-info btn-sm" type="submit">Save</button>
+                                    
+
+                                    <div class="form-row">
+                                        
+                                        <div class="form-label col-md-4">
+                                            <label for="">
+                                                Phone Number:
+                                                <span class="required">*</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-input col-md-8">
+                                            <input type="text" id="phoneNumber" data-required="true" value="<%-data.phoneNumber%>" class="form-control" name="phoneNumber" data-trigger="change"  />
+
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="form-row">
+                                        
+                                        <div class="form-label col-md-4">
+                                            <label for="">
+                                                Address 1:
+                                                <span class="required">*</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-input col-md-8">
+                                            <input type="text" id="address1" data-required="true" value="<%-data.address1%>" class="form-control" name="address1"   data-trigger="change"  />
+                                            <input type="hidden" name="latitude" value="<%-data.latitude %>" id="latitude" placeholder="Address 1" class="form-control">
+                                            <input type="hidden" name="longitude" value="<%-data.longitude %>" id="longitude" placeholder="Address 1" class="form-control">
+
+                                            
+                                        </div>
+                                       
+                                    </div>
+
+                                    <!--<div class="form-row">
+                                        
+                                        <div class="form-label col-md-4">
+                                            <label for="">
+                                                Address 2:
+                                                <span class="required">*</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-input col-md-8">
+                                            <input type="text" id="address2" data-required="true" value="<%-data.address2%>" class="form-control" name="address2"   data-trigger="change"  />
+                                            <input type="hidden" name="address2LatLong" value="<%-data.address2LatLong %>" id="address2LatLong" placeholder="Address 1" class="form-control">
+                                        </div>
+                                       
+                                    </div>-->
+
+                                    <div class="col-lg-12">
+                                            
+                                        <div class="card-box">
+                                            <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Select Logo Here</h5>
+
+                                          
+                                                <div class="form-group fallback">
+                                                    <input type="file" class="form-control-file" name="image" />
+                                                </div>
+                                                <br/>
+                                                <div class=" form-group fallback">
+                                                    <input type="file" class="form-control-file" name="image2" />
+                                                </div>
+                                                <br/>
+                                                <div class="form-group fallback">
+                                                    <input type="file" class="form-control-file" name="image3" />
+                                                </div>
+
+                                            <!-- Preview -->
+                                            <div class="dropzone-previews mt-3" id="file-previews"></div>
+
+                                        </div> <!-- end col-->
+
+                                        <button class="btn btn-info btn-sm" type="submit">Save</button>
+                                    </form>
+                                </div>
+                            </div>  
+                        </div>
                 
-                    </form>
-
-                        </div>
-                </div>
-            </div>
-                
-            </div>
-
+                    </div>
+                    <div class="col-4"><div id="map_canvas" style="height:100%;"></div></div>
                 </div> <!-- container -->
 
             </div> <!-- content -->
@@ -193,14 +194,15 @@
             // beforeSubmit:  showRequest,
             success:       showResponse  // post-submit callback 
         }; 
- 
+
         // bind form using 'ajaxForm' 
         $('#profileSubmit').ajaxForm(options);
 
         function showResponse(responseText, statusText, xhr, $form){
+            $(".overlay").show();
             setTimeout(function(){
 
-                $(".loader").css("display","none");
+                 $(".overlay").hide();
 
                 if(responseText.code == 200){
                     toastr.success(responseText.message);
@@ -209,34 +211,33 @@
                     toastr.error("Error Occured");
                 }
 
-                $("#profileSubmit")[0].reset();
+                setTimeout(function(){
+                    window.location.reload();
+                }, 2000);
 
             },2000)
             
         }
-        $(document).ready(function () {
-            new google.maps.event.addDomListener(window, 'load', initialize);
+        var geocoder;
+        var map;
+        var marker;
+        var infowindow = new google.maps.InfoWindow({
+          size: new google.maps.Size(150, 50)
         });
-        function initialize() {
-            //pickup
-            var input = document.getElementById('address1');
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            new google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                var place = autocomplete.getPlace();
-                var componenents= place.address_components;
-                var lat =  place.geometry.location.lat();
-                var lng =  place.geometry.location.lng();
-                var addressLat = lat.toFixed(6);
-                var addressLong = lng.toFixed(6);
-                var obj = { 
-                    "lat":addressLat.toString(),
-                    "long":addressLong.toString()
-                }
-                $('#address1LatLong').val(JSON.stringify(obj));
-            });
 
-            //drop Off
-            var input2 = document.getElementById('address2');
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(30.7046, 76.7179);
+            var mapOptions = {
+                zoom: 10,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+            google.maps.event.addListener(map, 'click', function() {
+                infowindow.close();
+            });
+            var input2 = document.getElementById('address1');
             var autocomplete2 = new google.maps.places.Autocomplete(input2);
             new google.maps.event.addListener(autocomplete2, 'place_changed', function () {
                 var place = autocomplete2.getPlace(); 
@@ -244,13 +245,81 @@
                 var lng2 =  place.geometry.location.lng();
                 var addressLat2 = lat2.toFixed(6);
                 var addressLong2 = lng2.toFixed(6);
-                var obj2 = { 
-                    "lat":addressLat2.toString(),
-                    "long":addressLong2.toString()
+                $('#latitude').val(addressLat2);
+                $('#longitude').val(addressLong2);
+
+                map.setCenter(place.geometry.location);
+                if (marker) {
+                    marker.setMap(null);
+                    if (infowindow) infowindow.close();
                 }
-                $('#address2LatLong').val(JSON.stringify(obj2));
+                marker = new google.maps.Marker({
+                    map: map,
+                    draggable: true,
+                    position: place.geometry.location
+                });
+                google.maps.event.addListener(marker, 'dragend', function() {
+                    geocodePosition(marker.getPosition());
+                });
+            });
+            //Pre Defind
+            var address = document.getElementById('address1').value;
+            geocoder.geocode({
+                'address': address
+            }, function(results, status) {
+                
+                if (status == google.maps.GeocoderStatus.OK) {
+                  map.setCenter(results[0].geometry.location);
+                  if (marker) {
+                    marker.setMap(null);
+                    if (infowindow) infowindow.close();
+                  }
+                  marker = new google.maps.Marker({
+                    map: map,
+                    draggable: true,
+                    position: results[0].geometry.location
+                  });
+                  google.maps.event.addListener(marker, 'dragend', function() {
+                    geocodePosition(marker.getPosition());
+                  });
+                  google.maps.event.addListener(marker, 'click', function() {
+                    if (marker.formatted_address) {
+                      infowindow.setContent(marker.formatted_address + "<br>coordinates: " + marker.getPosition().toUrlValue(6));
+                    } else {
+                      infowindow.setContent(address + "<br>coordinates: " + marker.getPosition().toUrlValue(6));
+                    }
+                    infowindow.open(map, marker);
+                  });
+                  google.maps.event.trigger(marker, 'click');
+                } else {
+                  console.log('Geocode was not successful for the following reason: ' + status);
+                }
             });
         }
+
+        function geocodePosition(pos) {
+            geocoder.geocode({
+                latLng: pos
+            }, function(responses) {
+
+                if (responses && responses.length > 0) {
+                  marker.formatted_address = responses[0].formatted_address;
+                } else {
+                  marker.formatted_address = 'Cannot determine address at this location.';
+                }
+                infowindow.setContent(marker.formatted_address + "<br>coordinates: " + marker.getPosition().toUrlValue(6));
+                infowindow.open(map, marker);
+                var locationaltitude = marker.getPosition().toUrlValue(6);
+                var res = locationaltitude.split(",");
+                var lat1 = res[0];
+                var log2 = res[1];
+                $('#address1').val(marker.formatted_address);
+                $('#latitude').val(lat1);
+                $('#longitude').val(log2);
+            });
+        }
+
+        google.maps.event.addDomListener(window, "load", initialize);
     </script>
 
 </body>

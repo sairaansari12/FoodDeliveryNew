@@ -41,80 +41,77 @@ app.get('/', adminAuth,async (req, res, next) => {
 
 app.post('/update',adminAuth,async(req,res,next) => { 
   
-    var params=req.body
+  var params=req.body
   var documentId=params.documentId
- 
+    try{
 
-        try{
-            
-                  
-                if(documentId && documentId!="")
-               {
-                
-               var response= await DOCUMENT.update({ 
-                  aboutus: params.aboutus,
-                  aboutusLink:  params.aboutusLink,
-                  privacyContent:  params.privacyContent,
-                  privacyLink:  params.privacyLink,
-                  termsContent:  params.termsContent,
-                  termsLink:  params.termsLink,
-                  websiteLink:  params.websiteLink,
-                  facebookLink:  params.facebookLink,
-                  gmailLink:  params.gmailLink,
-                  linkedinLink:  params.linkedinLink,
-                  twitterLink:  params.twitterLink,
-                  instaLink:  params.instaLink,
-                  currency:  params.currency,
-                  language:  params.language,
-                  autoAssign:  params.autoAssign,
-                  onelPValue:  params.onelPValue,
-                  loyalityPoints:  params.loyalityPoints,
-                  lpOrderPercentage:  params.lpOrderPercentage,
-                  companyId: req.id
+      const findData = await DOCUMENT.findOne({
+        where: {
+          companyId: req.companyId
+        }
+      });
+      if(findData)
+      {
+    
+       var response= await DOCUMENT.update({ 
+          aboutus: params.aboutus,
+          aboutusLink:  params.aboutusLink,
+          privacyContent:  params.privacyContent,
+          privacyLink:  params.privacyLink,
+          termsContent:  params.termsContent,
+          termsLink:  params.termsLink,
+          websiteLink:  params.websiteLink,
+          facebookLink:  params.facebookLink,
+          gmailLink:  params.gmailLink,
+          linkedinLink:  params.linkedinLink,
+          twitterLink:  params.twitterLink,
+          instaLink:  params.instaLink,
+          currency:  params.currency,
+          language:  params.language,
+          autoAssign:  params.autoAssign,
+          onelPValue:  params.onelPValue,
+          loyalityPoints:  params.loyalityPoints,
+          lpOrderPercentage:  params.lpOrderPercentage,
+          companyId: req.id
+        },
+        {
+          where: { 
+            id: findData.dataValues.id
+          }
+        }) ; 
+        CURRENCY=params.currency
+        return responseHelper.post(res, appstrings.update_success,null,200);
+      }
+      else{
+        var response= await DOCUMENT.create({ 
+          aboutus: params.aboutus,
+          aboutusLink:  params.aboutusLink,
+          privacyContent:  params.privacyContent,
+          privacyLink:  params.privacyLink,
+          termsContent:  params.termsContent,
+          termsLink:  params.termsLink,
+          websiteLink:  params.websiteLink,
+          facebookLink:  params.facebookLink,
+          gmailLink:  params.gmailLink,
+          linkedinLink:  params.linkedinLink,
+          twitterLink:  params.twitterLink,
+          instaLink:  params.instaLink,
+          currency:  params.currency,
+          language:  params.language,
+          autoAssign:  params.autoAssign,
+          onelPValue:  params.onelPValue,
+          loyalityPoints:  params.loyalityPoints,
+          lpOrderPercentage:  params.lpOrderPercentage,
+          companyId: req.id
+        }) ; 
+        CURRENCY=params.currency
+        if(response)return responseHelper.post(res, appstrings.update_success,null,200);
 
- },
-          
-                  {where: { id: documentId}}) ; 
-                  CURRENCY=params.currency
-                 return responseHelper.post(res, appstrings.update_success,null,200);
-               }
-                
-                     
-                else{
-
-                  var response= await DOCUMENT.create({ 
-                    aboutus: params.aboutus,
-                    aboutusLink:  params.aboutusLink,
-                    privacyContent:  params.privacyContent,
-                    privacyLink:  params.privacyLink,
-                    termsContent:  params.termsContent,
-                    termsLink:  params.termsLink,
-                    websiteLink:  params.websiteLink,
-                    facebookLink:  params.facebookLink,
-                    gmailLink:  params.gmailLink,
-                    linkedinLink:  params.linkedinLink,
-                    twitterLink:  params.twitterLink,
-                    instaLink:  params.instaLink,
-                    currency:  params.currency,
-                    language:  params.language,
-                    autoAssign:  params.autoAssign,
-                    onelPValue:  params.onelPValue,
-                  loyalityPoints:  params.loyalityPoints,
-                  lpOrderPercentage:  params.lpOrderPercentage,
-                    companyId: req.id
-   }) ; 
-   CURRENCY=params.currency
-              if(response)return responseHelper.post(res, appstrings.update_success,null,200);
-
-           else  return responseHelper.post(res, appstrings.oops_something,null,200);
-                }
-               
-                       
+        else  return responseHelper.post(res, appstrings.oops_something,null,200);
+      }
     }catch (e) {
-        console.log(e)
-          return responseHelper.error(res, e.message);
-
-    //  return responseHelper.error(res, e.message, 400);
+      console.log(e)
+        return responseHelper.error(res, e.message);
     }
 });
 

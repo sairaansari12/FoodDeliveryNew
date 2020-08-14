@@ -120,7 +120,7 @@
                                                     <span class="required"></span>
                                                 </label>
 
-                                                <input type="checkbox" class="custom-checkbox" name="checkedMonFri"  />
+                                                <input type="checkbox" class="custom-checkbox" id="checkedMonFri" name="checkedMonFri"  />
                                                 <label for="">Mon-Fri</label>
                                                 </div>
 
@@ -151,12 +151,12 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="#tabs-accordion-1" onclick="getDaydata('sat')" title="Tab 6" data-toggle="tab" class="nav-link">
+                                                        <a href="#tabs-accordion-1"  onclick="getDaydata('sat')" title="Tab 6" data-toggle="tab" class="nav-link">
                                                            Sat
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="#tabs-accordion-1" onclick="getDaydata('sun')" title="Tab 7" data-toggle="tab" class="nav-link">
+                                                        <a href="#tabs-accordion-1"  onclick="getDaydata('sun')" title="Tab 7" data-toggle="tab" class="nav-link">
                                                             Sun
                                                         </a>
                                                     </li>
@@ -249,8 +249,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
 
 <script type="text/javascript">
-     $("#fromDate").flatpickr();
-     $("#toDate").flatpickr();
+    
+    $("#fromDate").flatpickr();
+    $("#toDate").flatpickr();
 $("#fromTime").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"h:i K"});
 $("#toTime").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"h:i K"});
     var breakRow = 0

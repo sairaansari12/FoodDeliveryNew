@@ -171,12 +171,20 @@ cookingInstructions :
   defaultValue :''
 },
 
-
-
 tip :
 {
   type: DataTypes.STRING(10),
   defaultValue :'0'
+},
+usedLPoints :
+{
+  type: DataTypes.STRING(20),
+  defaultValue :''
+},
+LPointsPrice :
+{
+  type: DataTypes.STRING(20),
+  defaultValue :''
 },
 
 

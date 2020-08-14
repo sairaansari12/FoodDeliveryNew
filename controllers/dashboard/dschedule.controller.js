@@ -80,13 +80,21 @@ app.post('/addupdate',adminAuth,async (req, res) => {
 
     }
 
-   if(data.checkedMonFri) {
-    addupate('mon',data,slots,slotsRemaining,req,res)
-   addupate('tue',data,slots,slotsRemaining,req,res)
-   addupate('wed',data,slots,slotsRemaining,req,res)
-   addupate('thu',data,slots,slotsRemaining,req,res)
-   addupate('fri',data,slots,slotsRemaining,req,res)
-  }
+    console.log(data);
+
+    if(data.checkedMonFri) {
+      if(data.dayParts == "sat" || data.dayParts == "sun")
+      { 
+        addupate(data.dayParts,data,slots,slotsRemaining,req,res)
+      }else{
+        addupate('mon',data,slots,slotsRemaining,req,res)
+        addupate('tue',data,slots,slotsRemaining,req,res)
+        addupate('wed',data,slots,slotsRemaining,req,res)
+        addupate('thu',data,slots,slotsRemaining,req,res)
+        addupate('fri',data,slots,slotsRemaining,req,res)
+      }
+      
+    }
   
   else     addupate(data.dayParts,data,slots,slotsRemaining,req,res)
 

@@ -6,7 +6,7 @@ const ORDERS= db.models.orders
 const SUBORDERS=db.models.suborders
 const SERVICES = db.models.services
 const USER = db.models.users
-
+const moment = require('moment');
 SUBORDERS.belongsTo(SERVICES,{foreignKey: 'serviceId'})
 ASSIGNMENT.belongsTo(EMPLOYEE,{foreignKey: 'empId'})
 ORDERS.belongsTo(db.models.address,{foreignKey: 'addressId'})
@@ -260,7 +260,7 @@ if(findData.rows.length==0)
 app.post('/status',adminAuth,async(req,res,next) => { 
     
     var params=req.body
-    try{
+
         let responseNull=  commonMethods.checkParameterMissing([params.id,params.status])
         if(responseNull) return responseHelper.post(res, appstrings.required_field,null,400);
        
@@ -282,33 +282,66 @@ app.post('/status',adminAuth,async(req,res,next) => {
        if(userData)
        {
       
-     //Check Auto Assignment
-      if(params.status == '1')
-      {
-        var date2 = new Date();
-        var dateTime2 = moment(date2).format("YYYY-MM-DD");
-        const findDataSetting = await DOCUMENT.findOne({
-          where :{companyId :req.companyId }
-        });
-        if(findDataSetting.dataValues.autoAssign == "yes")
-        {
-          var items = await EMPLOYEE.findOne({
-            where: {
-              loginstatus: '1',
-              companyId: req.companyId,
-              role: '1',
-              id: {
-                [Op.notIn]:  [sequelize.literal(`select empId from assignedEmployees where jobStatus = 1 AND DATE(createdAt) = `+dateTime2)]
+         //Check Auto Assignment
+          if(params.status == '1')
+          {
+            var date2 = new Date();
+            var dateTime2 = moment(date2).format("YYYY-MM-DD");
+            const findDataSetting = await DOCUMENT.findOne({
+              where :{companyId :req.companyId }
+            });
+            if(findDataSetting.dataValues.autoAssign == "yes")
+            {
+              var items = await EMPLOYEE.findAll({
+                where: {
+                  loginstatus: '1',
+                  companyId: req.companyId,
+                  role: '1'
+                }
+              });
+
+              if(items)
+              {
+                var BusyEmp = [];
+                var idelEmp = [];
+                for (var i = 0; i < items.length; i++) {
+                  var empId = items[i].id;
+                  var itemss = await ASSIGNMENT.findOne({
+                    where: {
+                      empId: empId,
+                      jobStatus: '1'
+                    },
+                    include: [{
+                      model: ORDERS,
+                      required:true,
+                      serviceDateTime: {
+                        [Op.eq]: userData.dataValues.serviceDateTime
+                      }
+                    }]
+                  });
+                  if(!itemss)
+                  {
+                    idelEmp.push(empId);
+                  }
+                  else{
+                    BusyEmp.push(empId);
+                  }
+                }
+                console.log(idelEmp,"idelEmp");
+                console.log(BusyEmp,"BusyEmp");
+              }
+
+              if(idelEmp.length > 0)
+              {
+                //Add Empl
+                await ASSIGNMENT.create({
+                  empId: idelEmp[0],
+                  orderId: params.id
+                });
               }
             }
-          });
-        }
-        //Add Empl
-        await ASSIGNMENT.create({
-          empId: items.dataValues.id,
-          orderId: params.id
-        });
-      }
+          }
+
         const updatedResponse = await ORDERS.update({
             progressStatus: params.status
 
@@ -382,10 +415,7 @@ app.post('/status',adminAuth,async(req,res,next) => {
 
       }
 
-         }
-           catch (e) {
-             return responseHelper.error(res, e.message, 400);
-           }
+
     
     
     
